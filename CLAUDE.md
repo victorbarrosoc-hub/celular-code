@@ -203,6 +203,13 @@ não a estimativa.**
 **Três dos cinco proíbem caixa alta por escrito.** A planta 2D estava toda em
 versalete e foi corrigida — rótulo de planta em caixa alta vira logotipo errado.
 
+**A marca de cada empresa fica dentro da sala dela.** No 3D, cada sala de produto
+tem uma placa acesa na parede do fundo, virada para o corredor: quem passa lê de
+quem é a sala antes de entrar. As placas são desenhadas em canvas a partir do
+vetor de cada manual — `Path2D` come o mesmo `d` do SVG, então o M Batuta e o S
+do Disse Sim são o arquivo oficial, não redesenho. A recepção tem o diretório com
+as cinco, uma sob a outra.
+
 **Cor de marca é minoria em todos.** Carro do Freela pede 72% grafite e 8% ciano;
 Pronta pede 60 superfície · 30 tinta · 10 marca. Por isso, no pavimento, a cor da
 sala vive no **forro** — que é luz — e não em superfície grande.
