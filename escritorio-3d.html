@@ -76,10 +76,38 @@ body{
   margin:10px 0 0; font-family:var(--prosa); font-weight:300; font-size:15.5px;
   line-height:1.5; color:var(--tinta-2);
 }
-.cartela dl{display:flex; flex-wrap:wrap; gap:6px 18px; margin:14px 0 0}
-.cartela dt{font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--tinta-3)}
-.cartela dd{margin:0 0 0 -12px; font-size:11px; color:var(--tinta)}
-@media (max-height:620px){ .cartela p{display:none} }
+.cartela dl{display:flex; flex-wrap:wrap; gap:8px 18px; margin:14px 0 0}
+.cartela dl > div{display:flex; align-items:baseline; gap:6px}
+.cartela dt{font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--tinta-3); white-space:nowrap}
+.cartela dd{margin:0; font-size:11px; color:var(--tinta); white-space:nowrap}
+
+/* a legenda sanfona: recolhida, sobra só de que ambiente se trata */
+.cartela__topo{display:flex; align-items:flex-start; gap:12px}
+.cartela__cabeca{flex:1 1 auto; min-width:0}
+.cartela__botao{
+  flex:none; margin:-4px -6px 0 0; width:34px; height:34px; display:grid; place-items:center;
+  border:0; border-radius:999px; background:transparent; color:var(--tinta-2); cursor:pointer;
+  transition:background 180ms var(--mola), color 180ms var(--mola);
+}
+.cartela__botao:hover{background:rgba(255,255,255,.09); color:var(--tinta)}
+.cartela__botao svg{transition:transform 300ms var(--mola)}
+.cartela__corpo{
+  display:grid; grid-template-rows:1fr; opacity:1;
+  transition:grid-template-rows 320ms var(--mola), opacity 220ms var(--mola);
+}
+.cartela__corpo > div{overflow:hidden; min-height:0}
+.cartela.fechada .cartela__corpo{grid-template-rows:0fr; opacity:0}
+.cartela.fechada .cartela__botao svg{transform:rotate(180deg)}
+.cartela.fechada h2{font-size:clamp(17px,2.4vw,21px)}
+
+@media (max-width:760px){
+  .cartela{bottom:96px; padding:13px 15px; max-width:calc(100vw - 28px); left:14px; right:14px}
+  .cartela p{font-size:14.5px; line-height:1.46}
+  .cartela h2{font-size:20px}
+}
+@media (prefers-reduced-motion: reduce){
+  .cartela__corpo, .cartela__botao svg{transition:none}
+}
 
 /* ── a barra dos ambientes ── */
 .pista{
@@ -146,10 +174,22 @@ body{
 </header>
 
 <section class="cartela" id="cartela" aria-live="polite">
-  <span class="cartela__r" id="cartelaR">Pavimento único</span>
-  <h2 id="cartelaT">O escritório</h2>
-  <p id="cartelaP">Doze ambientes num pavimento aberto. Nenhuma sala tem parede: a zona é definida pelo forro colorido suspenso e pela ilha de carpete da mesma cor no chão, exatamente embaixo.</p>
-  <dl id="cartelaD"></dl>
+  <div class="cartela__topo">
+    <div class="cartela__cabeca">
+      <span class="cartela__r" id="cartelaR">Pavimento único</span>
+      <h2 id="cartelaT">O escritório</h2>
+    </div>
+    <button class="cartela__botao" id="cartelaBotao" type="button"
+            aria-expanded="true" aria-controls="cartelaCorpo" aria-label="Recolher a legenda">
+      <svg viewBox="0 0 14 9" width="14" height="9" fill="none" aria-hidden="true">
+        <path d="M1 1.5 7 7.5l6-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+  <div class="cartela__corpo" id="cartelaCorpo"><div>
+    <p id="cartelaP">Dezoito ambientes num pavimento aberto. Nenhuma sala de trabalho tem parede: a zona é o forro colorido suspenso mais a ilha de carpete da mesma cor no chão.</p>
+    <dl id="cartelaD"></dl>
+  </div></div>
 </section>
 
 <nav class="pista" aria-label="Ambientes"><div class="pista__linha" id="pista"></div></nav>
@@ -4558,7 +4598,7 @@ function paredeTexto(l1, l2, w, h){
 var PLACA_W = 72, PLACA_D = 26;
 var cena = new T.Scene();
 cena.background = new T.Color(0x0B0C0E);
-cena.fog = new T.Fog(0x0B0C0E, 60, 175);
+cena.fog = new T.Fog(0x0B0C0E, 68, 215);
 
 /* ── salas de produto: fileira de mesas longas, sem divisória ───────────── */
 function salaDeProduto(g, w, d, cor, norte, marcaId){
@@ -5435,7 +5475,25 @@ if (T.SRGBColorSpace) rend.outputColorSpace = T.SRGBColorSpace;
 var cam = new T.PerspectiveCamera(46, 1, .1, 400);
 var alvo = new T.Vector3(PLACA_W/2, 0, PLACA_D/2 - 1);
 var esp = {raio:60, theta:-Math.PI/2, phi:.78};
-var GERAL = {pos:new T.Vector3(PLACA_W/2-12, 31, PLACA_D/2+51), alv:new T.Vector3(PLACA_W/2+1, 1.2, PLACA_D/2-1)};
+/* A placa tem 72 m de frente por 26 de fundo. Numa tela deitada isso cabe de
+   lado; numa tela em pé, não cabe de jeito nenhum — para enquadrar os 72 m a
+   câmera teria de ir tão longe que a névoa comeria o pavimento. Então o
+   retrato troca de eixo: olha pelo comprimento do corredor, e é a profundidade
+   de 26 m que passa a medir a largura da tela. */
+var GERAL_ALVO = new T.Vector3(PLACA_W/2+1, 1.2, PLACA_D/2-1);
+var GERAL_OFF  = new T.Vector3(-13, 29.8, 52);
+function vistaGeral(){
+  if (cam.aspect < .95){
+    var alv = new T.Vector3(PLACA_W*.40, 1.2, PLACA_D/2);
+    var off = new T.Vector3(-46, 30, 7).normalize()
+                .multiplyScalar(Math.min(84, Math.max(56, 26 / Math.max(.28, cam.aspect))));
+    return {pos: alv.clone().add(off), alv: alv};
+  }
+  var recuo = Math.min(1.5, Math.max(1, 1.42 / cam.aspect));
+  return {pos: GERAL_ALVO.clone().add(GERAL_OFF.clone().multiplyScalar(recuo)),
+          alv: GERAL_ALVO.clone()};
+}
+var GERAL = vistaGeral();
 
 function aplicarEsp(){
   cam.position.set(
@@ -5519,6 +5577,10 @@ tela.addEventListener('wheel', function(e){
 function ajustar(){
   var w=window.innerWidth, h=window.innerHeight;
   cam.aspect=w/h; cam.updateProjectionMatrix(); rend.setSize(w,h,false);
+  /* girar o aparelho não pode deixar a placa cortada */
+  if (!atual && !voo){
+    var g = vistaGeral(); espDe(g.pos, g.alv); aplicarEsp();
+  }
 }
 window.addEventListener('resize', ajustar);
 
@@ -5530,6 +5592,7 @@ function laco(agora){
 
 /* ═══ INTERFACE ════════════════════════════════════════════════════════════ */
 var pista=document.getElementById('pista'), cartela=document.getElementById('cartela');
+var btCartela=document.getElementById('cartelaBotao');
 var cR=document.getElementById('cartelaR'), cT=document.getElementById('cartelaT'),
     cP=document.getElementById('cartelaP'), cD=document.getElementById('cartelaD');
 var atual=null;
@@ -5540,16 +5603,39 @@ function mostrarCartela(a){
     if (a){
       cartela.style.setProperty('--cor', a.cor);
       cR.textContent=a.rot; cT.textContent=a.nome; cP.textContent=a.texto;
-      cD.innerHTML = a.fatos.map(function(f){ return '<dt>'+f[0]+'</dt><dd>'+f[1]+'</dd>'; }).join('');
+      cD.innerHTML = a.fatos.map(function(f){ return '<div><dt>'+f[0]+'</dt><dd>'+f[1]+'</dd></div>'; }).join('');
     } else {
       cartela.style.setProperty('--cor','#F5D9A8');
       cR.textContent='Pavimento único'; cT.textContent='O escritório';
       cP.textContent='Dezoito ambientes num pavimento aberto. Nenhuma sala de trabalho tem parede: a zona é o forro colorido suspenso mais a ilha de carpete da mesma cor no chão. Fecham-se só dois blocos — o serviço, porque banheiro a planta aberta não resolve, e a produção, porque estúdio precisa de escuro e de silêncio.';
-      cD.innerHTML='<dt>Placa</dt><dd>72 × 26 m</dd><dt>Pé-direito</dt><dd>3,60 m</dd><dt>Ambientes</dt><dd>18</dd>';
+      cD.innerHTML='<div><dt>Placa</dt><dd>72 × 26 m</dd></div><div><dt>Pé-direito</dt><dd>3,60 m</dd></div><div><dt>Ambientes</dt><dd>18</dd></div>';
     }
     cartela.classList.add('dentro');
   }, calmo?0:180);
 }
+/* ── a legenda recolhe: no celular ela come metade da tela ─────────────── */
+var CHAVE_LEGENDA = 'cincoSalas.legenda';
+function recolherLegenda(fechada){
+  cartela.classList.toggle('fechada', fechada);
+  if (btCartela){
+    btCartela.setAttribute('aria-expanded', String(!fechada));
+    btCartela.setAttribute('aria-label', fechada ? 'Abrir a legenda' : 'Recolher a legenda');
+  }
+  try { window.localStorage.setItem(CHAVE_LEGENDA, fechada ? '1' : '0'); } catch(e){}
+}
+(function(){
+  if (!btCartela) return;
+  var salvo = null;
+  try { salvo = window.localStorage.getItem(CHAVE_LEGENDA); } catch(e){}
+  /* sem escolha guardada, tela pequena começa recolhida */
+  var apertado = window.matchMedia &&
+    window.matchMedia('(max-width: 760px), (max-height: 700px)').matches;
+  recolherLegenda(salvo === null ? !!apertado : salvo === '1');
+  btCartela.addEventListener('click', function(){
+    recolherLegenda(!cartela.classList.contains('fechada'));
+  });
+})();
+
 function entrar(id){
   var a=porId[id]; atual=id;
   Array.prototype.forEach.call(pista.children, function(el){
@@ -5561,7 +5647,8 @@ function entrar(id){
 function geral(){
   atual=null;
   Array.prototype.forEach.call(pista.children, function(el){ el.classList.remove('aqui'); });
-  voarPara(GERAL.pos, GERAL.alv);
+  var g = vistaGeral();
+  voarPara(g.pos, g.alv);
   mostrarCartela(null);
 }
 document.getElementById('btGeral').addEventListener('click', geral);
@@ -5590,7 +5677,7 @@ function partir(){
   }
   montarPista();
   ajustar();
-  espDe(GERAL.pos, GERAL.alv); aplicarEsp();
+  var g0 = vistaGeral(); espDe(g0.pos, g0.alv); aplicarEsp();
   rend.render(cena, cam);
   requestAnimationFrame(laco);
   /* a planta 2D manda o ambiente pela âncora: escritorio-3d.html#copa */
