@@ -17,7 +17,7 @@
 
 :root{
   /* ── as cinco luzes · vivas, para preencher: ponto, trilho, janela, brilho ── */
-  --h-cdf:#17D1E8; --h-mae:#D9AC4C; --h-dis:#3F86BE; --h-pro:#EDB3BC; --h-may:#E08700;
+  --h-cdf:#17D1E8; --h-mae:#D9AC4C; --h-dis:#7FB6DC; --h-pro:#EDB3BC; --h-may:#F6A821;
 
   /* ── o corredor · tema claro (padrão) ── */
   --chao:#F2F0EC; --chao-2:#E7E4DE; --sup:#FFFFFF;
@@ -52,7 +52,7 @@
     --planta-piso:#191C22; --planta-parede:#EDEAE4;
     --vidro:rgba(14,15,18,.84);
     --sombra:0 1px 2px rgba(0,0,0,.5), 0 24px 60px -34px rgba(0,0,0,.95);
-    --c-cdf:#5DE1F2; --c-mae:#E3C173; --c-dis:#8FBEE2; --c-pro:#EDB3BC; --c-may:#F5A93A;
+    --c-cdf:#17D1E8; --c-mae:#E3C173; --c-dis:#7FB6DC; --c-pro:#EDB3BC; --c-may:#FFC95E;
   }
 }
 :root[data-theme="dark"]{
@@ -64,7 +64,7 @@
   --planta-piso:#191C22; --planta-parede:#EDEAE4;
   --vidro:rgba(14,15,18,.84);
   --sombra:0 1px 2px rgba(0,0,0,.5), 0 24px 60px -34px rgba(0,0,0,.95);
-  --c-cdf:#5DE1F2; --c-mae:#E3C173; --c-dis:#8FBEE2; --c-pro:#EDB3BC; --c-may:#F5A93A;
+  --c-cdf:#17D1E8; --c-mae:#E3C173; --c-dis:#7FB6DC; --c-pro:#EDB3BC; --c-may:#FFC95E;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -208,13 +208,16 @@ svg{display:block}
 .pl-piso{fill:var(--tinte); transition:fill 280ms var(--est)}
 .pl-corredor{fill:url(#hachura)}
 .pl-porta{fill:none; stroke:var(--fio-forte); stroke-width:1.5}
-.pl-mesa{fill:none; stroke:var(--fio-forte); stroke-width:1.5}
-.pl-cadeira{fill:var(--fio-forte)}
+.pl-parede-servico{fill:none; stroke:var(--planta-parede); stroke-width:4}
+.pl-divisa-fina{stroke:var(--planta-parede); stroke-width:3; stroke-linecap:butt}
+.pl-porta-vao{fill:var(--luz)}
 .pl-cadeira{fill:var(--fio-forte)}
 .pl-num{font-family:var(--cota); font-size:12px; font-weight:500; fill:var(--marca-forte)}
 .pl-num-anel{fill:none; stroke:var(--marca-forte); stroke-width:1.4; opacity:.5; transition:opacity 280ms var(--est)}
-.pl-nome{font-family:var(--disp); font-weight:700; font-size:15px; letter-spacing:.13em; fill:var(--marca-forte)}
-.pl-sub{font-family:var(--cota); font-size:10.5px; letter-spacing:.09em; fill:var(--tinta-3)}
+/* Caixa alta e baixa: Carro do Freela, Maestro e Pronta proíbem caixa alta
+   total no nome. Um rótulo de planta em versalete viraria logotipo errado. */
+.pl-nome{font-family:var(--disp); font-weight:700; font-size:14px; letter-spacing:-.008em; fill:var(--marca-forte)}
+.pl-sub{font-family:var(--cota); font-size:9.5px; letter-spacing:.09em; fill:var(--tinta-3)}
 .pl-cota{font-family:var(--cota); font-size:9.5px; letter-spacing:.1em; fill:var(--tinta-3)}
 .pl-cota-linha{stroke:var(--fio-forte); stroke-width:1}
 /* a janela nasce acesa; entrar na sala acende mais */
@@ -348,24 +351,29 @@ svg{display:block}
 
 /* ── 01 · CARRO DO FREELA — grafite e ciano ──────────────────────────── */
 .sala--cdf{
-  --sala-fundo:#121110; --sala-sup:#1A1917;
-  --sala-tinta:#F0EDE7; --sala-tinta-2:#B7B0A6; --sala-tinta-3:#948C82;
-  --sala-fio:#272522; --sala-luz:16%;
-  --sala-marca:#17D1E8; --sala-marca-txt:#5DE1F2; --sala-marca-sobre:#06181C;
+  --sala-fundo:#0E1216; --sala-sup:#151B21;
+  --sala-tinta:#E9EEF0; --sala-tinta-2:#93A0A8; --sala-tinta-3:#67727A;
+  --sala-fio:#232C34; --sala-luz:16%;
+  --sala-marca:#17D1E8; --sala-marca-txt:#17D1E8; --sala-marca-sobre:#0E1216;
 }
-.sala--cdf .tese, .sala--cdf .logo{font-family:"Schibsted Grotesk",system-ui,sans-serif; font-weight:700}
-.logo--cdf{font-size:clamp(30px,4.4vw,46px); letter-spacing:-.035em; color:#17D1E8}
-.logo--cdf span{color:#F0EDE7}
+.sala--cdf .tese{font-family:"Schibsted Grotesk",system-ui,sans-serif; font-weight:700}
+.sala--cdf .logo{font-family:"Schibsted Grotesk",system-ui,sans-serif}
+/* Schibsted Grotesk Black, caixa alta e baixa, tracking −0,045em — o manual
+   proíbe caixa alta total: o nome é frase falada, e frase falada se lê. */
+.logo--cdf{font-size:clamp(28px,4.1vw,42px); font-weight:900; letter-spacing:-.045em; color:#E9EEF0}
+.logo--cdf span{color:#17D1E8}
 .sala--cdf .sala__prosa{font-family:"Schibsted Grotesk",system-ui,sans-serif; font-weight:400; font-size:16px}
 
 /* ── 02 · MAESTRO — tinta e latão ───────────────────────────────────── */
 .sala--maestro{
-  --sala-fundo:#0D0F12; --sala-sup:#121418;
+  --sala-fundo:#08090B; --sala-sup:#121418;
   --sala-tinta:#F4F6F8; --sala-tinta-2:#9AA1AC; --sala-tinta-3:#6B7280;
   --sala-fio:#23272E; --sala-luz:15%;
   --sala-marca:#D9AC4C; --sala-marca-txt:#E3C173; --sala-marca-sobre:#0D0F12;
 }
-.logo--maestro{font-family:"Instrument Serif",Georgia,serif; font-weight:400; font-size:clamp(38px,5.6vw,60px); letter-spacing:-.022em; color:#E3C173}
+/* Instrument Serif Regular, tracking positivo, caixa alta e baixa.
+   Nunca "MAESTRO", nunca "maestro". */
+.logo--maestro{font-family:"Instrument Serif",Georgia,serif; font-weight:400; font-size:clamp(36px,5.2vw,54px); letter-spacing:.012em; color:#E3C173}
 .sala--maestro .tese{font-family:"Instrument Serif",Georgia,serif; font-weight:400; letter-spacing:-.018em; font-size:clamp(26px,3.6vw,40px)}
 .sala--maestro .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
 
@@ -376,8 +384,9 @@ svg{display:block}
   --sala-fio:rgba(23,21,18,.12); --sala-luz:11%;
   --sala-marca:#064675; --sala-marca-txt:#064675; --sala-marca-sobre:#FFFFFF;
 }
-.logo--dissesim{font-family:"Instrument Serif",Georgia,serif; font-weight:400; font-size:clamp(38px,5.6vw,60px); letter-spacing:-.022em; color:#171512}
-.logo--dissesim em{font-style:italic; color:#064675}
+/* Vetor oficial da marca, medido contra o arquivo original. O "s" espelhado
+   em "disse" é de propósito: encostado no "s" normal, os dois fazem um coração. */
+.logo--dissesim{width:clamp(180px,26vw,250px); height:auto; display:block}
 .sala--dissesim .tese{font-family:"Instrument Serif",Georgia,serif; font-weight:400; letter-spacing:-.018em; font-size:clamp(26px,3.6vw,40px)}
 .sala--dissesim .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
 
@@ -393,19 +402,22 @@ svg{display:block}
   font-size:clamp(40px,5.8vw,62px); letter-spacing:-.026em; color:#F4F0F2;
   display:inline-flex; align-items:baseline; gap:.05em;
 }
-.logo--pronta i{width:.17em; height:.17em; border-radius:50%; background:#D8BC8C; box-shadow:0 0 .5em rgba(216,188,140,.34); flex:none; display:inline-block}
+/* Diâmetro 0,17em, afastamento 0,05em, sentado na linha de base.
+   O halo tem 1,5× o raio do ponto — nunca mais. */
+.logo--pronta i{width:.17em; height:.17em; border-radius:50%; background:#D8BC8C;
+  box-shadow:0 0 0 .0425em rgba(216,188,140,.34); flex:none; display:inline-block}
 .sala--pronta .tese{font-family:"Bodoni Moda",Didot,Georgia,serif; font-weight:500; font-size:clamp(25px,3.5vw,38px); letter-spacing:-.022em}
 .sala--pronta .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
 
 /* ── 05 · MAYHOUSE — noite, laranja e lilás ──────────────────────────── */
 .sala--mayhouse{
-  --sala-fundo:#0A0F22; --sala-sup:#101731;
-  --sala-tinta:#F1F4FB; --sala-tinta-2:#A7B2CE; --sala-tinta-3:#78849F;
-  --sala-fio:#1D2745; --sala-luz:18%;
-  --sala-marca:#E08700; --sala-marca-txt:#F5A93A; --sala-marca-sobre:#1B1206;
+  --sala-fundo:#0A0F22; --sala-sup:#121834;
+  --sala-tinta:#E8EBF5; --sala-tinta-2:#97A3C2; --sala-tinta-3:#6D7A9C;
+  --sala-fio:#1E2545; --sala-luz:18%;
+  --sala-marca:#F6A821; --sala-marca-txt:#FFC95E; --sala-marca-sobre:#2A1F05;
 }
-.logo--mayhouse{font-family:"Baloo 2",system-ui,sans-serif; font-weight:800; font-size:clamp(36px,5.2vw,56px); letter-spacing:-.02em; color:#F1F4FB}
-.logo--mayhouse span{color:#F5A93A}
+.logo--mayhouse{font-family:"Baloo 2",system-ui,sans-serif; font-weight:800; font-size:clamp(34px,4.8vw,50px); letter-spacing:-.02em; color:#E8EBF5}
+.logo--mayhouse span{color:#F6A821}
 .sala--mayhouse .tese{font-family:"Baloo 2",system-ui,sans-serif; font-weight:700; font-size:clamp(25px,3.4vw,37px); letter-spacing:-.015em; line-height:1.24}
 .sala--mayhouse .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
 
@@ -524,26 +536,45 @@ svg{display:block}
       </svg>
       Cinco&nbsp;Salas
     </a>
-    <nav class="barra__salas" aria-label="Salas">
-      <a class="pastilha" href="#sala-cdf"      data-sala="cdf"      style="--h:var(--h-cdf);--cor:var(--c-cdf)"><i></i><span>Carro do Freela</span></a>
-      <a class="pastilha" href="#sala-maestro"  data-sala="maestro"  style="--h:var(--h-mae);--cor:var(--c-mae)"><i></i><span>Maestro</span></a>
-      <a class="pastilha" href="#sala-dissesim" data-sala="dissesim" style="--h:var(--h-dis);--cor:var(--c-dis)"><i></i><span>Disse Sim</span></a>
-      <a class="pastilha" href="#sala-pronta"   data-sala="pronta"   style="--h:var(--h-pro);--cor:var(--c-pro)"><i></i><span>Pronta</span></a>
-      <a class="pastilha" href="#sala-mayhouse" data-sala="mayhouse" style="--h:var(--h-may);--cor:var(--c-may)"><i></i><span>MayHouse</span></a>
+    <nav class="barra__salas" aria-label="Ambientes">
+      <a class="pastilha" href="#" data-sala="recepcao" data-ir="3d:recepcao" style="--h:#F5D9A8;--cor:var(--luz)"><i></i><span>Recepção</span></a>
       <span class="pastilha__corte" aria-hidden="true"></span>
-      <a class="pastilha" href="#sala-marca"   data-sala="marca"   style="--h:var(--luz);--cor:var(--luz)"><i></i><span>Marca</span></a>
-      <a class="pastilha" href="#sala-maquina" data-sala="maquina" style="--h:var(--luz);--cor:var(--luz)"><i></i><span>Máquina</span></a>
+      <a class="pastilha" href="#sala-cdf" data-sala="cdf" data-ir="#sala-cdf" style="--h:#17D1E8;--cor:var(--c-cdf)"><i></i><span>Carro do Freela</span></a>
+      <a class="pastilha" href="#sala-maestro" data-sala="maestro" data-ir="#sala-maestro" style="--h:#D9AC4C;--cor:var(--c-mae)"><i></i><span>Maestro</span></a>
+      <a class="pastilha" href="#sala-dissesim" data-sala="dissesim" data-ir="#sala-dissesim" style="--h:#7FB6DC;--cor:var(--c-dis)"><i></i><span>Disse Sim</span></a>
+      <a class="pastilha" href="#sala-pronta" data-sala="pronta" data-ir="#sala-pronta" style="--h:#EDB3BC;--cor:var(--c-pro)"><i></i><span>Pronta</span></a>
+      <a class="pastilha" href="#sala-mayhouse" data-sala="mayhouse" data-ir="#sala-mayhouse" style="--h:#F6A821;--cor:var(--c-may)"><i></i><span>MayHouse</span></a>
+      <span class="pastilha__corte" aria-hidden="true"></span>
+      <a class="pastilha" href="#sala-marca" data-sala="marca" data-ir="#sala-marca" style="--h:#F5D9A8;--cor:var(--luz)"><i></i><span>Marca</span></a>
+      <a class="pastilha" href="#sala-maquina" data-sala="maquina" data-ir="#sala-maquina" style="--h:#F5D9A8;--cor:var(--luz)"><i></i><span>Máquina</span></a>
+      <span class="pastilha__corte" aria-hidden="true"></span>
+      <a class="pastilha" href="#" data-sala="convivio" data-ir="3d:convivio" style="--h:#D9B98A;--cor:var(--luz)"><i></i><span>Convívio</span></a>
+      <a class="pastilha" href="#" data-sala="despressurizacao" data-ir="3d:despressurizacao" style="--h:#9E9BA5;--cor:var(--tinta-2)"><i></i><span>Despressurização</span></a>
+      <a class="pastilha" href="#" data-sala="copa" data-ir="3d:copa" style="--h:#D98A6E;--cor:var(--luz)"><i></i><span>Copa</span></a>
+      <a class="pastilha" href="#" data-sala="refeitorio" data-ir="3d:refeitorio" style="--h:#D98A6E;--cor:var(--luz)"><i></i><span>Refeitório</span></a>
+      <span class="pastilha__corte" aria-hidden="true"></span>
+      <a class="pastilha" href="#" data-sala="servico" data-ir="3d:servico" style="--h:#D6D0C4;--cor:var(--tinta-2)"><i></i><span>Serviço</span></a>
+      <a class="pastilha" href="#" data-sala="despensa" data-ir="3d:despensa" style="--h:#D98A6E;--cor:var(--luz)"><i></i><span>Despensa</span></a>
+      <a class="pastilha" href="#" data-sala="deposito" data-ir="3d:deposito" style="--h:#9ED8E4;--cor:var(--c-cdf)"><i></i><span>Depósito</span></a>
     </nav>
   </div>
   <!-- a largura de cada segmento é a área da sala na planta -->
   <div class="trilho" aria-hidden="true">
-    <span data-sala="cdf"      style="--h:var(--h-cdf);flex:72666"></span>
-    <span data-sala="maestro"  style="--h:var(--h-mae);flex:91278"></span>
-    <span data-sala="dissesim" style="--h:var(--h-dis);flex:49896"></span>
-    <span data-sala="pronta"   style="--h:var(--h-pro);flex:46032"></span>
-    <span data-sala="mayhouse" style="--h:var(--h-may);flex:42168"></span>
-    <span data-sala="marca"    style="--h:var(--luz);flex:46332"></span>
-    <span data-sala="maquina"  style="--h:var(--luz);flex:39312"></span>
+    <span data-sala="recepcao" style="--h:#F5D9A8;flex:9450"></span>
+    <span data-sala="cdf" style="--h:#17D1E8;flex:11025"></span>
+    <span data-sala="maestro" style="--h:#D9AC4C;flex:12600"></span>
+    <span data-sala="dissesim" style="--h:#7FB6DC;flex:9975"></span>
+    <span data-sala="pronta" style="--h:#EDB3BC;flex:8400"></span>
+    <span data-sala="mayhouse" style="--h:#F6A821;flex:8400"></span>
+    <span data-sala="marca" style="--h:#F5D9A8;flex:8925"></span>
+    <span data-sala="maquina" style="--h:#F5D9A8;flex:7875"></span>
+    <span data-sala="convivio" style="--h:#D9B98A;flex:12075"></span>
+    <span data-sala="despressurizacao" style="--h:#9E9BA5;flex:8925"></span>
+    <span data-sala="copa" style="--h:#D98A6E;flex:3600"></span>
+    <span data-sala="refeitorio" style="--h:#D98A6E;flex:4800"></span>
+    <span data-sala="servico" style="--h:#D6D0C4;flex:9900"></span>
+    <span data-sala="despensa" style="--h:#D98A6E;flex:3375"></span>
+    <span data-sala="deposito" style="--h:#9ED8E4;flex:4500"></span>
   </div>
 </div>
 
@@ -566,8 +597,8 @@ svg{display:block}
       </div>
     </div>
     <div class="censo" aria-label="O edifício em números">
-      <div class="censo__item"><span class="censo__n" style="--cor:var(--c-cdf)">5</span><span class="censo__r">salas</span></div>
-      <div class="censo__item"><span class="censo__n" style="--cor:var(--luz)">2</span><span class="censo__r">salas de reunião</span></div>
+      <div class="censo__item"><span class="censo__n" style="--cor:var(--c-cdf)">5</span><span class="censo__r">salas de produto</span></div>
+      <div class="censo__item"><span class="censo__n" style="--cor:var(--luz)">15</span><span class="censo__r">ambientes</span></div>
       <div class="censo__item"><span class="censo__n" style="--cor:var(--c-dis)">5</span><span class="censo__r">sistemas de tokens</span></div>
       <div class="censo__item"><span class="censo__n" style="--cor:var(--c-may)">1</span><span class="censo__r">método</span></div>
     </div>
@@ -583,175 +614,180 @@ svg{display:block}
         <h2 id="t-planta" style="font-size:clamp(26px,3.6vw,38px);margin-top:12px">A planta</h2>
       </div>
       <p class="planta__legenda">
-        Cinco salas de produto e duas de reunião. A área de cada sala de produto é
-        proporcional a quanto de produto existe lá dentro — a mesma proporção do
-        trilho lá em cima. As salas A e B ficam fora dessa conta: são de todos.
+        Quinze ambientes num pavimento de 64 × 26 m. <b>Não há parede entre as
+        salas</b> — a zona é a ilha de carpete, e o forro colorido a repete lá em
+        cima. O único bloco de parede cheia é o serviço: banheiro é a única coisa
+        que a planta aberta não resolve. A espinha tem porta nas duas pontas.
       </p>
     </div>
 
     <div class="planta__rolagem">
-      <svg class="planta__svg" viewBox="0 0 1200 650" role="group" aria-label="Planta baixa do escritório: cinco salas de produto e duas de reunião, ligadas por um corredor">
+      <svg class="planta__svg" viewBox="0 0 1200 650" role="group" aria-label="Planta baixa do pavimento: quinze ambientes">
         <defs>
           <pattern id="hachura" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
             <line x1="0" y1="0" x2="0" y2="9" stroke="var(--hachura)" stroke-width="3"/>
           </pattern>
-          <filter id="brilho" x="-120%" y="-400%" width="340%" height="900%">
-            <feGaussianBlur stdDeviation="13"/>
-          </filter>
+          <filter id="brilho" x="-120%" y="-400%" width="340%" height="900%"><feGaussianBlur stdDeviation="11"/></filter>
         </defs>
-
         <text class="pl-cota" x="60" y="46" letter-spacing="1.4">PLANTA · SEM ESCALA</text>
-        <g>
-          <line class="pl-cota-linha" x1="1112" y1="54" x2="1112" y2="26"/>
-          <polygon points="1112,20 1107,30 1117,30" fill="var(--tinta-3)"/>
-          <text class="pl-cota" x="1094" y="50">N</text>
+        <g><line class="pl-cota-linha" x1="1112" y1="54" x2="1112" y2="26"/>
+           <polygon points="1112,20 1107,30 1117,30" fill="var(--tinta-3)"/>
+           <text class="pl-cota" x="1094" y="50">N</text></g>
+        <rect class="pl-corredor" x="60.0" y="260.2" width="1080" height="49.6"/>
+        <text class="pl-cota" x="330" y="290.0" text-anchor="middle" letter-spacing="3">C O R R E D O R</text>
+        <g class="sala-planta" data-alvo="sala-recepcao" data-sala="recepcao" role="link" tabindex="0" aria-label="Recepção"
+           style="--marca-forte-dk:#F5D9A8;--marca-forte-lt:#8A6A2E;--tinte:rgba(245,217,168,.10);--tinte-forte:rgba(245,217,168,.240)">
+          <rect class="pl-piso" x="76.9" y="86.5" width="151.9" height="173.7" rx="6"/>
+          <rect class="pl-brilho" x="110.6" y="66.5" width="84.4" height="7" fill="#F5D9A8" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="110.6" y1="70" x2="195.0" y2="70" stroke="#F5D9A8"/>
+          <text class="pl-nome" x="92.9" y="126.5">Recepção</text>
+          <text class="pl-sub" x="92.9" y="146.5">entrada</text>
         </g>
-        <g>
-          <text class="pl-cota" x="4" y="283" letter-spacing="1">ENTRADA</text>
-          <line class="pl-cota-linha" x1="12" y1="300" x2="46" y2="300"/>
-          <polygon points="54,300 44,295 44,305" fill="var(--tinta-3)"/>
+        <g class="sala-planta" data-alvo="sala-cdf" data-sala="cdf" role="link" tabindex="0" aria-label="Carro do Freela"
+           style="--marca-forte-dk:#17D1E8;--marca-forte-lt:#0C627C;--tinte:rgba(23,209,232,.10);--tinte-forte:rgba(23,209,232,.240)">
+          <rect class="pl-piso" x="237.2" y="86.5" width="177.2" height="173.7" rx="6"/>
+          <rect class="pl-brilho" x="279.4" y="66.5" width="92.8" height="7" fill="#17D1E8" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="279.4" y1="70" x2="372.2" y2="70" stroke="#17D1E8"/>
+          <circle class="pl-num-anel" cx="267.2" cy="116.5" r="14"/>
+          <text class="pl-num" x="267.2" y="120.5" text-anchor="middle">01</text>
+          <text class="pl-nome" x="253.2" y="158.5">Carro do Freela</text>
+          <text class="pl-sub" x="253.2" y="178.5">audiovisual</text>
         </g>
-
-        <!-- ── as cinco salas de produto ── -->
-        <g class="sala-planta" data-alvo="sala-cdf" data-sala="cdf" role="link" tabindex="0" aria-label="Sala 01, Carro do Freela"
-           style="--marca-forte-dk:#5DE1F2;--marca-forte-lt:#0C627C;--tinte:rgba(23,209,232,.10);--tinte-forte:rgba(23,209,232,.22)">
-          <rect fill="var(--planta-piso)" x="63" y="73" width="367" height="198"/>
-          <rect class="pl-piso" x="63" y="73" width="367" height="198"/>
-          <rect class="pl-brilho" x="150" y="66" width="100" height="8" fill="#17D1E8" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="150" y1="70" x2="250" y2="70" stroke="#17D1E8"/>
-          <circle class="pl-num-anel" cx="100" cy="113" r="15"/>
-          <text class="pl-num" x="100" y="117" text-anchor="middle">01</text>
-          <text class="pl-nome" x="84" y="165">CARRO DO FREELA</text>
-          <text class="pl-sub" x="84" y="186">audiovisual</text>
+        <g class="sala-planta" data-alvo="sala-maestro" data-sala="maestro" role="link" tabindex="0" aria-label="Maestro"
+           style="--marca-forte-dk:#E3C173;--marca-forte-lt:#855F22;--tinte:rgba(217,172,76,.10);--tinte-forte:rgba(217,172,76,.240)">
+          <rect class="pl-piso" x="422.8" y="86.5" width="202.5" height="173.7" rx="6"/>
+          <rect class="pl-brilho" x="465.0" y="66.5" width="118.1" height="7" fill="#E3C173" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="465.0" y1="70" x2="583.1" y2="70" stroke="#E3C173"/>
+          <circle class="pl-num-anel" cx="452.8" cy="116.5" r="14"/>
+          <text class="pl-num" x="452.8" y="120.5" text-anchor="middle">02</text>
+          <text class="pl-nome" x="438.8" y="158.5">Maestro</text>
+          <text class="pl-sub" x="438.8" y="178.5">operação criativa</text>
         </g>
-
-        <g class="sala-planta" data-alvo="sala-maestro" data-sala="maestro" role="link" tabindex="0" aria-label="Sala 02, Maestro"
-           style="--marca-forte-dk:#E3C173;--marca-forte-lt:#855F22;--tinte:rgba(217,172,76,.10);--tinte-forte:rgba(217,172,76,.22)">
-          <rect fill="var(--planta-piso)" x="436" y="73" width="461" height="198"/>
-          <rect class="pl-piso" x="436" y="73" width="461" height="198"/>
-          <rect class="pl-brilho" x="560" y="66" width="180" height="8" fill="#D9AC4C" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="560" y1="70" x2="740" y2="70" stroke="#D9AC4C"/>
-          <circle class="pl-num-anel" cx="473" cy="113" r="15"/>
-          <text class="pl-num" x="473" y="117" text-anchor="middle">02</text>
-          <text class="pl-nome" x="457" y="165">MAESTRO</text>
-          <text class="pl-sub" x="457" y="186">operação criativa · agência e cliente</text>
+        <g class="sala-planta" data-alvo="sala-dissesim" data-sala="dissesim" role="link" tabindex="0" aria-label="Disse Sim"
+           style="--marca-forte-dk:#7FB6DC;--marca-forte-lt:#064675;--tinte:rgba(127,182,220,.10);--tinte-forte:rgba(127,182,220,.240)">
+          <rect class="pl-piso" x="633.8" y="86.5" width="160.3" height="173.7" rx="6"/>
+          <rect class="pl-brilho" x="675.9" y="66.5" width="76.0" height="7" fill="#7FB6DC" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="675.9" y1="70" x2="751.9" y2="70" stroke="#7FB6DC"/>
+          <circle class="pl-num-anel" cx="663.8" cy="116.5" r="14"/>
+          <text class="pl-num" x="663.8" y="120.5" text-anchor="middle">03</text>
+          <text class="pl-nome" x="649.8" y="158.5">Disse Sim</text>
+          <text class="pl-sub" x="649.8" y="178.5">cerimonial</text>
         </g>
-
-        <g class="sala-planta" data-alvo="sala-dissesim" data-sala="dissesim" role="link" tabindex="0" aria-label="Sala 03, Disse Sim"
-           style="--marca-forte-dk:#8FBEE2;--marca-forte-lt:#064675;--tinte:rgba(63,134,190,.10);--tinte-forte:rgba(63,134,190,.22)">
-          <rect fill="var(--planta-piso)" x="63" y="329" width="297" height="168"/>
-          <rect class="pl-piso" x="63" y="329" width="297" height="168"/>
-          <rect class="pl-brilho" x="130" y="496" width="100" height="8" fill="#3F86BE" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="130" y1="500" x2="230" y2="500" stroke="#3F86BE"/>
-          <circle class="pl-num-anel" cx="100" cy="369" r="15"/>
-          <text class="pl-num" x="100" y="373" text-anchor="middle">03</text>
-          <text class="pl-nome" x="84" y="421">DISSE SIM</text>
-          <text class="pl-sub" x="84" y="442">cerimonial · três painéis</text>
+        <g class="sala-planta" data-alvo="sala-servico" data-sala="servico" role="link" tabindex="0" aria-label="Serviço"
+           style="--marca-forte-dk:#D6D0C4;--marca-forte-lt:#4A463E;--tinte:rgba(207,201,191,.13);--tinte-forte:rgba(207,201,191,.243)">
+          <rect class="pl-piso" x="802.5" y="96.5" width="168.7" height="163.7" rx="6"/>
+          <text class="pl-nome" x="818.5" y="252">Serviço</text>
+          <text class="pl-sub" x="884" y="252">bloco fechado</text>
+          <text class="pl-sub" x="843" y="112" text-anchor="middle" letter-spacing="1">F</text>
+          <text class="pl-sub" x="902" y="112" text-anchor="middle" letter-spacing="1">M</text>
+          <text class="pl-sub" x="959" y="112" text-anchor="middle" letter-spacing="1">PNE</text>
         </g>
-
-        <g class="sala-planta" data-alvo="sala-pronta" data-sala="pronta" role="link" tabindex="0" aria-label="Sala 04, Pronta"
-           style="--marca-forte-dk:#EDB3BC;--marca-forte-lt:#8E3346;--tinte:rgba(237,179,188,.11);--tinte-forte:rgba(237,179,188,.24)">
-          <rect fill="var(--planta-piso)" x="366" y="329" width="274" height="168"/>
-          <rect class="pl-piso" x="366" y="329" width="274" height="168"/>
-          <rect class="pl-brilho" x="440" y="496" width="120" height="8" fill="#EDB3BC" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="440" y1="500" x2="560" y2="500" stroke="#EDB3BC"/>
-          <circle class="pl-num-anel" cx="403" cy="369" r="15"/>
-          <text class="pl-num" x="403" y="373" text-anchor="middle">04</text>
-          <text class="pl-nome" x="387" y="421">PRONTA</text>
-          <text class="pl-sub" x="387" y="442">maquiagem · o link na bio</text>
+        <g class="sala-planta" data-alvo="sala-marca" data-sala="marca" role="link" tabindex="0" aria-label="Marca"
+           style="--marca-forte-dk:#F5D9A8;--marca-forte-lt:#8A6A2E;--tinte:rgba(245,217,168,.09);--tinte-forte:rgba(245,217,168,.22)">
+          <rect class="pl-piso" x="979.7" y="86.5" width="143.4" height="173.7" rx="6"/>
+          <rect class="pl-brilho" x="1013.4" y="66.5" width="76.0" height="7" fill="#F5D9A8" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="1013.4" y1="70" x2="1089.4" y2="70" stroke="#F5D9A8"/>
+          <circle class="pl-num-anel" cx="1009.7" cy="116.5" r="14"/>
+          <text class="pl-num" x="1009.7" y="120.5" text-anchor="middle">A</text>
+          <text class="pl-nome" x="995.7" y="158.5">Marca</text>
+          <text class="pl-sub" x="995.7" y="178.5">reunião</text>
         </g>
-
-        <g class="sala-planta" data-alvo="sala-mayhouse" data-sala="mayhouse" role="link" tabindex="0" aria-label="Sala 05, MayHouse"
-           style="--marca-forte-dk:#F5A93A;--marca-forte-lt:#A35F00;--tinte:rgba(224,135,0,.10);--tinte-forte:rgba(224,135,0,.22)">
-          <rect fill="var(--planta-piso)" x="646" y="329" width="251" height="168"/>
-          <rect class="pl-piso" x="646" y="329" width="251" height="168"/>
-          <rect class="pl-brilho" x="720" y="496" width="110" height="8" fill="#E08700" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="720" y1="500" x2="830" y2="500" stroke="#E08700"/>
-          <circle class="pl-num-anel" cx="683" cy="369" r="15"/>
-          <text class="pl-num" x="683" y="373" text-anchor="middle">05</text>
-          <text class="pl-nome" x="667" y="421">MAYHOUSE</text>
-          <text class="pl-sub" x="667" y="442">contas da casa</text>
+        <g class="sala-planta" data-alvo="sala-despressurizacao" data-sala="despressurizacao" role="link" tabindex="0" aria-label="Despressurização"
+           style="--marca-forte-dk:#9E9BA5;--marca-forte-lt:#4B4954;--tinte:rgba(158,155,165,.10);--tinte-forte:rgba(158,155,165,.240)">
+          <rect class="pl-piso" x="76.9" y="309.8" width="143.4" height="173.7" rx="6"/>
+          <rect class="pl-brilho" x="110.6" y="496.5" width="76.0" height="7" fill="#9E9BA5" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="110.6" y1="500" x2="186.6" y2="500" stroke="#9E9BA5"/>
+          <text class="pl-nome" x="92.9" y="349.8">Despressurização</text>
+          <text class="pl-sub" x="92.9" y="369.8">silêncio</text>
         </g>
-
-        <!-- ── as duas salas de reunião · sem marca, janela dividida nos cinco tons ── -->
-        <g class="sala-planta" data-alvo="sala-marca" data-sala="marca" role="link" tabindex="0" aria-label="Sala de reunião A, Marca"
-           style="--marca-forte-dk:#EDEAE4;--marca-forte-lt:#16150F;--tinte:rgba(184,121,26,.07);--tinte-forte:rgba(184,121,26,.17)">
-          <rect fill="var(--planta-piso)" x="903" y="73" width="234" height="198"/>
-          <rect class="pl-piso" x="903" y="73" width="234" height="198"/>
-          <rect class="pl-brilho" x="980"  y="66" width="22" height="8" fill="#17D1E8" filter="url(#brilho)"/>
-          <rect class="pl-brilho" x="1002" y="66" width="22" height="8" fill="#D9AC4C" filter="url(#brilho)"/>
-          <rect class="pl-brilho" x="1024" y="66" width="22" height="8" fill="#3F86BE" filter="url(#brilho)"/>
-          <rect class="pl-brilho" x="1046" y="66" width="22" height="8" fill="#EDB3BC" filter="url(#brilho)"/>
-          <rect class="pl-brilho" x="1068" y="66" width="22" height="8" fill="#E08700" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="980"  y1="70" x2="1002" y2="70" stroke="#17D1E8"/>
-          <line class="pl-janela" x1="1002" y1="70" x2="1024" y2="70" stroke="#D9AC4C"/>
-          <line class="pl-janela" x1="1024" y1="70" x2="1046" y2="70" stroke="#3F86BE"/>
-          <line class="pl-janela" x1="1046" y1="70" x2="1068" y2="70" stroke="#EDB3BC"/>
-          <line class="pl-janela" x1="1068" y1="70" x2="1090" y2="70" stroke="#E08700"/>
-          <rect class="pl-mesa" x="1008" y="202" width="94" height="26" rx="3"/>
-          <rect class="pl-cadeira" x="1013" y="190" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1033" y="190" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1053" y="190" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1073" y="190" width="9" height="9" rx="1.5"/>
-          <rect class="pl-cadeira" x="1013" y="231" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1033" y="231" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1053" y="231" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1073" y="231" width="9" height="9" rx="1.5"/>
-          <circle class="pl-num-anel" cx="940" cy="105" r="15"/>
-          <text class="pl-num" x="940" y="109" text-anchor="middle">A</text>
-          <text class="pl-nome" x="924" y="150">MARCA</text>
-          <text class="pl-sub" x="924" y="170">reunião · de todos</text>
+        <g class="sala-planta" data-alvo="sala-convivio" data-sala="convivio" role="link" tabindex="0" aria-label="Convívio"
+           style="--marca-forte-dk:#D9B98A;--marca-forte-lt:#7A5A2E;--tinte:rgba(217,185,138,.11);--tinte-forte:rgba(217,185,138,.241)">
+          <rect class="pl-piso" x="228.8" y="309.8" width="194.0" height="173.7" rx="6"/>
+          <rect class="pl-brilho" x="262.5" y="496.5" width="126.6" height="7" fill="#D9B98A" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="262.5" y1="500" x2="389.1" y2="500" stroke="#D9B98A"/>
+          <text class="pl-nome" x="244.8" y="349.8">Convívio</text>
+          <text class="pl-sub" x="244.8" y="369.8">a praça</text>
         </g>
-
-        <g class="sala-planta" data-alvo="sala-maquina" data-sala="maquina" role="link" tabindex="0" aria-label="Sala de reunião B, Máquina"
-           style="--marca-forte-dk:#EDEAE4;--marca-forte-lt:#16150F;--tinte:rgba(184,121,26,.07);--tinte-forte:rgba(184,121,26,.17)">
-          <rect fill="var(--planta-piso)" x="903" y="329" width="234" height="168"/>
-          <rect class="pl-piso" x="903" y="329" width="234" height="168"/>
-          <rect class="pl-brilho" x="980"  y="496" width="22" height="8" fill="#17D1E8" filter="url(#brilho)"/>
-          <rect class="pl-brilho" x="1002" y="496" width="22" height="8" fill="#D9AC4C" filter="url(#brilho)"/>
-          <rect class="pl-brilho" x="1024" y="496" width="22" height="8" fill="#3F86BE" filter="url(#brilho)"/>
-          <rect class="pl-brilho" x="1046" y="496" width="22" height="8" fill="#EDB3BC" filter="url(#brilho)"/>
-          <rect class="pl-brilho" x="1068" y="496" width="22" height="8" fill="#E08700" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="980"  y1="500" x2="1002" y2="500" stroke="#17D1E8"/>
-          <line class="pl-janela" x1="1002" y1="500" x2="1024" y2="500" stroke="#D9AC4C"/>
-          <line class="pl-janela" x1="1024" y1="500" x2="1046" y2="500" stroke="#3F86BE"/>
-          <line class="pl-janela" x1="1046" y1="500" x2="1068" y2="500" stroke="#EDB3BC"/>
-          <line class="pl-janela" x1="1068" y1="500" x2="1090" y2="500" stroke="#E08700"/>
-          <rect class="pl-mesa" x="1008" y="442" width="94" height="26" rx="3"/>
-          <rect class="pl-cadeira" x="1013" y="430" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1033" y="430" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1053" y="430" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1073" y="430" width="9" height="9" rx="1.5"/>
-          <rect class="pl-cadeira" x="1013" y="471" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1033" y="471" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1053" y="471" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1073" y="471" width="9" height="9" rx="1.5"/>
-          <circle class="pl-num-anel" cx="940" cy="352" r="15"/>
-          <text class="pl-num" x="940" y="356" text-anchor="middle">B</text>
-          <text class="pl-nome" x="924" y="397">MÁQUINA</text>
-          <text class="pl-sub" x="924" y="416">reunião · de todos</text>
+        <g class="sala-planta" data-alvo="sala-pronta" data-sala="pronta" role="link" tabindex="0" aria-label="Pronta"
+           style="--marca-forte-dk:#EDB3BC;--marca-forte-lt:#8E3346;--tinte:rgba(237,179,188,.11);--tinte-forte:rgba(237,179,188,.241)">
+          <rect class="pl-piso" x="431.2" y="309.8" width="135.0" height="173.7" rx="6"/>
+          <rect class="pl-brilho" x="465.0" y="496.5" width="67.5" height="7" fill="#EDB3BC" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="465.0" y1="500" x2="532.5" y2="500" stroke="#EDB3BC"/>
+          <circle class="pl-num-anel" cx="461.2" cy="339.8" r="14"/>
+          <text class="pl-num" x="461.2" y="343.8" text-anchor="middle">04</text>
+          <text class="pl-nome" x="447.2" y="381.8">Pronta</text>
+          <text class="pl-sub" x="447.2" y="401.8">maquiagem</text>
         </g>
-
-        <rect class="pl-corredor" x="63" y="276" width="1074" height="48"/>
-        <text class="pl-cota" x="480" y="305" text-anchor="middle" letter-spacing="3">C O R R E D O R</text>
-
+        <g class="sala-planta" data-alvo="sala-mayhouse" data-sala="mayhouse" role="link" tabindex="0" aria-label="MayHouse"
+           style="--marca-forte-dk:#FFC95E;--marca-forte-lt:#A35F00;--tinte:rgba(246,168,33,.10);--tinte-forte:rgba(246,168,33,.240)">
+          <rect class="pl-piso" x="574.7" y="309.8" width="135.0" height="173.7" rx="6"/>
+          <rect class="pl-brilho" x="608.4" y="496.5" width="67.5" height="7" fill="#FFC95E" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="608.4" y1="500" x2="675.9" y2="500" stroke="#FFC95E"/>
+          <circle class="pl-num-anel" cx="604.7" cy="339.8" r="14"/>
+          <text class="pl-num" x="604.7" y="343.8" text-anchor="middle">05</text>
+          <text class="pl-nome" x="590.7" y="381.8">MayHouse</text>
+          <text class="pl-sub" x="590.7" y="401.8">contas da casa</text>
+        </g>
+        <g class="sala-planta" data-alvo="sala-maquina" data-sala="maquina" role="link" tabindex="0" aria-label="Máquina"
+           style="--marca-forte-dk:#F5D9A8;--marca-forte-lt:#8A6A2E;--tinte:rgba(245,217,168,.09);--tinte-forte:rgba(245,217,168,.22)">
+          <rect class="pl-piso" x="718.1" y="309.8" width="126.6" height="173.7" rx="6"/>
+          <rect class="pl-brilho" x="751.9" y="496.5" width="59.0" height="7" fill="#F5D9A8" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="751.9" y1="500" x2="810.9" y2="500" stroke="#F5D9A8"/>
+          <circle class="pl-num-anel" cx="748.1" cy="339.8" r="14"/>
+          <text class="pl-num" x="748.1" y="343.8" text-anchor="middle">B</text>
+          <text class="pl-nome" x="734.1" y="381.8">Máquina</text>
+          <text class="pl-sub" x="734.1" y="401.8">estúdio</text>
+        </g>
+        <g class="sala-planta" data-alvo="sala-copa" data-sala="copa" role="link" tabindex="0" aria-label="Copa"
+           style="--marca-forte-dk:#D98A6E;--marca-forte-lt:#8E4029;--tinte:rgba(181,96,74,.12);--tinte-forte:rgba(181,96,74,.242)">
+          <rect class="pl-piso" x="853.1" y="309.8" width="135.0" height="74.4" rx="6"/>
+          <text class="pl-nome" x="869.1" y="349.8">Copa</text>
+          <text class="pl-sub" x="869.1" y="369.8">café</text>
+        </g>
+        <g class="sala-planta" data-alvo="sala-refeitorio" data-sala="refeitorio" role="link" tabindex="0" aria-label="Refeitório"
+           style="--marca-forte-dk:#D98A6E;--marca-forte-lt:#8E4029;--tinte:rgba(181,96,74,.10);--tinte-forte:rgba(181,96,74,.240)">
+          <rect class="pl-piso" x="853.1" y="384.2" width="135.0" height="99.3" rx="6"/>
+          <rect class="pl-brilho" x="886.9" y="496.5" width="67.5" height="7" fill="#D98A6E" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="886.9" y1="500" x2="954.4" y2="500" stroke="#D98A6E"/>
+          <text class="pl-nome" x="869.1" y="424.2">Refeitório</text>
+          <text class="pl-sub" x="869.1" y="444.2">almoço</text>
+        </g>
+        <g class="sala-planta" data-alvo="sala-despensa" data-sala="despensa" role="link" tabindex="0" aria-label="Despensa"
+           style="--marca-forte-dk:#D98A6E;--marca-forte-lt:#8E4029;--tinte:rgba(181,96,74,.13);--tinte-forte:rgba(181,96,74,.243)">
+          <rect class="pl-piso" x="996.6" y="309.8" width="126.5" height="74.4" rx="6"/>
+          <text class="pl-nome" x="1012.6" y="349.8">Despensa</text>
+          <text class="pl-sub" x="1012.6" y="369.8">alimentos</text>
+        </g>
+        <g class="sala-planta" data-alvo="sala-deposito" data-sala="deposito" role="link" tabindex="0" aria-label="Depósito"
+           style="--marca-forte-dk:#9ED8E4;--marca-forte-lt:#245A66;--tinte:rgba(158,216,228,.12);--tinte-forte:rgba(158,216,228,.242)">
+          <rect class="pl-piso" x="996.6" y="384.2" width="126.5" height="99.3" rx="6"/>
+          <rect class="pl-brilho" x="1030.3" y="496.5" width="59.1" height="7" fill="#9ED8E4" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="1030.3" y1="500" x2="1089.4" y2="500" stroke="#9ED8E4"/>
+          <text class="pl-nome" x="1012.6" y="424.2">Depósito</text>
+          <text class="pl-sub" x="1012.6" y="444.2">equipamento</text>
+        </g>
+        <!-- o único bloco de parede cheia: banheiros, despensa e depósito -->
+        <rect class="pl-parede-servico" x="802.5" y="96.5" width="168.7" height="163.7"/>
+        <rect class="pl-parede-servico" x="996.6" y="309.8" width="126.5" height="74.4"/>
+        <rect class="pl-parede-servico" x="996.6" y="384.2" width="126.5" height="99.3"/>
+        <line class="pl-divisa-fina" x1="859.9" y1="96.5" x2="859.9" y2="232.1"/>
+        <line class="pl-divisa-fina" x1="918.9" y1="96.5" x2="918.9" y2="232.1"/>
+        <line class="pl-divisa-fina" x1="802.5" y1="232.1" x2="971.2" y2="232.1"/>
+        <path class="pl-porta" fill="none" d="M831.2,232.1 L831.2,254.1 A22,22 0 0 0 853.2,232.1"/>
+        <path class="pl-porta" fill="none" d="M890.2,232.1 L890.2,254.1 A22,22 0 0 0 912.2,232.1"/>
+        <path class="pl-porta" fill="none" d="M945.9,232.1 L945.9,254.1 A22,22 0 0 0 967.9,232.1"/>
+        <path class="pl-porta" fill="none" d="M1030.3,309.8 L1030.3,331.8 A22,22 0 0 0 1052.3,309.8"/>
+        <path class="pl-porta" fill="none" d="M1030.3,384.2 L1030.3,406.2 A22,22 0 0 0 1052.3,384.2"/>
         <rect class="pl-parede" x="60" y="70" width="1080" height="430"/>
-        <line class="pl-divisa" x1="433" y1="70" x2="433" y2="274"/>
-        <line class="pl-divisa" x1="900" y1="70" x2="900" y2="274"/>
-        <line class="pl-divisa" x1="60"   y1="274" x2="180"  y2="274"/>
-        <line class="pl-divisa" x1="220"  y1="274" x2="620"  y2="274"/>
-        <line class="pl-divisa" x1="660"  y1="274" x2="1010" y2="274"/>
-        <line class="pl-divisa" x1="1050" y1="274" x2="1140" y2="274"/>
-        <line class="pl-divisa" x1="60"   y1="326" x2="250"  y2="326"/>
-        <line class="pl-divisa" x1="290"  y1="326" x2="470"  y2="326"/>
-        <line class="pl-divisa" x1="510"  y1="326" x2="760"  y2="326"/>
-        <line class="pl-divisa" x1="800"  y1="326" x2="960"  y2="326"/>
-        <line class="pl-divisa" x1="1000" y1="326" x2="1140" y2="326"/>
-        <line class="pl-divisa" x1="363" y1="326" x2="363" y2="500"/>
-        <line class="pl-divisa" x1="643" y1="326" x2="643" y2="500"/>
-        <line class="pl-divisa" x1="900" y1="326" x2="900" y2="500"/>
-
-        <path class="pl-porta" fill="none" d="M180,274 L180,234 A40,40 0 0 1 220,274"/>
-        <path class="pl-porta" fill="none" d="M620,274 L620,234 A40,40 0 0 1 660,274"/>
-        <path class="pl-porta" fill="none" d="M1010,274 L1010,234 A40,40 0 0 1 1050,274"/>
-        <path class="pl-porta" fill="none" d="M250,326 L250,366 A40,40 0 0 0 290,326"/>
-        <path class="pl-porta" fill="none" d="M470,326 L470,366 A40,40 0 0 0 510,326"/>
-        <path class="pl-porta" fill="none" d="M760,326 L760,366 A40,40 0 0 0 800,326"/>
-        <path class="pl-porta" fill="none" d="M960,326 L960,366 A40,40 0 0 0 1000,326"/>
-
+        <rect class="pl-porta-vao" x="56.5" y="266.8" width="7" height="36.4"/>
+        <text class="pl-cota" x="34" y="289.0" text-anchor="middle" letter-spacing="1">PORTA</text>
+        <rect class="pl-porta-vao" x="1136.5" y="266.8" width="7" height="36.4"/>
+        <text class="pl-cota" x="1166" y="289.0" text-anchor="middle" letter-spacing="1">PORTA</text>
         <g>
           <line class="pl-cota-linha" x1="60" y1="568" x2="1140" y2="568"/>
           <line class="pl-cota-linha" x1="60" y1="560" x2="60" y2="576"/>
           <line class="pl-cota-linha" x1="1140" y1="560" x2="1140" y2="576"/>
-          <text class="pl-cota" x="600" y="602" text-anchor="middle" letter-spacing="1.4">ÁREA = QUANTO DE PRODUTO EXISTE · AS SALAS A E B SÃO DE USO COMUM</text>
+          <text class="pl-cota" x="600" y="602" text-anchor="middle" letter-spacing="1.4">SEM PAREDE ENTRE AS SALAS · SÓ O SERVIÇO É BLOCO FECHADO</text>
         </g>
       </svg>
     </div>
@@ -759,7 +795,7 @@ svg{display:block}
     <a class="para3d" href="escritorio-3d.html">
       <span class="para3d__l">
         <b>Entrar no pavimento</b>
-        <em>Doze ambientes em 3D, navegáveis — recepção, convívio, despressurização, copa e refeitório inclusive</em>
+        <em>Quinze ambientes em 3D, navegáveis — recepção, convívio, despressurização, copa, refeitório, banheiros, despensa e depósito inclusive</em>
       </span>
       <span class="para3d__cores" aria-hidden="true">
         <i style="--h:var(--h-cdf)"></i><i style="--h:var(--h-mae)"></i><i style="--h:var(--h-dis)"></i><i style="--h:var(--h-pro)"></i><i style="--h:var(--h-may)"></i>
@@ -782,7 +818,7 @@ svg{display:block}
     </div>
     <div class="sala__grade">
       <div class="surge">
-        <p class="logo logo--cdf" id="n-cdf">carro do <span>freela</span></p>
+        <div class="assinatura"><svg class="simbolo" viewBox="0 0 100 100" width="46" height="46" aria-hidden="true"><g transform="translate(10.63,0) skewX(-12)"><rect x="10" y="24" width="7" height="52" rx="2" fill="#17D1E8" opacity=".34"/><rect x="26" y="24" width="13" height="52" rx="2.6" fill="#17D1E8" opacity=".64"/><rect x="50" y="24" width="26" height="52" rx="3.5" fill="#17D1E8"/></g></svg><p class="logo logo--cdf" id="n-cdf">Carro do <span>Freela</span></p></div>
         <p class="tese">Escale sua equipe sem adivinhar.</p>
         <p class="sala__prosa">
           Agenda e contratação de freelas do audiovisual. Quem contrata escolhe a
@@ -835,7 +871,7 @@ svg{display:block}
     </div>
     <div class="sala__grade">
       <div class="surge">
-        <p class="logo logo--maestro" id="n-maestro">Maestro</p>
+        <div class="assinatura"><svg class="simbolo" viewBox="0 0 48 48" width="44" height="44" aria-hidden="true"><path d="M11 35.5V12.5Q24 48.5 37 12.5V35.5" fill="none" stroke="#D9AC4C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg><p class="logo logo--maestro" id="n-maestro">Maestro</p></div>
         <p class="tese">O sistema operacional da operação criativa.</p>
         <p class="sala__prosa">
           Dois turnos do mesmo produto: o da agência, que produz, e o do cliente,
@@ -887,7 +923,7 @@ svg{display:block}
     </div>
     <div class="sala__grade">
       <div class="surge">
-        <p class="logo logo--dissesim" id="n-dissesim">Disse <em>Sim</em></p>
+        <div class="assinatura"><svg class="simbolo" viewBox="0 0 403 301.3" width="42" height="31" aria-hidden="true" shape-rendering="geometricPrecision"><path fill-rule="evenodd" fill="#064675" d="M121.8,301.5C94.6,299.2 71.7,285.7 56.1,262.5L53.2,258.3L48.0,254.8C31.8,244.1 20.6,229.9 12.1,209.2C6.7,196.0 3.5,183.1 1.7,167.1C-4.1,115.2 6.0,69.1 31.6,30.7C38.2,20.9 50.8,7.7 57.4,3.7C71.8,-4.9 89.7,2.4 94.4,18.9C95.0,21.0 95.1,22.4 95.1,25.7C95.1,30.6 94.6,32.9 92.6,37.0C91.3,39.7 90.8,40.3 84.2,46.8C72.1,58.9 64.9,68.8 57.3,84.0C43.7,111.3 37.2,139.5 37.2,172.0C37.2,199.9 41.3,223.4 49.8,243.1C54.7,254.6 57.8,257.3 70.5,261.1C88.3,266.5 107.0,266.2 125.5,260.2C138.2,256.0 150.1,246.3 160.9,231.3C171.4,216.7 179.5,193.9 192.0,144.0C205.4,90.3 211.9,72.5 223.6,56.8C237.3,38.3 251.8,29.9 274.1,27.3C279.3,26.7 292.6,27.1 297.5,28.0C320.1,32.0 336.6,43.2 350.9,64.3C353.5,68.1 353.6,68.2 357.5,70.8C364.6,75.5 367.7,78.0 373.0,83.3C387.0,97.3 394.0,112.0 399.3,138.2C408.1,181.7 401.7,224.1 380.7,263.1C376.4,271.0 373.8,274.3 369.8,277.2C365.6,280.2 361.7,281.4 356.1,281.4C346.1,281.4 337.7,276.4 333.5,267.9C331.4,263.6 330.9,261.3 330.9,256.7C330.9,250.3 331.7,248.1 337.3,239.5C353.2,215.2 361.7,190.9 365.2,160.0C365.9,153.4 366.2,135.5 365.7,128.7C364.1,108.3 359.8,90.1 353.1,76.1C351.1,71.8 349.9,70.7 345.6,69.0C330.1,63.0 314.2,61.8 298.7,65.5C279.7,70.0 267.3,79.3 256.0,97.4C246.7,112.3 241.2,128.8 228.0,181.2C221.8,206.0 216.1,225.7 211.4,238.5C204.9,256.1 197.2,268.5 185.7,280.0C173.5,292.2 161.7,297.9 143.2,300.7C138.9,301.3 126.0,301.8 121.8,301.5Z"/></svg><svg class="logo logo--dissesim" id="n-dissesim" viewBox="0 0 979.3 187.7" width="230" height="44" role="img" aria-label="Disse Sim"><path fill-rule="evenodd" fill="#171512" d="M54.2,186.6C28.4,184.2 7.5,164.8 2.7,138.8C0.6,127.0 0.6,115.0 2.7,103.7C8.4,73.7 34.5,53.5 64.2,55.9C77.5,57.0 88.1,62.1 98.2,72.3C102.0,76.2 103.2,76.8 104.0,75.4C104.2,74.9 104.3,62.8 104.3,38.4C104.3,16.6 104.5,2.0 104.6,1.8C104.8,1.7 108.7,1.6 113.4,1.6L121.8,1.6L121.9,93.1L122.0,184.7L113.7,184.7C109.1,184.7 105.2,184.6 104.9,184.5C104.4,184.3 104.3,183.2 104.3,176.1C104.3,167.2 104.2,166.7 102.6,166.7C101.8,166.7 101.1,167.2 98.4,170.0C86.5,182.5 71.3,188.2 54.2,186.6ZM258.8,186.0C252.1,185.3 245.1,183.3 238.8,180.3C226.7,174.6 219.4,166.3 216.5,155.2C215.6,151.6 215.5,150.8 216.0,150.5C216.2,150.4 229.7,147.3 231.6,147.0C232.4,146.8 232.6,147.2 233.0,149.2C235.1,160.0 243.5,167.7 256.4,170.6C260.6,171.5 270.7,171.4 274.9,170.4C288.2,167.3 295.4,159.9 294.1,150.5C293.2,144.1 288.7,139.2 278.8,133.8C275.0,131.7 273.6,131.2 259.2,126.2C240.6,119.8 235.7,117.2 228.7,110.5C221.6,103.6 218.9,96.0 220.0,86.2C220.9,77.5 224.6,70.9 231.5,65.6C254.5,47.9 297.2,54.3 306.4,76.7C307.4,79.2 307.6,80.6 306.9,80.8C299.3,83.1 291.2,85.3 291.0,85.2C290.9,85.1 290.4,84.2 290.1,83.1C285.2,69.9 257.4,65.8 243.3,76.2C238.7,79.5 236.4,85.6 237.8,90.9C240.0,99.5 247.8,104.9 267.2,111.5C288.7,118.7 293.7,121.0 300.7,126.9C309.5,134.3 313.3,144.4 311.5,155.9C310.4,163.2 308.2,167.8 303.3,172.7C293.3,182.8 276.9,187.8 258.8,186.0ZM360.0,186.0C346.4,184.5 334.0,178.4 327.4,169.9C319.1,159.1 319.4,141.4 328.2,131.3C335.3,123.0 341.9,119.6 365.3,111.8C374.6,108.7 377.7,107.4 382.0,105.1C390.6,100.5 394.7,95.9 395.7,90.0C397.7,78.3 385.7,69.8 368.2,70.5C355.2,70.9 345.5,76.0 343.0,83.7C342.8,84.4 342.5,85.1 342.3,85.2C342.1,85.3 339.6,84.6 328.2,81.3C325.6,80.5 325.5,80.3 326.9,76.7C329.6,70.1 335.3,64.7 343.4,60.9C369.1,48.8 403.8,57.7 411.6,78.4C415.7,89.4 413.5,101.5 405.9,109.4C398.9,116.7 392.7,119.9 371.8,127.0C358.4,131.6 354.7,133.2 348.6,137.4C343.1,141.2 340.0,145.5 339.2,150.4C337.8,159.7 345.1,167.3 358.5,170.4C362.9,171.5 373.1,171.5 377.6,170.4C390.0,167.5 398.4,159.7 400.4,149.2C400.7,147.4 400.9,147.0 401.4,147.0C402.3,147.0 417.5,150.4 417.7,150.6C418.2,151.0 415.9,158.6 414.4,161.8C411.4,168.0 407.4,172.5 401.3,176.6C389.8,184.2 375.0,187.5 360.0,186.0ZM491.7,186.1C469.2,184.4 448.9,169.9 440.9,149.9C437.4,141.2 435.9,132.5 435.9,120.8C435.9,100.4 441.3,85.5 452.7,74.0C463.2,63.3 475.0,57.6 490.0,55.9C503.6,54.3 515.4,57.0 526.2,64.1C539.8,73.2 548.4,86.5 551.5,103.3C552.8,110.6 553.6,128.0 552.6,128.0C552.4,128.0 530.7,128.0 504.5,128.0C478.3,128.0 456.3,128.1 455.7,128.2C453.9,128.6 453.8,129.4 454.6,133.8C457.8,150.6 468.0,163.3 482.9,168.9C488.4,171.0 496.9,171.9 503.1,171.0C515.8,169.3 528.0,160.9 534.0,149.6C534.7,148.2 535.5,147.0 535.7,147.0C536.1,147.0 548.1,155.4 549.1,156.3C549.7,156.9 549.7,157.0 548.5,159.0C537.4,177.3 515.2,187.9 491.7,186.1ZM164.5,184.9C164.4,184.7 164.3,159.7 164.2,129.4C164.2,77.1 164.1,74.3 163.6,73.8C163.0,73.2 162.1,73.2 154.1,73.1C149.2,73.0 145.1,72.9 144.9,72.8C144.8,72.7 144.7,72.4 144.8,72.0C145.0,71.7 145.9,68.7 147.0,65.2C148.1,61.7 149.2,58.7 149.4,58.4C149.7,58.1 152.8,58.0 165.8,58.1L181.8,58.2L181.8,121.7L181.8,185.2L173.2,185.3C166.5,185.3 164.6,185.3 164.5,184.9ZM68.7,171.3C74.9,170.3 79.3,168.6 84.5,165.1C98.6,155.8 105.7,140.1 105.2,119.3C104.9,109.5 103.1,101.7 99.6,94.5C97.5,90.2 95.6,87.6 91.7,83.6C83.9,75.6 75.0,71.4 64.3,70.8C52.0,70.1 41.8,74.1 32.6,83.3C24.0,92.0 20.0,101.6 18.9,116.2C17.7,133.2 21.9,147.8 30.6,157.4C41.0,168.9 54.5,173.8 68.7,171.3ZM534.7,112.6C535.4,112.0 535.4,111.7 535.2,108.5C534.4,96.8 530.6,87.9 523.4,80.9C518.4,76.1 513.2,73.2 506.7,71.4C502.5,70.3 493.6,70.1 489.1,71.1C479.7,73.1 471.7,77.8 465.1,85.1C460.1,90.6 456.4,98.5 454.7,107.2C453.9,111.3 453.8,112.1 454.5,112.8C455.0,113.3 459.1,113.3 494.5,113.3L534.0,113.3L534.7,112.6ZM169.8,32.2C159.2,29.9 155.1,16.4 162.6,8.7C170.4,0.8 183.7,4.2 186.5,14.8C188.7,22.8 183.5,30.8 175.3,32.3C173.1,32.8 172.4,32.7 169.8,32.2Z"/><path fill-rule="evenodd" fill="#064675" d="M643.7,187.8C639.6,187.5 633.3,186.6 630.0,185.8C613.5,181.8 600.5,171.9 595.0,159.4C592.6,153.9 591.1,147.5 592.1,146.7C592.3,146.5 596.9,145.7 602.2,145.0C607.5,144.3 614.4,143.3 617.4,142.8C620.5,142.4 623.3,142.1 623.5,142.2C623.8,142.3 624.1,142.8 624.2,143.3C625.4,148.7 626.3,150.7 629.0,153.3C633.6,157.9 642.3,160.3 651.8,159.4C660.2,158.6 664.5,156.1 665.2,151.5C666.0,145.9 661.0,142.1 645.2,136.3C642.2,135.2 639.1,134.0 638.2,133.6C637.2,133.2 635.8,132.7 635.0,132.4C628.1,130.3 617.4,125.3 613.1,122.4C605.4,117.1 599.6,110.0 597.4,103.0C593.9,92.2 596.3,79.7 603.2,71.5C617.7,54.6 650.4,49.8 673.5,61.4C684.0,66.7 690.8,74.1 693.8,83.6C694.8,86.7 694.9,87.8 694.2,88.3C694.0,88.5 690.1,89.2 685.5,90.0C680.9,90.8 674.1,91.9 670.3,92.5C666.5,93.1 663.1,93.6 662.8,93.5C662.6,93.3 662.1,92.5 661.8,91.5C660.2,86.1 654.5,83.3 645.0,83.3C635.2,83.3 629.7,86.3 629.7,91.5C629.6,96.2 635.0,99.8 648.8,104.4C662.0,108.6 676.4,114.9 683.0,119.3C690.2,123.9 695.9,131.7 698.1,139.7C699.2,143.8 699.2,153.8 698.0,158.0C694.9,169.6 685.8,178.5 671.7,183.8C663.9,186.6 652.0,188.4 643.7,187.8ZM725.4,185.6C725.1,185.3 725.0,174.1 725.0,137.2C725.0,100.3 724.9,89.0 724.6,88.7C724.3,88.4 722.0,88.3 716.4,88.3C708.6,88.3 707.3,88.2 707.3,87.2C707.3,86.3 715.7,58.9 716.2,58.1L716.7,57.3L737.4,57.3C753.1,57.3 758.3,57.4 758.6,57.7C759.0,58.2 759.2,184.4 758.8,185.5C758.6,185.9 756.8,186.0 742.2,186.0C729.9,186.0 725.7,185.9 725.4,185.6ZM787.3,185.1C786.6,184.3 786.4,59.6 787.1,58.3L787.5,57.5L803.7,57.4C818.6,57.3 819.9,57.4 820.2,57.9C820.6,58.3 820.7,60.3 820.7,65.2C820.7,68.9 820.8,72.2 820.9,72.5C821.3,73.6 822.4,72.9 826.2,69.1C835.5,59.4 845.0,55.2 857.8,55.2C873.0,55.2 884.5,61.7 891.7,74.2C893.0,76.5 893.5,76.5 895.2,74.2C902.9,63.9 914.4,57.3 928.3,55.5C948.6,52.8 967.2,62.6 974.7,80.0C977.2,85.9 978.7,92.8 979.3,101.6C979.8,109.3 979.8,183.6 979.2,184.7L978.8,185.5L962.8,185.6C953.1,185.6 946.6,185.5 946.3,185.3C945.9,185.1 945.8,180.0 945.7,144.1C945.4,98.3 945.6,101.0 943.0,95.8C939.8,89.3 934.1,86.0 926.2,86.0C911.9,86.0 902.7,97.1 900.7,117.0C900.5,119.1 900.3,132.4 900.3,152.3C900.3,180.6 900.3,184.3 899.8,184.9L899.3,185.7L883.4,185.7C868.5,185.7 867.4,185.6 866.9,185.1C866.4,184.5 866.3,180.8 866.3,143.7C866.2,102.9 866.2,102.8 865.4,100.3C863.4,93.0 858.4,88.0 851.8,86.5C848.7,85.7 842.7,86.0 839.7,86.9C831.4,89.6 825.2,97.5 822.5,108.7C820.8,116.2 820.7,118.5 820.7,152.9C820.7,181.3 820.6,184.7 820.1,185.1C819.3,186.0 788.0,185.9 787.3,185.1ZM736.5,42.8C731.2,41.5 725.6,36.9 723.1,31.7C718.8,23.0 720.5,13.1 727.3,6.3C731.8,1.8 735.9,0.1 742.2,0.2C751.3,0.3 759.4,6.6 762.2,15.8C763.1,18.8 763.1,25.1 762.1,28.2C760.1,34.4 754.6,40.2 748.6,42.3C745.9,43.3 739.5,43.6 736.5,42.8Z"/></svg></div>
         <p class="tese">A cerimonialista comanda. Os fornecedores alimentam. O casal decide.</p>
         <p class="sala__prosa">
           Plataforma de cerimonial com três painéis e um sistema só. Cada
@@ -940,7 +976,7 @@ svg{display:block}
     </div>
     <div class="sala__grade">
       <div class="surge">
-        <p class="logo logo--pronta" id="n-pronta">Pronta<i aria-hidden="true"></i></p>
+        <div class="assinatura"><p class="logo logo--pronta" id="n-pronta">Pronta<i aria-hidden="true"></i></p></div>
         <p class="tese">O link na bio que transforma “me chama no direct” em sinal pago.</p>
         <p class="sala__prosa">
           Produto para o mercado de maquiagem. A cliente abre um link e sai de lá
@@ -992,7 +1028,7 @@ svg{display:block}
     </div>
     <div class="sala__grade">
       <div class="surge">
-        <p class="logo logo--mayhouse" id="n-mayhouse">May<span>House</span></p>
+        <div class="assinatura"><svg class="simbolo" viewBox="0 0 64 64" width="46" height="46" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#0d1230"/><path d="M 12 30 L 32 14 L 52 30 Z" fill="#4c3a52" stroke="#0b1023" stroke-width="2" stroke-linejoin="round"/><rect x="16" y="30" width="32" height="22" rx="2" fill="#231d3d" stroke="#0b1023" stroke-width="2"/><rect x="24" y="36" width="9" height="10" rx="1.5" fill="#ffcf5e"/><rect x="37" y="36" width="9" height="10" rx="1.5" fill="#ffcf5e"/><circle cx="28.5" cy="41" r="7" fill="#ffb92e" opacity="0.25"/></svg><p class="logo logo--mayhouse" id="n-mayhouse">May<span>House</span></p></div>
         <p class="tese">Onde suas contas moram.</p>
         <p class="sala__prosa">
           Controle financeiro doméstico em que cada conta ganha um cômodo, uma
@@ -1077,25 +1113,27 @@ svg{display:block}
             <li><b>Token é a fonte da verdade</b><span>Nenhum valor literal de cor, espaçamento, raio ou duração dentro de componente. A identidade mora num arquivo só, e mudar a marca é mudar esse arquivo.</span></li>
             <li><b>Contraste é medido, não escolhido</b><span>O número fica anotado ao lado da cor — <code>2,27:1</code>, <code>9,03:1</code>. Cor que reprova como texto vira ornamento, e está escrito que é.</span></li>
             <li><b>Português é a língua do produto</b><span>Nenhuma string no código: tudo em arquivo de textos. E as palavras são decisão de produto — em Maestro, “reprovar” não existe em lugar nenhum.</span></li>
+            <li><b>Nenhum nome em caixa alta</b><span>Três dos cinco manuais proíbem por escrito. Carro do Freela porque o nome é frase falada; Maestro porque nunca é <code>MAESTRO</code>; Pronta porque só a inicial é maiúscula. É a regra que mais se quebra sem querer — inclusive nesta planta, até agora.</span></li>
+            <li><b>Cor de marca é minoria</b><span>Carro do Freela pede 72% grafite e 8% ciano. Pronta pede 60 · 30 · 10. Em nenhuma das cinco a cor da marca cobre superfície grande — ela é ação e é luz, nunca fundo.</span></li>
           </ul>
         </div>
         <div class="paletas">
           <div class="paleta" style="--h:var(--h-cdf);--cor:var(--c-cdf)">
-            <div class="paleta__cabeca"><i></i><b>Carro do Freela</b><em>Schibsted Grotesk · Spline Sans Mono</em></div>
+            <div class="paleta__cabeca"><i></i><b>Carro do Freela</b><em>Schibsted Grotesk Black · Spline Sans Mono</em></div>
             <div class="tiras">
-              <span class="tira" style="--t:#121110" data-hex="#121110"></span>
+              <span class="tira" style="--t:#0E1216" data-hex="#0E1216"></span>
               <span class="tira" style="--t:#17D1E8" data-hex="#17D1E8"></span>
-              <span class="tira" style="--t:#F0EDE7" data-hex="#F0EDE7"></span>
+              <span class="tira" style="--t:#E9EEF0" data-hex="#E9EEF0"></span>
               <span class="tira" style="--t:#FF3D9A" data-hex="#FF3D9A"></span>
             </div>
           </div>
           <div class="paleta" style="--h:var(--h-mae);--cor:var(--c-mae)">
-            <div class="paleta__cabeca"><i></i><b>Maestro</b><em>Instrument Serif · Inter</em></div>
+            <div class="paleta__cabeca"><i></i><b>Maestro</b><em>Instrument Serif Regular · Inter</em></div>
             <div class="tiras">
-              <span class="tira" style="--t:#0D0F12" data-hex="#0D0F12"></span>
+              <span class="tira" style="--t:#08090B" data-hex="#08090B"></span>
               <span class="tira" style="--t:#C8963A" data-hex="#C8963A"></span>
-              <span class="tira" style="--t:#3B6FE0" data-hex="#3B6FE0"></span>
-              <span class="tira" style="--t:#2A9862" data-hex="#2A9862"></span>
+              <span class="tira" style="--t:#5B8DEF" data-hex="#5B8DEF"></span>
+              <span class="tira" style="--t:#35B87A" data-hex="#35B87A"></span>
             </div>
           </div>
           <div class="paleta" style="--h:var(--h-dis);--cor:var(--c-dis)">
@@ -1104,11 +1142,11 @@ svg{display:block}
               <span class="tira" style="--t:#FAF8F5" data-hex="#FAF8F5"></span>
               <span class="tira" style="--t:#171512" data-hex="#171512"></span>
               <span class="tira" style="--t:#064675" data-hex="#064675"></span>
-              <span class="tira" style="--t:#7FB6DC" data-hex="#7FB6DC"></span>
+              <span class="tira" style="--t:#005C95" data-hex="#005C95"></span>
             </div>
           </div>
           <div class="paleta" style="--h:var(--h-pro);--cor:var(--c-pro)">
-            <div class="paleta__cabeca"><i></i><b>Pronta</b><em>Bodoni Moda · Inter</em></div>
+            <div class="paleta__cabeca"><i></i><b>Pronta</b><em>Bodoni Moda 500 · Inter</em></div>
             <div class="tiras">
               <span class="tira" style="--t:#0C0A0D" data-hex="#0C0A0D"></span>
               <span class="tira" style="--t:#EDB3BC" data-hex="#EDB3BC"></span>
@@ -1120,9 +1158,9 @@ svg{display:block}
             <div class="paleta__cabeca"><i></i><b>MayHouse</b><em>Baloo 2 · Inter</em></div>
             <div class="tiras">
               <span class="tira" style="--t:#0A0F22" data-hex="#0A0F22"></span>
-              <span class="tira" style="--t:#E08700" data-hex="#E08700"></span>
-              <span class="tira" style="--t:#6D5BC4" data-hex="#6D5BC4"></span>
-              <span class="tira" style="--t:#C9705A" data-hex="#C9705A"></span>
+              <span class="tira" style="--t:#F6A821" data-hex="#F6A821"></span>
+              <span class="tira" style="--t:#8B7BD8" data-hex="#8B7BD8"></span>
+              <span class="tira" style="--t:#FFCF5E" data-hex="#FFCF5E"></span>
             </div>
           </div>
         </div>
@@ -1200,15 +1238,22 @@ svg{display:block}
         fictícios.
       </p>
     </div>
-    <nav class="indice" aria-label="Índice das salas">
-      <a href="#sala-cdf"      style="--h:var(--h-cdf);--cor:var(--c-cdf)"><i></i>01 · Carro do Freela <em>audiovisual</em></a>
-      <a href="#sala-maestro"  style="--h:var(--h-mae);--cor:var(--c-mae)"><i></i>02 · Maestro <em>operação criativa</em></a>
-      <a href="#sala-dissesim" style="--h:var(--h-dis);--cor:var(--c-dis)"><i></i>03 · Disse Sim <em>cerimonial</em></a>
-      <a href="#sala-pronta"   style="--h:var(--h-pro);--cor:var(--c-pro)"><i></i>04 · Pronta <em>maquiagem</em></a>
-      <a href="#sala-mayhouse" style="--h:var(--h-may);--cor:var(--c-may)"><i></i>05 · MayHouse <em>casa</em></a>
-      <a href="#sala-marca"   style="--h:var(--luz);--cor:var(--luz)"><i></i>A · Marca <em>reunião</em></a>
-      <a href="#sala-maquina" style="--h:var(--luz);--cor:var(--luz)"><i></i>B · Máquina <em>reunião</em></a>
-      <a href="escritorio-3d.html" style="--h:var(--luz);--cor:var(--luz)"><i></i>O pavimento em 3D <em>doze ambientes</em></a>
+    <nav class="indice" aria-label="Índice do pavimento">
+      <a href="#" data-ir="3d:recepcao" style="--h:#F5D9A8;--cor:var(--luz)"><i></i>Recepção</a>
+      <a href="#sala-cdf" data-ir="#sala-cdf" style="--h:#17D1E8;--cor:var(--c-cdf)"><i></i>Carro do Freela</a>
+      <a href="#sala-maestro" data-ir="#sala-maestro" style="--h:#D9AC4C;--cor:var(--c-mae)"><i></i>Maestro</a>
+      <a href="#sala-dissesim" data-ir="#sala-dissesim" style="--h:#7FB6DC;--cor:var(--c-dis)"><i></i>Disse Sim</a>
+      <a href="#sala-pronta" data-ir="#sala-pronta" style="--h:#EDB3BC;--cor:var(--c-pro)"><i></i>Pronta</a>
+      <a href="#sala-mayhouse" data-ir="#sala-mayhouse" style="--h:#F6A821;--cor:var(--c-may)"><i></i>MayHouse</a>
+      <a href="#sala-marca" data-ir="#sala-marca" style="--h:#F5D9A8;--cor:var(--luz)"><i></i>Marca</a>
+      <a href="#sala-maquina" data-ir="#sala-maquina" style="--h:#F5D9A8;--cor:var(--luz)"><i></i>Máquina</a>
+      <a href="#" data-ir="3d:convivio" style="--h:#D9B98A;--cor:var(--luz)"><i></i>Convívio</a>
+      <a href="#" data-ir="3d:despressurizacao" style="--h:#9E9BA5;--cor:var(--tinta-2)"><i></i>Despressurização</a>
+      <a href="#" data-ir="3d:copa" style="--h:#D98A6E;--cor:var(--luz)"><i></i>Copa</a>
+      <a href="#" data-ir="3d:refeitorio" style="--h:#D98A6E;--cor:var(--luz)"><i></i>Refeitório</a>
+      <a href="#" data-ir="3d:servico" style="--h:#D6D0C4;--cor:var(--tinta-2)"><i></i>Serviço</a>
+      <a href="#" data-ir="3d:despensa" style="--h:#D98A6E;--cor:var(--luz)"><i></i>Despensa</a>
+      <a href="#" data-ir="3d:deposito" style="--h:#9ED8E4;--cor:var(--c-cdf)"><i></i>Depósito</a>
     </nav>
   </div>
 </footer>
@@ -1221,8 +1266,11 @@ svg{display:block}
   /* ── a planta: passar o mouse acende mais forte ── */
   planta.forEach(function(g){
     var ir = function(){
-      var alvo = document.getElementById(g.getAttribute("data-alvo"));
-      if (alvo) alvo.scrollIntoView({behavior: calmo ? "auto" : "smooth", block: "start"});
+      var id = g.getAttribute("data-alvo"), alvo = document.getElementById(id);
+      if (alvo) { alvo.scrollIntoView({behavior: calmo ? "auto" : "smooth", block: "start"}); return; }
+      /* ambiente que só existe na maquete: abre o 3D já dentro dele */
+      var l3 = document.querySelector(".para3d");
+      if (l3) window.open(l3.getAttribute("href") + "#" + id.replace(/^sala-/,""), "_blank", "noopener");
     };
     ["mouseenter","focus"].forEach(function(ev){ g.addEventListener(ev, function(){ g.classList.add("acesa"); }); });
     ["mouseleave","blur"].forEach(function(ev){ g.addEventListener(ev, function(){ g.classList.remove("acesa"); }); });
@@ -1252,6 +1300,15 @@ svg{display:block}
     }, {threshold: [0, 0.06, 0.25, 0.5, 0.75, 1], rootMargin: "-58px 0px 0px 0px"});
     secoes.forEach(function(s){ espia.observe(s); });
   }
+
+  /* pastilha ou índice de ambiente que só existe na maquete */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-ir^='3d:']"), function(a){
+    a.addEventListener("click", function(e){
+      e.preventDefault();
+      var l3 = document.querySelector(".para3d");
+      if (l3) window.open(l3.getAttribute("href") + "#" + a.getAttribute("data-ir").slice(3), "_blank", "noopener");
+    });
+  });
 
   /* ── o conteúdo das salas sobe ao entrar em quadro ── */
   var partes = Array.prototype.slice.call(document.querySelectorAll(".surge"));

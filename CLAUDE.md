@@ -152,11 +152,16 @@ Duas coisas a não confundir:
   técnico continua ortogonal, e a curva entra no objeto — forro de canto redondo,
   cápsula de vidro curvo, ilha de carpete de canto suave.
 
-## O pavimento — 12 ambientes
+## O pavimento — 15 ambientes
 
-Placa de 56 × 26 m, pé-direito 3,60 m, forros suspensos a 2,90 m. Uma espinha de
-circulação leste-oeste no meio (z 11,5–14,5), sem forro, cortando o pavimento
-inteiro. Perímetro todo em vidro nas duas faces longas.
+Placa de **64 × 26 m**, pé-direito 3,60 m, forros suspensos a 2,90 m. Uma espinha
+de circulação leste-oeste no meio (z 11,5–14,5), sem forro, cortando o pavimento
+inteiro, **com porta de vidro nas duas pontas** — ela terminava em parede cega.
+Perímetro todo em vidro nas duas faces longas.
+
+**Nenhuma sala de trabalho tem parede.** O único bloco de parede cheia é o
+serviço: banheiro é a única coisa que a planta aberta não resolve. A planta 2D
+foi redesenhada para parar de desenhar parede onde não há.
 
 | Faixa | Ambiente | x | Cor |
 |---|---|---|---|
@@ -172,3 +177,32 @@ inteiro. Perímetro todo em vidro nas duas faces longas.
 | sul | B · Máquina (cápsula podcast) | 39–46,5 | cinco faixas |
 | sul | Copa | 47–55, z 14,5–19 | terracota |
 | sul | Refeitório | 47–55, z 19–25 | terracota |
+| norte | **Serviço** · feminino, masculino, acessível | 44–54 | bloco fechado |
+| sul | **Despensa** · alimentos e limpeza | 55,5–63, z 14,5–19 | bloco fechado |
+| sul | **Depósito** · equipamento audiovisual e técnico | 55,5–63, z 19–25 | bloco fechado |
+
+Marca passou para 54,5–63. Serviço abre numa antecâmara, e a antecâmara abre no
+corredor: ninguém entra em sanitário direto do aberto. Despensa encosta na copa
+parede a parede — quem repõe o café não atravessa o escritório com a caixa.
+Depósito é separado da despensa de propósito: câmera não se guarda ao lado de
+material de limpeza.
+
+## Os manuais de identidade — a fonte das cinco marcas
+
+Lidos em 26/08/2026, direto do repositório de cada produto. **São eles que mandam,
+não a estimativa.**
+
+| Marca | Manual | O que ele corrigiu aqui |
+|---|---|---|
+| Carro do Freela | `app/public/identidade.html` (direção B, v1) | grafite é `#0E1216` (frio, de monitor calibrado) e cal é `#E9EEF0`. Símbolo: três lâminas, grid 100×100, alturas 52, larguras 7/13/26, opacidades 34/64/100%, skew −12°. Logotipo Schibsted Grotesk Black, **caixa alta e baixa**, tracking −0,045em. |
+| Maestro | `docs/BRAND/VISUAL_IDENTITY.md` | Símbolo "M Batuta", path canônico `M11 35.5V12.5Q24 48.5 37 12.5V35.5`, traço 6, grid 48. Wordmark Instrument Serif Regular, tracking positivo. **Nunca "MAESTRO", nunca "maestro".** Canvas é `#08090B`. |
+| Disse Sim | `src/marca/caminhos.ts` + `Logo.tsx` | Vetor oficial, medido contra o original. O "s" espelhado em "disse" é de propósito: com o "s" normal ao lado, os dois fazem um coração. Navy `#064675`, azul `#005C95`, reverso `#7FB6DC`. |
+| Pronta | `marca/manual.html` (v2) | Um átomo só: o ponto de champanhe. Halo de 1,5× o raio, nunca mais. Logotipo Bodoni Moda 500, −0,026em, ponto de 0,17em na linha de base. **Só inicial maiúscula.** Champanhe é ornamento e nunca texto. |
+| MayHouse | `assets/icone.svg` + `assets/css/style.css` | Primária é `#F6A821` (o `#E08700` era o tema claro do céu). Lilás `#8B7BD8`, janela acesa `#FFCF5E`, telhado `#4C3A52`. Display Baloo 2. |
+
+**Três dos cinco proíbem caixa alta por escrito.** A planta 2D estava toda em
+versalete e foi corrigida — rótulo de planta em caixa alta vira logotipo errado.
+
+**Cor de marca é minoria em todos.** Carro do Freela pede 72% grafite e 8% ciano;
+Pronta pede 60 superfície · 30 tinta · 10 marca. Por isso, no pavimento, a cor da
+sala vive no **forro** — que é luz — e não em superfície grande.

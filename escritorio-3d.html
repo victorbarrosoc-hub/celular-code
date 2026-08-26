@@ -4443,6 +4443,62 @@ function pendente(y,cor,r){
   return g;
 }
 
+/* ── placas de porta: pictograma desenhado, não fonte ──────────────────── */
+function pictograma(tipo, cor){
+  var c=document.createElement('canvas'); c.width=256; c.height=256;
+  var g=c.getContext('2d');
+  g.fillStyle='#15171B'; g.fillRect(0,0,256,256);
+  g.fillStyle=cor||'#F5D9A8'; g.strokeStyle=cor||'#F5D9A8';
+  g.lineWidth=13; g.lineCap='round'; g.lineJoin='round';
+  function cabeca(x,y,r){ g.beginPath(); g.arc(x,y,r,0,Math.PI*2); g.fill(); }
+  if (tipo==='f'){
+    cabeca(128,62,25);
+    g.beginPath(); g.moveTo(128,96); g.lineTo(78,186); g.lineTo(178,186); g.closePath(); g.fill();
+    g.fillRect(108,186,15,42); g.fillRect(133,186,15,42);
+  } else if (tipo==='m'){
+    cabeca(128,62,25);
+    g.beginPath(); g.moveTo(128,96); g.lineTo(90,110); g.lineTo(90,176); g.lineTo(166,176); g.lineTo(166,110); g.closePath(); g.fill();
+    g.fillRect(103,176,18,52); g.fillRect(135,176,18,52);
+  } else if (tipo==='pne'){
+    cabeca(150,50,22);
+    g.beginPath(); g.moveTo(150,80); g.lineTo(150,140); g.lineTo(196,140); g.stroke();
+    g.beginPath(); g.moveTo(150,140); g.lineTo(120,140); g.stroke();
+    g.beginPath(); g.arc(132,168,52,0,Math.PI*2); g.stroke();
+  } else if (tipo==='despensa'){
+    g.strokeRect(66,74,124,116);
+    g.beginPath(); g.moveTo(66,116); g.lineTo(190,116); g.moveTo(66,152); g.lineTo(190,152); g.stroke();
+    g.fillRect(150,86,22,20); g.fillRect(150,124,22,20); g.fillRect(150,160,22,20);
+  } else if (tipo==='deposito'){
+    g.strokeRect(58,96,140,100);
+    g.beginPath(); g.moveTo(104,96); g.lineTo(104,72); g.lineTo(152,72); g.lineTo(152,96); g.stroke();
+    g.beginPath(); g.arc(128,146,26,0,Math.PI*2); g.stroke();
+    g.beginPath(); g.arc(128,146,9,0,Math.PI*2); g.fill();
+  }
+  var t=new T.CanvasTexture(c);
+  if (T.SRGBColorSpace) t.colorSpace=T.SRGBColorSpace;
+  return t;
+}
+function placaPorta(tipo, w, cor){
+  var tex=pictograma(tipo, cor);
+  return new T.Mesh(new T.PlaneGeometry(w,w), new T.MeshStandardMaterial({
+    map:tex, emissive:0xFFFFFF, emissiveMap:tex, emissiveIntensity:.55, roughness:.85
+  }));
+}
+/* uma porta de verdade: batente, folha de vidro e puxador */
+function portaDupla(larg, alt, mat){
+  var g=new T.Group();
+  g.add(por(cx(larg,.1,.16,M.preto), 0, alt, 0));
+  g.add(por(cx(.1,alt,.16,M.preto), -larg/2, alt/2, 0));
+  g.add(por(cx(.1,alt,.16,M.preto),  larg/2, alt/2, 0));
+  [-1,1].forEach(function(l){
+    var folha = cx(larg/2-.08, alt-.12, .06, mat||M.vidro);
+    folha.position.set(l*(larg/4), (alt-.12)/2, 0); g.add(folha);
+    g.add(por(cil(.022,.022,.9,M.metal,8), l*.16, 1.05, .07));
+    g.add(por(cx(larg/2-.1,.05,.09,M.preto), l*(larg/4), alt-.12, 0));
+  });
+  return g;
+}
+
 /* ── o forro e a ilha: o par que faz a sala ─────────────────────────────── */
 var Y_FORRO = 2.88;
 function forro(w,d,cor,grupo){
@@ -4499,7 +4555,7 @@ function paredeTexto(l1, l2, w, h){
    Placa de 56 × 26. Espinha de circulação em z 11,5–14,5, sem forro,
    cortando o pavimento inteiro de leste a oeste.
    ═══════════════════════════════════════════════════════════════════════════ */
-var PLACA_W = 56, PLACA_D = 26;
+var PLACA_W = 64, PLACA_D = 26;
 var cena = new T.Scene();
 cena.background = new T.Color(0x0B0C0E);
 cena.fog = new T.Fog(0x0B0C0E, 60, 175);
@@ -4611,7 +4667,7 @@ var AMB = [
   },
 
 { id:'marca', nome:'Marca', rot:'Reunião A · de todos', cor:'#F5D9A8',
-  x:[44,55], z:[1,11.5], norte:true, alt:1.95, dist:.86, desv:-.42,
+  x:[54.5,63], z:[1,11.5], norte:true, alt:1.95, dist:.9, desv:-.42,
   fatos:[['Mesa','6,2 m · retangular'],['Lugares','12'],['Podcast','4 braços']],
   texto:'A sala onde as cinco identidades se sentam juntas. Mesa longa e retangular, nunca redonda: numa mesa redonda ninguém tem cabeceira, e aqui a pauta tem dono. Os quatro braços de microfone deixam a sala virar estúdio sem virar outra sala.',
   montar:function(g,w,d){
@@ -4787,8 +4843,155 @@ var AMB = [
   }
 ];
 
+
+/* ── serviço: o único bloco fechado do pavimento ───────────────────────── */
+function paredeServico(g, x, z, w, d, h){
+  var m = pad(0xCFC9BF,.88);
+  g.add(por(cx(w,h,.14,m), x, h/2, z-d/2));
+  g.add(por(cx(w,h,.14,m), x, h/2, z+d/2));
+  g.add(por(cx(.14,h,d,m), x-w/2, h/2, z));
+  g.add(por(cx(.14,h,d,m), x+w/2, h/2, z));
+}
+function bancadaPia(g, x, z, w, n, virado){
+  g.add(por(cx(w,.09,.55,M.pedra), x, .88, z));
+  g.add(por(cx(w,.55,.06,pad(0x9E9A93,.6)), x, .6, z));
+  for (var i=0;i<n;i++){
+    var px = x - w/2 + w*(i+.5)/n;
+    var cuba = cil(.17,.13,.11,M.branco,14); cuba.position.set(px,.87,z); g.add(cuba);
+    var tor = cil(.02,.02,.24,M.metal,8); tor.position.set(px,1.02,z-(virado?-.2:.2)); g.add(tor);
+  }
+  var esp = cx(w,1.0,.03, new T.MeshStandardMaterial({color:0xC9D6DB, roughness:.06, metalness:.9}));
+  esp.position.set(x,1.75,z-(virado?-.28:.28)); g.add(esp);
+}
+function baiaSanitaria(g, x, z, w, d, m){
+  g.add(por(cx(.06,2.0,d,m), x-w/2, 1.0, z));
+  g.add(por(cx(.06,2.0,d,m), x+w/2, 1.0, z));
+  g.add(por(cx(w,2.0,.06,m), x, 1.0, z-d/2));
+  g.add(por(cx(.42,.4,.62,M.branco), x, .2, z+d/2-.5));
+  g.add(por(cx(.42,.5,.16,M.branco), x, .55, z+d/2-.15));
+}
+function prateleira(g, x, z, w, prof, niveis, rot){
+  var gg=new T.Group(); gg.position.set(x,0,z); gg.rotation.y=rot||0; g.add(gg);
+  for (var i=0;i<niveis;i++){
+    gg.add(por(cx(w,.05,prof,M.oak2), 0, .38+i*.52, 0));
+  }
+  gg.add(por(cx(.07,niveis*.52+.3,prof,M.metal), -w/2, (niveis*.52+.3)/2, 0));
+  gg.add(por(cx(.07,niveis*.52+.3,prof,M.metal),  w/2, (niveis*.52+.3)/2, 0));
+  return gg;
+}
+
+var AMB_SERVICO = [
+{ id:'servico', nome:'Serviço', rot:'Banheiros · o bloco fechado', cor:'#CFC9BF',
+  x:[44,54], z:[1.6,11.5], norte:true, alt:1.95, dist:1.0, desv:-.1, miraY:1.3,
+  fatos:[['Feminino','3,4 × 7,0 m'],['Masculino','3,2 × 7,0 m'],['Acessível','2,8 × 7,0 m']],
+  texto:'O único bloco de parede cheia do pavimento inteiro — e é assim de propósito: banheiro é a única coisa que a planta aberta não resolve. Três sanitários abrindo numa antecâmara, e a antecâmara abrindo no corredor, para que ninguém entre direto do aberto.',
+  montar:function(g,w,d){
+    var h=3.0, m=pad(0xCFC9BF,.88);
+    ilha(w, d, 0xB9B2A6, g, .35);
+    /* casca do bloco */
+    g.add(por(cx(w,h,.16,m), 0, h/2, -d/2));
+    g.add(por(cx(.16,h,d,m), -w/2, h/2, 0));
+    g.add(por(cx(.16,h,d,m),  w/2, h/2, 0));
+    /* a frente é só duas orelhas: a antecâmara fica aberta para o corredor */
+    g.add(por(cx(2.0,h,.16,m), -w/2+1.0, h/2, d/2));
+    g.add(por(cx(2.0,h,.16,m),  w/2-1.0, h/2, d/2));
+    g.add(por(cx(w,.3,.5,m), 0, h-.15, d/2));
+    /* divisórias internas */
+    g.add(por(cx(.14,h,7.05,m), -1.6, h/2, -1.42));
+    g.add(por(cx(.14,h,7.05,m),  1.9, h/2, -1.42));
+    /* parede da antecâmara, com os três vãos de porta */
+    [[-5.0,-3.75],[-2.85,-1.75],[-1.15,-0.05],[.75,1.4],[2.4,3.15],[4.05,5.0]].forEach(function(v){
+      g.add(por(cx(v[1]-v[0],h,.14,m), (v[0]+v[1])/2, h/2, 2.1));
+    });
+    [[-3.3,'f'],[.3,'m'],[3.6,'pne']].forEach(function(pp){
+      g.add(por(cx(.94,.35,.14,m), pp[0], h-.18, 2.1));
+      var pl = placaPorta(pp[1], .34, '#F5D9A8'); pl.position.set(pp[0], 2.34, 2.19); g.add(pl);
+      var folha = cx(.9,2.15,.05, M.oak2); folha.position.set(pp[0]-.02, 1.08, 2.16);
+      folha.rotation.y = .34; g.add(folha);
+      g.add(por(cil(.02,.02,.2,M.metal,8), pp[0]+.32, 1.05, 2.2));
+    });
+    /* feminino */
+    bancadaPia(g, -3.3, -4.2, 2.6, 3, false);
+    baiaSanitaria(g, -4.1, .1, 1.5, 1.6, m);
+    baiaSanitaria(g, -2.4, .1, 1.5, 1.6, m);
+    /* masculino */
+    bancadaPia(g, .15, -4.2, 2.4, 2, false);
+    baiaSanitaria(g, 1.1, .1, 1.5, 1.6, m);
+    for (var u=0;u<2;u++){ g.add(por(cx(.4,.62,.3,M.branco), -1.0+u*.75, .95, -1.1)); }
+    /* acessível: circulação livre marcada no piso */
+    bancadaPia(g, 3.55, -4.2, 1.5, 1, false);
+    g.add(por(cx(.44,.42,.66,M.branco), 4.4, .21, -1.4));
+    g.add(por(cx(.44,.52,.17,M.branco), 4.4, .58, -0.98));
+    var b1=cil(.03,.03,.8,M.metal,8); b1.rotation.z=Math.PI/2; b1.position.set(4.4,.78,-2.0); g.add(b1);
+    var b2=cil(.03,.03,.8,M.metal,8); b2.rotation.x=Math.PI/2; b2.position.set(4.88,.78,-1.4); g.add(b2);
+    var giro = anel(3.0,3.0,1.5,.012, new T.MeshStandardMaterial({color:0xF5D9A8, roughness:.9, transparent:true, opacity:.5}), .05);
+    giro.position.set(3.5,.02,.4); g.add(giro);
+    var pl=new T.PointLight(0xFFF0D6, 15, 12, 2); pl.position.set(0,2.5,-1); g.add(pl);
+    var pl2=new T.PointLight(0xFFF0D6, 9, 8, 2); pl2.position.set(0,2.5,3.4); g.add(pl2);
+  } },
+
+{ id:'despensa', nome:'Despensa', rot:'Alimentos e limpeza', cor:'#B5604A',
+  x:[55.5,63], z:[14.5,19], norte:false, alt:1.85, dist:1.15, desv:-.45, miraY:1.15,
+  fatos:[['Área','7,5 × 4,5 m'],['Prateleiras','4 níveis'],['Vizinha','a copa, parede a parede']],
+  texto:'Encostada na copa de propósito: quem repõe o café não atravessa o escritório com a caixa na mão. Alimento e consumível de um lado, material de limpeza do outro, separados — e a porta fica no corredor de serviço, não na sala de convívio.',
+  montar:function(g,w,d){
+    var h=3.0, m=pad(0xCFC9BF,.88);
+    ilha(w, d, 0x9C9186, g, .4);
+    g.add(por(cx(w,h,.16,m), 0, h/2, d/2));
+    g.add(por(cx(.16,h,d,m),  w/2, h/2, 0));
+    g.add(por(cx(2.4,h,.16,m), -w/2+1.2, h/2, -d/2));
+    g.add(por(cx(2.4,h,.16,m),  w/2-1.2, h/2, -d/2));
+    g.add(por(cx(w,.5,.16,m), 0, h-.25, -d/2));
+    var folha = cx(.95,2.15,.05,M.oak2); folha.position.set(-.5,1.08,-d/2+.05); folha.rotation.y=.4; g.add(folha);
+    var pl0 = placaPorta('despensa', .34, '#F5D9A8'); pl0.position.set(0, 2.4, -d/2+.1); g.add(pl0);
+    prateleira(g, -w/2+.7, -.4, 3.6, .55, 4, Math.PI/2);
+    prateleira(g,  w/2-.7, -.4, 3.6, .55, 4, Math.PI/2);
+    prateleira(g,  1.4, d/2-.6, 3.4, .55, 4, 0);
+    [[-2.2,-1.2,C.terra],[-2.2,.4,0x8A7F70],[1.0,-1.4,0xB0A48E],[2.4,.8,C.terra]].forEach(function(c){
+      g.add(por(cx(.5,.36,.4, pad(c[2],.9)), c[0], .18, c[1]));
+    });
+    var pl=new T.PointLight(0xFFF0D6, 12, 10, 2); pl.position.set(0,2.5,0); g.add(pl);
+  } },
+
+{ id:'deposito', nome:'Depósito', rot:'Equipamento · guardar mesmo', cor:'#8E8B93',
+  x:[55.5,63], z:[19,25], norte:false, alt:1.85, dist:1.05, desv:-.42, miraY:1.15,
+  fatos:[['Área','7,5 × 6,0 m'],['Guarda','câmera, lente, luz, som'],['Regra','case fechado, etiqueta à vista']],
+  texto:'Onde o equipamento audiovisual e de tecnologia mora de verdade — não em cima da mesa de ninguém. Prateleira de altura de case, tomada em cada nível para carregar bateria, e a etiqueta virada para fora, porque quem procura uma lente às sete da manhã não abre caixa por caixa.',
+  montar:function(g,w,d){
+    var h=3.0, m=pad(0xCFC9BF,.88);
+    ilha(w, d, 0x7E7C82, g, .5);
+    g.add(por(cx(w,h,.16,m), 0, h/2, d/2));
+    g.add(por(cx(.16,h,d,m),  w/2, h/2, 0));
+    g.add(por(cx(.16,h,d,m), -w/2, h/2, 0));
+    g.add(por(cx(2.6,h,.16,m), -w/2+1.3, h/2, -d/2));
+    g.add(por(cx(2.6,h,.16,m),  w/2-1.3, h/2, -d/2));
+    g.add(por(cx(w,.5,.16,m), 0, h-.25, -d/2));
+    var folha = cx(1.0,2.15,.05,M.metal); folha.position.set(-.6,1.08,-d/2+.05); folha.rotation.y=.45; g.add(folha);
+    var pl0 = placaPorta('deposito', .34, '#9ED8E4'); pl0.position.set(0, 2.4, -d/2+.1); g.add(pl0);
+    prateleira(g, -w/2+.8, .2, 5.0, .7, 4, Math.PI/2);
+    prateleira(g,  w/2-.8, .2, 5.0, .7, 4, Math.PI/2);
+    /* cases pretos, etiqueta virada para fora */
+    for (var i=0;i<10;i++){
+      var lado = i<5 ? -1 : 1, k = i%5;
+      var cs = cx(.62,.4,.5, pad(0x1D1F24,.6,.2));
+      cs.position.set(lado*(w/2-.85), .58+ (k%3)*.52, -1.6 + Math.floor(k/3)*1.5 + (k%3)*.5);
+      g.add(cs);
+      var et = cx(.3,.13,.02, emissivo(0x9ED8E4,.5));
+      et.position.set(lado*(w/2-1.18), .58+(k%3)*.52, cs.position.z); et.rotation.y=Math.PI/2; g.add(et);
+    }
+    var tri = new T.Group(); tri.position.set(1.6,0,d/2-1.2); g.add(tri);
+    for (var t3=0;t3<3;t3++){
+      var pe=cil(.03,.03,1.6,M.preto,6); pe.position.set(Math.cos(t3/3*6.28)*.28,.8,Math.sin(t3/3*6.28)*.28);
+      pe.rotation.z=Math.cos(t3/3*6.28)*.18; pe.rotation.x=-Math.sin(t3/3*6.28)*.18; tri.add(pe);
+    }
+    tri.add(por(cx(.26,.12,.26,M.preto), 0, 1.62, 0));
+    var pl=new T.PointLight(0xD6EEF5, 12, 11, 2); pl.position.set(0,2.5,0); g.add(pl);
+  } }
+];
+AMB = AMB.concat(AMB_SERVICO);
+
 /* ═══ MONTAGEM ═════════════════════════════════════════════════════════════ */
-var ORDEM = ['recepcao','cdf','maestro','dissesim','pronta','mayhouse','marca','maquina','convivio','despressurizacao','copa','refeitorio'];
+var ORDEM = ['recepcao','cdf','maestro','dissesim','pronta','mayhouse','marca','maquina','convivio','despressurizacao','copa','refeitorio','servico','despensa','deposito'];
 var porId = {};
 AMB.forEach(function(a){ porId[a.id]=a; });
 
@@ -4814,7 +5017,17 @@ function montarPavimento(){
     cap.position.set(vert?p[0]:p[0]+comp/2, H, vert?p[1]+comp/2:p[1]); cena.add(cap);
   });
 
-  /* os doze ambientes */
+  /* as duas portas da espinha — ela terminava em parede cega nos dois lados */
+  [[0, 0], [PLACA_W, Math.PI]].forEach(function(e, i){
+    var pg = portaDupla(2.8, 2.45, M.vidro);
+    pg.position.set(e[0], 0, PLACA_D/2); pg.rotation.y = Math.PI/2 + e[1]; cena.add(pg);
+    var luz = new T.PointLight(0xFFE8C8, 9, 9, 2);
+    luz.position.set(e[0] + (i ? -1.4 : 1.4), 2.4, PLACA_D/2); cena.add(luz);
+    var soleira = cx(i?.1:.1, .02, 3.0, emissivo(0xF5D9A8,.5));
+    soleira.position.set(e[0] + (i ? -1.1 : 1.1), .02, PLACA_D/2); cena.add(soleira);
+  });
+
+  /* os ambientes */
   AMB.forEach(function(a){
     var w=a.x[1]-a.x[0], d=a.z[1]-a.z[0];
     var cxx=(a.x[0]+a.x[1])/2, czz=(a.z[0]+a.z[1])/2;
@@ -4859,8 +5072,8 @@ if (T.SRGBColorSpace) rend.outputColorSpace = T.SRGBColorSpace;
 
 var cam = new T.PerspectiveCamera(46, 1, .1, 400);
 var alvo = new T.Vector3(PLACA_W/2, 0, PLACA_D/2 - 1);
-var esp = {raio:48, theta:-Math.PI/2, phi:.78};
-var GERAL = {pos:new T.Vector3(PLACA_W/2-9, 25, PLACA_D/2+41), alv:new T.Vector3(PLACA_W/2+1, 1.2, PLACA_D/2-1)};
+var esp = {raio:54, theta:-Math.PI/2, phi:.78};
+var GERAL = {pos:new T.Vector3(PLACA_W/2-11, 28, PLACA_D/2+46), alv:new T.Vector3(PLACA_W/2+1, 1.2, PLACA_D/2-1)};
 
 function aplicarEsp(){
   cam.position.set(
@@ -4969,8 +5182,8 @@ function mostrarCartela(a){
     } else {
       cartela.style.setProperty('--cor','#F5D9A8');
       cR.textContent='Pavimento único'; cT.textContent='O escritório';
-      cP.textContent='Doze ambientes num pavimento aberto. Nenhuma sala tem parede: a zona é definida pelo forro colorido suspenso e pela ilha de carpete da mesma cor no chão, exatamente embaixo.';
-      cD.innerHTML='<dt>Placa</dt><dd>56 × 26 m</dd><dt>Pé-direito</dt><dd>3,60 m</dd><dt>Ambientes</dt><dd>12</dd>';
+      cP.textContent='Quinze ambientes num pavimento aberto. Nenhuma sala de trabalho tem parede: a zona é o forro colorido suspenso mais a ilha de carpete da mesma cor no chão. Só o serviço é bloco fechado — banheiro é a única coisa que a planta aberta não resolve.';
+      cD.innerHTML='<dt>Placa</dt><dd>64 × 26 m</dd><dt>Pé-direito</dt><dd>3,60 m</dd><dt>Ambientes</dt><dd>15</dd>';
     }
     cartela.classList.add('dentro');
   }, calmo?0:180);
@@ -4993,7 +5206,7 @@ document.getElementById('btGeral').addEventListener('click', geral);
 
 function montarPista(){
   ORDEM.forEach(function(id, i){
-    if (i===1 || i===6 || i===8){
+    if (i===1 || i===6 || i===8 || i===12){
       var s=document.createElement('span'); s.className='porta__corte'; pista.appendChild(s);
     }
     var a=porId[id];
