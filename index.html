@@ -1,0 +1,916 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinco Salas</title>
+<meta name="description" content="Escritório de produtos: cinco SaaS, cinco marcas, uma planta baixa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@500;700&family=Instrument+Serif:ital@0;1&family=Bodoni+Moda:opsz,wght@6..96,500&family=Baloo+2:wght@700;800&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════
+   CINCO SALAS — escritório de produtos
+   O corredor é acromático. Toda cor da página pertence a uma sala.
+   As salas não seguem o tema do visitante: a luz da sala é a luz da sala.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── o corredor · tema claro (padrão) ───────────────────────────────────── */
+:root{
+  --chao:#F2F0EC;        /* cal — neutro puxado para o quente, escolhido */
+  --chao-2:#E7E4DE;
+  --sup:#FFFFFF;
+  --fio:#DAD5CC;
+  --fio-forte:#BEB7AB;
+  --tinta:#16150F;
+  --tinta-2:#4E4A40;
+  --tinta-3:#7A7466;
+  --luz:#B8791A;         /* a luz de janela, escurecida para valer como texto */
+  --luz-cheia:#F5D9A8;
+  --hachura:rgba(22,21,15,.055);
+  --planta-piso:#FFFFFF;--planta-piso-2:#FBFAF7;
+  --planta-parede:#16150F;
+  --sombra:0 1px 2px rgba(22,21,15,.05), 0 18px 46px -30px rgba(22,21,15,.45);
+
+  --disp:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --prosa:"Newsreader",Georgia,"Times New Roman",serif;
+  --cota:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+
+  --mola:cubic-bezier(.22,1,.36,1);
+  --est:cubic-bezier(.4,0,.2,1);
+}
+
+/* ── o corredor · tema escuro ───────────────────────────────────────────── */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --chao:#0E0F12; --chao-2:#131519; --sup:#15171B;
+    --fio:#24272E; --fio-forte:#363B44;
+    --tinta:#EDEAE4; --tinta-2:#A8A69E; --tinta-3:#7C7A74;
+    --luz:#F5D9A8; --luz-cheia:#F5D9A8;
+    --hachura:rgba(237,234,228,.05);
+    --planta-piso:#191C22; --planta-parede:#EDEAE4;
+    --sombra:0 1px 2px rgba(0,0,0,.5), 0 24px 60px -34px rgba(0,0,0,.95);
+  }
+}
+:root[data-theme="dark"]{
+  --chao:#0E0F12; --chao-2:#131519; --sup:#15171B;
+  --fio:#24272E; --fio-forte:#363B44;
+  --tinta:#EDEAE4; --tinta-2:#A8A69E; --tinta-3:#7C7A74;
+  --luz:#F5D9A8; --luz-cheia:#F5D9A8;
+  --hachura:rgba(237,234,228,.05);
+  --planta-piso:#191C22; --planta-parede:#EDEAE4;
+  --sombra:0 1px 2px rgba(0,0,0,.5), 0 24px 60px -34px rgba(0,0,0,.95);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0; background:var(--chao); color:var(--tinta);
+  font-family:var(--prosa); font-size:17px; font-weight:300; line-height:1.62;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+h1,h2,h3{margin:0; font-family:var(--disp); font-weight:800; line-height:1.02; letter-spacing:-.03em; text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+svg{display:block}
+:focus-visible{outline:2px solid var(--luz); outline-offset:3px; border-radius:3px}
+
+html{scroll-behavior:smooth}
+.faixa{padding-inline:clamp(20px,5vw,72px)}
+.medida{max-width:1240px; margin-inline:auto}
+.prosa{max-width:62ch}
+
+/* rótulo de desenho técnico */
+.rotulo{
+  font-family:var(--cota); font-size:11px; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--tinta-3);
+}
+
+/* ═══ 1 · A PLACA ═══════════════════════════════════════════════════════ */
+.placa{
+  border-bottom:1px solid var(--fio);
+  padding-block:clamp(48px,9vw,104px) clamp(40px,7vw,72px);
+}
+.placa__grade{
+  display:grid; gap:clamp(28px,5vw,56px);
+  grid-template-columns:1fr;
+}
+@media (min-width:900px){ .placa__grade{grid-template-columns:1.15fr .85fr; align-items:end} }
+
+.marca{display:flex; align-items:center; gap:14px; margin-bottom:clamp(28px,5vw,44px)}
+.marca__glifo{width:26px; height:26px; flex:none}
+.marca__nome{
+  font-family:var(--disp); font-weight:800; font-size:15px;
+  letter-spacing:.24em; text-transform:uppercase; line-height:1;
+}
+.marca__sub{
+  font-family:var(--cota); font-size:11px; letter-spacing:.1em;
+  color:var(--tinta-3); border-left:1px solid var(--fio); padding-left:14px; line-height:1;
+}
+
+.placa h1{font-size:clamp(42px,8.2vw,92px); letter-spacing:-.042em}
+.placa h1 em{
+  font-family:var(--prosa); font-style:italic; font-weight:300;
+  letter-spacing:-.02em; color:var(--luz);
+}
+.placa__lede{
+  margin-top:clamp(20px,3vw,30px); font-size:clamp(17px,2vw,20px);
+  color:var(--tinta-2); max-width:54ch;
+}
+
+/* o censo — cotas do edifício */
+.censo{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--fio); border:1px solid var(--fio)}
+@media (min-width:560px){ .censo{grid-template-columns:repeat(4,1fr)} }
+.censo__item{background:var(--chao); padding:16px 18px}
+.censo__n{
+  display:block; font-family:var(--disp); font-weight:700; font-size:26px;
+  letter-spacing:-.03em; line-height:1; font-variant-numeric:tabular-nums;
+}
+.censo__r{display:block; margin-top:8px; font-family:var(--cota); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--tinta-3)}
+
+/* ═══ 2 · A PLANTA ══════════════════════════════════════════════════════ */
+.planta{padding-block:clamp(44px,7vw,80px); border-bottom:1px solid var(--fio)}
+.planta__cabeca{
+  display:flex; flex-wrap:wrap; gap:16px 32px; align-items:baseline;
+  justify-content:space-between; margin-bottom:clamp(24px,4vw,40px);
+}
+.planta__legenda{font-size:15px; color:var(--tinta-2); max-width:46ch}
+.planta__rolagem{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:6px}
+.planta__svg{width:100%; height:auto; min-width:780px}
+.planta__dica{
+  margin-top:12px; font-family:var(--cota); font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--tinta-3);
+}
+@media (min-width:860px){ .planta__dica{display:none} }
+
+/* peças do desenho */
+.pl-parede{fill:none; stroke:var(--planta-parede); stroke-width:5}
+.pl-divisa{stroke:var(--planta-parede); stroke-width:5; stroke-linecap:butt}
+.pl-piso{fill:var(--planta-piso); transition:fill 280ms var(--est)}
+.pl-corredor{fill:url(#hachura)}
+.pl-porta{fill:none; stroke:var(--fio-forte); stroke-width:1.5}
+.pl-num{font-family:var(--cota); font-size:12px; font-weight:500; fill:var(--tinta-3)}
+.pl-num-anel{fill:none; stroke:var(--fio-forte); stroke-width:1.2}
+.pl-nome{font-family:var(--disp); font-weight:700; font-size:15px; letter-spacing:.13em; fill:var(--tinta)}
+.pl-sub{font-family:var(--cota); font-size:10.5px; letter-spacing:.09em; fill:var(--tinta-3)}
+.pl-cota{font-family:var(--cota); font-size:9.5px; letter-spacing:.1em; fill:var(--tinta-3)}
+.pl-cota-linha{stroke:var(--fio-forte); stroke-width:1}
+.pl-janela{stroke-width:9; stroke-linecap:butt; opacity:.5; transition:opacity 320ms var(--est)}
+.pl-brilho{opacity:0; transition:opacity 420ms var(--est)}
+
+.sala-planta{cursor:pointer}
+.sala-planta:focus{outline:none}
+.sala-planta:focus-visible .pl-piso{stroke:var(--luz); stroke-width:2}
+.sala-planta.acesa .pl-piso{fill:var(--tinte)}
+.sala-planta.acesa .pl-janela{opacity:1}
+.sala-planta.acesa .pl-brilho{opacity:1}
+.sala-planta.acesa .pl-nome{fill:var(--marca-forte-lt)}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) .sala-planta.acesa .pl-nome{fill:var(--marca-forte)}
+}
+:root[data-theme="dark"] .sala-planta.acesa .pl-nome{fill:var(--marca-forte)}
+
+/* ═══ 3 · O CORREDOR — as cinco salas ═══════════════════════════════════ */
+.sala{
+  --sala-pad:clamp(56px,9vw,116px);
+  position:relative; padding-block:var(--sala-pad);
+  background:var(--sala-fundo); color:var(--sala-tinta);
+  border-bottom:1px solid var(--sala-fio);
+}
+.sala__grade{display:grid; gap:clamp(36px,5vw,64px); grid-template-columns:1fr}
+@media (min-width:940px){ .sala__grade{grid-template-columns:1.08fr .92fr; align-items:start} }
+
+/* a soleira: número, nome curto, estado */
+.soleira{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  padding-bottom:22px; margin-bottom:clamp(26px,4vw,38px);
+  border-bottom:1px solid var(--sala-fio);
+}
+.soleira__n{
+  font-family:var(--cota); font-size:11px; font-weight:500; letter-spacing:.18em;
+  color:var(--sala-tinta-3); font-variant-numeric:tabular-nums;
+}
+.soleira__risco{flex:1 1 40px; height:1px; background:var(--sala-fio); min-width:24px}
+.selo{
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:var(--cota); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+  padding:5px 11px; border-radius:999px;
+  border:1px solid var(--sala-fio-forte); color:var(--sala-tinta-2);
+}
+.selo::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--sala-marca); flex:none}
+
+/* o logotipo de cada sala, na letra da própria marca */
+.logo{line-height:1; margin-bottom:22px}
+.tese{
+  font-size:clamp(24px,3.4vw,36px); line-height:1.16; letter-spacing:-.02em;
+  text-wrap:balance; color:var(--sala-tinta); margin-bottom:22px;
+}
+.sala__prosa{font-size:16.5px; color:var(--sala-tinta-2); max-width:56ch}
+.sala__prosa + .sala__prosa{margin-top:16px}
+
+/* a régua de fatos */
+.fatos{margin-top:clamp(28px,4vw,40px); border-top:1px solid var(--sala-fio)}
+.fato{
+  display:flex; justify-content:space-between; align-items:baseline; gap:20px;
+  padding:13px 0; border-bottom:1px solid var(--sala-fio);
+}
+.fato__r{font-family:var(--cota); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--sala-tinta-3)}
+.fato__v{
+  font-family:var(--cota); font-size:13.5px; font-weight:500; color:var(--sala-tinta);
+  font-variant-numeric:tabular-nums; text-align:right;
+}
+
+/* a regra que define o produto */
+.regra{
+  background:var(--sala-sup); border:1px solid var(--sala-fio-forte);
+  border-left:3px solid var(--sala-marca);
+  padding:clamp(24px,3.4vw,34px);
+}
+.regra__r{
+  font-family:var(--cota); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--sala-marca-txt); display:block; margin-bottom:16px;
+}
+.regra__c{
+  font-family:var(--prosa); font-style:italic; font-weight:300;
+  font-size:clamp(19px,2.3vw,23px); line-height:1.42; color:var(--sala-tinta);
+  letter-spacing:-.012em;
+}
+.regra__pe{margin-top:18px; font-size:15px; color:var(--sala-tinta-2)}
+
+.porta{
+  display:inline-flex; align-items:center; gap:10px; margin-top:clamp(26px,3.4vw,34px);
+  font-family:var(--cota); font-size:12px; font-weight:500; letter-spacing:.08em;
+  text-decoration:none; color:var(--sala-marca-txt);
+  padding:13px 20px; border:1px solid var(--sala-marca); border-radius:2px;
+  background:transparent; transition:background 200ms var(--est), color 200ms var(--est);
+}
+.porta:hover{background:var(--sala-marca); color:var(--sala-marca-sobre)}
+.porta__seta{transition:transform 220ms var(--mola)}
+.porta:hover .porta__seta{transform:translateX(4px)}
+.sala :focus-visible{outline-color:var(--sala-marca)}
+
+/* ── 01 · CARRO DO FREELA — grafite e ciano ──────────────────────────── */
+.sala--cdf{
+  --sala-fundo:#121110; --sala-sup:#1A1917;
+  --sala-tinta:#F0EDE7; --sala-tinta-2:#B7B0A6; --sala-tinta-3:#948C82;
+  --sala-fio:#272522; --sala-fio-forte:#33302C;
+  --sala-marca:#17D1E8; --sala-marca-txt:#17D1E8; --sala-marca-sobre:#0A1416;
+}
+.sala--cdf .tese, .sala--cdf .logo{
+  font-family:"Schibsted Grotesk",system-ui,sans-serif; font-weight:700;
+}
+.logo--cdf{font-size:clamp(30px,4.4vw,46px); letter-spacing:-.035em; color:#17D1E8}
+.logo--cdf span{color:#F0EDE7}
+.sala--cdf .sala__prosa{font-family:"Schibsted Grotesk",system-ui,sans-serif; font-weight:400; font-size:16px}
+
+/* ── 02 · MAESTRO — tinta e latão ───────────────────────────────────── */
+.sala--maestro{
+  --sala-fundo:#0D0F12; --sala-sup:#121418;
+  --sala-tinta:#F4F6F8; --sala-tinta-2:#9AA1AC; --sala-tinta-3:#6B7280;
+  --sala-fio:#23272E; --sala-fio-forte:#333941;
+  --sala-marca:#D9AC4C; --sala-marca-txt:#E3C173; --sala-marca-sobre:#0D0F12;
+}
+.logo--maestro{
+  font-family:"Instrument Serif",Georgia,serif; font-weight:400;
+  font-size:clamp(38px,5.6vw,60px); letter-spacing:-.022em; color:#E3C173;
+}
+.sala--maestro .tese{font-family:"Instrument Serif",Georgia,serif; font-weight:400; letter-spacing:-.018em; font-size:clamp(26px,3.6vw,40px)}
+.sala--maestro .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
+
+/* ── 03 · DISSE SIM — papel e navy (a sala clara do corredor) ────────── */
+.sala--dissesim{
+  --sala-fundo:#FAF8F5; --sala-sup:#FFFFFF;
+  --sala-tinta:#171512; --sala-tinta-2:#4A453F; --sala-tinta-3:#6F6960;
+  --sala-fio:rgba(23,21,18,.11); --sala-fio-forte:rgba(23,21,18,.2);
+  --sala-marca:#064675; --sala-marca-txt:#064675; --sala-marca-sobre:#FFFFFF;
+}
+.logo--dissesim{
+  font-family:"Instrument Serif",Georgia,serif; font-weight:400;
+  font-size:clamp(38px,5.6vw,60px); letter-spacing:-.022em; color:#171512;
+}
+.logo--dissesim em{font-style:italic; color:#064675}
+.sala--dissesim .tese{font-family:"Instrument Serif",Georgia,serif; font-weight:400; letter-spacing:-.018em; font-size:clamp(26px,3.6vw,40px)}
+.sala--dissesim .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
+
+/* ── 04 · PRONTA — quase preto, rosé e champanhe ─────────────────────── */
+.sala--pronta{
+  --sala-fundo:#0C0A0D; --sala-sup:#131016;
+  --sala-tinta:#F4F0F2; --sala-tinta-2:#C6BDC5; --sala-tinta-3:#9E95A1;
+  --sala-fio:#262029; --sala-fio-forte:#332C37;
+  --sala-marca:#EDB3BC; --sala-marca-txt:#EDB3BC; --sala-marca-sobre:#2A121A;
+}
+.logo--pronta{
+  font-family:"Bodoni Moda",Didot,Georgia,serif; font-weight:500;
+  font-size:clamp(40px,5.8vw,62px); letter-spacing:-.026em; color:#F4F0F2;
+  display:inline-flex; align-items:baseline; gap:.05em;
+}
+.logo--pronta i{
+  width:.17em; height:.17em; border-radius:50%; background:#D8BC8C;
+  box-shadow:0 0 .5em rgba(216,188,140,.34); flex:none; display:inline-block;
+}
+.sala--pronta .tese{font-family:"Bodoni Moda",Didot,Georgia,serif; font-weight:500; font-size:clamp(25px,3.5vw,38px); letter-spacing:-.022em}
+.sala--pronta .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
+
+/* ── 05 · MAYHOUSE — noite, laranja e lilás ──────────────────────────── */
+.sala--mayhouse{
+  --sala-fundo:#0A0F22; --sala-sup:#101731;
+  --sala-tinta:#F1F4FB; --sala-tinta-2:#A7B2CE; --sala-tinta-3:#78849F;
+  --sala-fio:#1D2745; --sala-fio-forte:#2C3860;
+  --sala-marca:#E08700; --sala-marca-txt:#F5A93A; --sala-marca-sobre:#20160A;
+}
+.logo--mayhouse{
+  font-family:"Baloo 2",system-ui,sans-serif; font-weight:800;
+  font-size:clamp(36px,5.2vw,56px); letter-spacing:-.02em; color:#F1F4FB;
+}
+.logo--mayhouse span{color:#F5A93A}
+.sala--mayhouse .tese{font-family:"Baloo 2",system-ui,sans-serif; font-weight:700; font-size:clamp(25px,3.4vw,37px); letter-spacing:-.015em; line-height:1.24}
+.sala--mayhouse .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
+
+/* ═══ 4 · A REGRA DA CASA ═══════════════════════════════════════════════ */
+.casa{padding-block:clamp(56px,9vw,110px); border-bottom:1px solid var(--fio)}
+.casa__cabeca{margin-bottom:clamp(34px,5vw,54px)}
+.casa h2{font-size:clamp(30px,4.6vw,50px); margin-top:16px; letter-spacing:-.035em}
+.casa__lede{margin-top:20px; font-size:17.5px; color:var(--tinta-2); max-width:58ch}
+.metodo{display:grid; gap:1px; background:var(--fio); border:1px solid var(--fio); grid-template-columns:1fr}
+@media (min-width:640px){ .metodo{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:1020px){ .metodo{grid-template-columns:repeat(3,1fr)} }
+.metodo__item{background:var(--chao); padding:clamp(24px,3vw,32px); display:flex; flex-direction:column; gap:12px}
+.metodo__n{font-family:var(--cota); font-size:10px; letter-spacing:.16em; color:var(--tinta-3)}
+.metodo__t{font-family:var(--disp); font-weight:700; font-size:19px; letter-spacing:-.02em; line-height:1.18}
+.metodo__d{font-size:15.5px; color:var(--tinta-2)}
+.metodo__d code{
+  font-family:var(--cota); font-size:.86em; background:var(--chao-2);
+  padding:1px 5px; border-radius:2px; color:var(--tinta);
+}
+.sala__prosa code{
+  font-family:var(--cota); font-size:.86em; background:var(--sala-sup);
+  border:1px solid var(--sala-fio); padding:1px 5px; border-radius:2px; color:var(--sala-tinta);
+}
+
+/* ═══ 5 · O RODAPÉ ══════════════════════════════════════════════════════ */
+.rodape{padding-block:clamp(44px,6vw,72px) clamp(52px,7vw,80px)}
+.rodape__grade{display:grid; gap:32px; grid-template-columns:1fr}
+@media (min-width:760px){ .rodape__grade{grid-template-columns:1.4fr 1fr; align-items:start} }
+.rodape__nota{font-size:15px; color:var(--tinta-2); max-width:56ch}
+.rodape__nota strong{font-weight:400; color:var(--tinta)}
+.indice{display:flex; flex-direction:column; gap:1px; background:var(--fio); border-block:1px solid var(--fio)}
+.indice a{
+  display:flex; justify-content:space-between; gap:16px; align-items:baseline;
+  background:var(--chao); padding:12px 0; text-decoration:none;
+  font-family:var(--cota); font-size:12px; letter-spacing:.06em;
+  transition:color 180ms var(--est);
+}
+.indice a:hover{color:var(--luz)}
+.indice em{font-style:normal; color:var(--tinta-3); font-size:10px; letter-spacing:.12em; text-transform:uppercase}
+
+/* ═══ movimento ═════════════════════════════════════════════════════════ */
+.surge{opacity:0; transform:translateY(18px); transition:opacity 620ms var(--mola), transform 620ms var(--mola)}
+.surge.dentro{opacity:1; transform:none}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; transition-duration:.01ms !important}
+  .surge{opacity:1; transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ 1 · A PLACA ═══════════════════════════════════════════════════════ -->
+<header class="placa faixa">
+  <div class="medida">
+    <div class="marca">
+      <svg class="marca__glifo" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M1.5 11.5h23M11.5 1.5v10M11.5 15.5v9M17.5 15.5v9" stroke="currentColor" stroke-width="1.2"/>
+        <rect x="4" y="4" width="5" height="5" fill="var(--luz)"/>
+      </svg>
+      <span class="marca__nome">Cinco&nbsp;Salas</span>
+      <span class="marca__sub">escritório de produtos</span>
+    </div>
+
+    <div class="placa__grade">
+      <div>
+        <h1>Cinco produtos.<br>Cinco marcas.<br><em>Uma regra só.</em></h1>
+        <p class="placa__lede prosa">
+          Nenhum deles pede uma conversa. O freela responde num botão, a agência
+          aprova num selo, o casal decide numa tela, a cliente fecha num link, a
+          conta tem hora certa de sair. O escritório existe para guardar essa
+          regra — e para que cada empresa mantenha a própria luz.
+        </p>
+      </div>
+      <div class="censo" aria-label="O edifício em números">
+        <div class="censo__item"><span class="censo__n">5</span><span class="censo__r">salas</span></div>
+        <div class="censo__item"><span class="censo__n">5</span><span class="censo__r">sistemas de tokens</span></div>
+        <div class="censo__item"><span class="censo__n">3</span><span class="censo__r">instalam no celular</span></div>
+        <div class="censo__item"><span class="censo__n">1</span><span class="censo__r">método</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ 2 · A PLANTA ══════════════════════════════════════════════════════ -->
+<section class="planta faixa" aria-labelledby="t-planta">
+  <div class="medida">
+    <div class="planta__cabeca">
+      <div>
+        <span class="rotulo">Pavimento único</span>
+        <h2 id="t-planta" style="font-size:clamp(26px,3.6vw,38px);margin-top:12px">A planta</h2>
+      </div>
+      <p class="planta__legenda">
+        A área de cada sala é proporcional a quanto de produto existe lá dentro —
+        modelos, telas, testes, decisões registradas. O corredor é comum. Clique
+        numa sala para entrar.
+      </p>
+    </div>
+
+    <div class="planta__rolagem">
+      <svg class="planta__svg" viewBox="0 0 1200 650" role="group" aria-label="Planta baixa do escritório, cinco salas ligadas por um corredor">
+        <defs>
+          <pattern id="hachura" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="9" stroke="var(--hachura)" stroke-width="3"/>
+          </pattern>
+          <filter id="brilho" x="-120%" y="-400%" width="340%" height="900%">
+            <feGaussianBlur stdDeviation="13"/>
+          </filter>
+        </defs>
+
+        <text class="pl-cota" x="60" y="46" letter-spacing="1.4">PLANTA · SEM ESCALA</text>
+        <g>
+          <line class="pl-cota-linha" x1="1112" y1="54" x2="1112" y2="26"/>
+          <polygon points="1112,20 1107,30 1117,30" fill="var(--tinta-3)"/>
+          <text class="pl-cota" x="1094" y="50">N</text>
+        </g>
+        <g>
+          <text class="pl-cota" x="4" y="283" letter-spacing="1">ENTRADA</text>
+          <line class="pl-cota-linha" x1="12" y1="300" x2="46" y2="300"/>
+          <polygon points="54,300 44,295 44,305" fill="var(--tinta-3)"/>
+        </g>
+
+        <g class="sala-planta" data-alvo="sala-cdf" data-sala="cdf" role="link" tabindex="0"
+           aria-label="Sala 01, Carro do Freela" style="--marca-forte:#17D1E8;--marca-forte-lt:#0C627C;--tinte:rgba(23,209,232,.10)">
+          <rect class="pl-piso" x="63" y="73" width="407" height="198"/>
+          <rect class="pl-brilho" x="180" y="66" width="120" height="8" fill="#17D1E8" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="180" y1="70" x2="300" y2="70" stroke="#17D1E8"/>
+          <circle class="pl-num-anel" cx="100" cy="113" r="15"/>
+          <text class="pl-num" x="100" y="117" text-anchor="middle">01</text>
+          <text class="pl-nome" x="84" y="165">CARRO DO FREELA</text>
+          <text class="pl-sub" x="84" y="186">audiovisual · escala e contratação</text>
+        </g>
+
+        <g class="sala-planta" data-alvo="sala-maestro" data-sala="maestro" role="link" tabindex="0"
+           aria-label="Sala 02, Maestro" style="--marca-forte:#D9AC4C;--marca-forte-lt:#855F22;--tinte:rgba(217,172,76,.10)">
+          <rect class="pl-piso" x="476" y="73" width="661" height="198"/>
+          <rect class="pl-brilho" x="700" y="66" width="200" height="8" fill="#D9AC4C" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="700" y1="70" x2="900" y2="70" stroke="#D9AC4C"/>
+          <circle class="pl-num-anel" cx="513" cy="113" r="15"/>
+          <text class="pl-num" x="513" y="117" text-anchor="middle">02</text>
+          <text class="pl-nome" x="497" y="165">MAESTRO</text>
+          <text class="pl-sub" x="497" y="186">operação criativa · agência e cliente</text>
+        </g>
+
+        <g class="sala-planta" data-alvo="sala-dissesim" data-sala="dissesim" role="link" tabindex="0"
+           aria-label="Sala 03, Disse Sim" style="--marca-forte:#3F86BE;--marca-forte-lt:#064675;--tinte:rgba(63,134,190,.10)">
+          <rect class="pl-piso" x="63" y="329" width="392" height="168"/>
+          <rect class="pl-brilho" x="150" y="496" width="120" height="8" fill="#3F86BE" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="150" y1="500" x2="270" y2="500" stroke="#3F86BE"/>
+          <circle class="pl-num-anel" cx="100" cy="369" r="15"/>
+          <text class="pl-num" x="100" y="373" text-anchor="middle">03</text>
+          <text class="pl-nome" x="84" y="421">DISSE SIM</text>
+          <text class="pl-sub" x="84" y="442">cerimonial · três painéis</text>
+        </g>
+
+        <g class="sala-planta" data-alvo="sala-pronta" data-sala="pronta" role="link" tabindex="0"
+           aria-label="Sala 04, Pronta" style="--marca-forte:#EDB3BC;--marca-forte-lt:#8E3346;--tinte:rgba(237,179,188,.10)">
+          <rect class="pl-piso" x="461" y="329" width="359" height="168"/>
+          <rect class="pl-brilho" x="560" y="496" width="120" height="8" fill="#EDB3BC" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="560" y1="500" x2="680" y2="500" stroke="#EDB3BC"/>
+          <circle class="pl-num-anel" cx="498" cy="369" r="15"/>
+          <text class="pl-num" x="498" y="373" text-anchor="middle">04</text>
+          <text class="pl-nome" x="482" y="421">PRONTA</text>
+          <text class="pl-sub" x="482" y="442">maquiagem · o link na bio</text>
+        </g>
+
+        <g class="sala-planta" data-alvo="sala-mayhouse" data-sala="mayhouse" role="link" tabindex="0"
+           aria-label="Sala 05, MayHouse" style="--marca-forte:#E08700;--marca-forte-lt:#A35F00;--tinte:rgba(224,135,0,.10)">
+          <rect class="pl-piso" x="826" y="329" width="311" height="168"/>
+          <rect class="pl-brilho" x="920" y="496" width="120" height="8" fill="#E08700" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="920" y1="500" x2="1040" y2="500" stroke="#E08700"/>
+          <circle class="pl-num-anel" cx="863" cy="369" r="15"/>
+          <text class="pl-num" x="863" y="373" text-anchor="middle">05</text>
+          <text class="pl-nome" x="847" y="421">MAYHOUSE</text>
+          <text class="pl-sub" x="847" y="442">contas da casa</text>
+        </g>
+
+        <rect class="pl-corredor" x="63" y="276" width="1074" height="48"/>
+        <text class="pl-cota" x="600" y="305" text-anchor="middle" letter-spacing="3">C O R R E D O R</text>
+
+        <rect class="pl-parede" x="60" y="70" width="1080" height="430"/>
+        <line class="pl-divisa" x1="473" y1="70" x2="473" y2="274"/>
+        <line class="pl-divisa" x1="60"   y1="274" x2="240"  y2="274"/>
+        <line class="pl-divisa" x1="280"  y1="274" x2="760"  y2="274"/>
+        <line class="pl-divisa" x1="800"  y1="274" x2="1140" y2="274"/>
+        <line class="pl-divisa" x1="60"   y1="326" x2="340"  y2="326"/>
+        <line class="pl-divisa" x1="380"  y1="326" x2="690"  y2="326"/>
+        <line class="pl-divisa" x1="730"  y1="326" x2="1000" y2="326"/>
+        <line class="pl-divisa" x1="1040" y1="326" x2="1140" y2="326"/>
+        <line class="pl-divisa" x1="458" y1="326" x2="458" y2="500"/>
+        <line class="pl-divisa" x1="823" y1="326" x2="823" y2="500"/>
+
+        <path class="pl-porta" fill="none" d="M240,274 L240,234 A40,40 0 0 1 280,274"/>
+        <path class="pl-porta" fill="none" d="M760,274 L760,234 A40,40 0 0 1 800,274"/>
+        <path class="pl-porta" fill="none" d="M340,326 L340,366 A40,40 0 0 0 380,326"/>
+        <path class="pl-porta" fill="none" d="M690,326 L690,366 A40,40 0 0 0 730,326"/>
+        <path class="pl-porta" fill="none" d="M1000,326 L1000,366 A40,40 0 0 0 1040,326"/>
+
+        <g>
+          <line class="pl-cota-linha" x1="60" y1="568" x2="1140" y2="568"/>
+          <line class="pl-cota-linha" x1="60" y1="560" x2="60" y2="576"/>
+          <line class="pl-cota-linha" x1="1140" y1="560" x2="1140" y2="576"/>
+          <text class="pl-cota" x="600" y="602" text-anchor="middle" letter-spacing="1.4">ÁREA DA SALA = QUANTO DE PRODUTO EXISTE</text>
+        </g>
+      </svg>
+    </div>
+    <p class="planta__dica">arraste para o lado para ver a planta inteira</p>
+  </div>
+</section>
+
+<!-- ═══ 3 · O CORREDOR ════════════════════════════════════════════════════ -->
+<main>
+
+<!-- ── 01 ─────────────────────────────────────────────────────────────── -->
+<section class="sala sala--cdf faixa" id="sala-cdf" aria-labelledby="n-cdf">
+  <div class="medida">
+    <div class="soleira surge">
+      <span class="soleira__n">SALA 01</span>
+      <span class="soleira__risco"></span>
+      <span class="selo">Protótipo · fora dos buscadores</span>
+    </div>
+    <div class="sala__grade">
+      <div class="surge">
+        <p class="logo logo--cdf" id="n-cdf">carro do <span>freela</span></p>
+        <p class="tese">Escale sua equipe sem adivinhar.</p>
+        <p class="sala__prosa">
+          Agenda e contratação de freelas do audiovisual. Quem contrata escolhe a
+          praça, vê quem está com o dia livre e monta a escala inteira com o custo
+          somando na tela. Quem é freela mantém a própria agenda — e a
+          disponibilidade pública sai dali sozinha.
+        </p>
+        <p class="sala__prosa">
+          O ciclo fecha sem sair da plataforma: consulta com data e valor, aceite
+          ou recusa com motivo, data travada, sinal de 20% retido, contrato
+          assinado pelo gov.br e o restante liberado por função depois da entrega
+          conferida. O nome nasceu no grupo, não numa agência.
+        </p>
+        <a class="porta" href="https://carrodofreela.com.br" target="_blank" rel="noopener">
+          carrodofreela.com.br
+          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+      <div class="surge">
+        <div class="regra">
+          <span class="regra__r">A regra da sala</span>
+          <p class="regra__c">“Nada disso passa por chat. A conversa de três dias é o custo que se quer eliminar — por isso a resposta é um botão.”</p>
+          <p class="regra__pe">
+            Não existe contraproposta de diária. Recusar por “valor abaixo da minha
+            tabela” devolve o sinal e a consulta volta corrigida: a mesma informação
+            numa rodada em vez de duas.
+          </p>
+        </div>
+        <div class="fatos">
+          <div class="fato"><span class="fato__r">Profissionais cadastrados</span><span class="fato__v">109</span></div>
+          <div class="fato"><span class="fato__r">Suítes de teste</span><span class="fato__v">28</span></div>
+          <div class="fato"><span class="fato__r">Requisições externas</span><span class="fato__v">0</span></div>
+          <div class="fato"><span class="fato__r">Reputação</span><span class="fato__v">4 fatos, nenhuma estrela</span></div>
+          <div class="fato"><span class="fato__r">Posição na busca</span><span class="fato__v">não se compra</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 02 ─────────────────────────────────────────────────────────────── -->
+<section class="sala sala--maestro faixa" id="sala-maestro" aria-labelledby="n-maestro">
+  <div class="medida">
+    <div class="soleira surge">
+      <span class="soleira__n">SALA 02</span>
+      <span class="soleira__risco"></span>
+      <span class="selo">Em obra · 6 sprints concluídos</span>
+    </div>
+    <div class="sala__grade">
+      <div class="surge">
+        <p class="logo logo--maestro" id="n-maestro">Maestro</p>
+        <p class="tese">O sistema operacional da operação criativa.</p>
+        <p class="sala__prosa">
+          Dois turnos do mesmo produto: o da agência, que produz, e o do cliente,
+          que decide. Entre os dois, um ciclo — campanha, lote, decisão, termo — e
+          um selo que diz o que foi aprovado.
+        </p>
+        <p class="sala__prosa">
+          A documentação é a fonte da verdade: nada entra no código sem estar
+          escrito em <code>/docs</code> antes. Trinta e um documentos, sessenta e
+          uma decisões registradas, nove protótipos navegáveis e duas rodadas de
+          teste com clientes reais antes da primeira linha de produção.
+        </p>
+        <a class="porta" href="https://maestroapptest.vercel.app" target="_blank" rel="noopener">
+          maestroapptest.vercel.app
+          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+      <div class="surge">
+        <div class="regra">
+          <span class="regra__r">A regra da sala · invariante I-05</span>
+          <p class="regra__c">“‘O que foi aprovado é o que vai ao ar’ deixa de ser confiança e vira propriedade do sistema.”</p>
+          <p class="regra__pe">
+            Versão é imutável. Editar um conteúdo aprovado cria versão nova, a
+            aprovação deixa de apontar para a versão atual, o status cai e o
+            agendamento trava sozinho.
+          </p>
+        </div>
+        <div class="fatos">
+          <div class="fato"><span class="fato__r">Modelos no schema</span><span class="fato__v">36</span></div>
+          <div class="fato"><span class="fato__r">Testes passando</span><span class="fato__v">105</span></div>
+          <div class="fato"><span class="fato__r">Invariantes contra Postgres real</span><span class="fato__v">21</span></div>
+          <div class="fato"><span class="fato__r">Decisões registradas</span><span class="fato__v">61</span></div>
+          <div class="fato"><span class="fato__r">Aberto e bloqueante</span><span class="fato__v">D-024 · marca e domínio</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 03 ─────────────────────────────────────────────────────────────── -->
+<section class="sala sala--dissesim faixa" id="sala-dissesim" aria-labelledby="n-dissesim">
+  <div class="medida">
+    <div class="soleira surge">
+      <span class="soleira__n">SALA 03</span>
+      <span class="soleira__risco"></span>
+      <span class="selo">Demonstração · dados fictícios</span>
+    </div>
+    <div class="sala__grade">
+      <div class="surge">
+        <p class="logo logo--dissesim" id="n-dissesim">Disse <em>Sim</em></p>
+        <p class="tese">A cerimonialista comanda. Os fornecedores alimentam. O casal decide.</p>
+        <p class="sala__prosa">
+          Plataforma de cerimonial com três painéis e um sistema só. Cada
+          fornecedor cumpre as etapas do próprio serviço; a cerimonialista vê o
+          casamento inteiro andando; os noivos entram para decidir e avaliar, não
+          para administrar.
+        </p>
+        <p class="sala__prosa">
+          A identidade sonora é gerada em WebAudio — não há um arquivo de áudio no
+          projeto. As fontes são self-hosted em 132 KB e o app se instala na tela
+          de início do celular.
+        </p>
+        <a class="porta" href="https://dissesimapp.vercel.app" target="_blank" rel="noopener">
+          dissesimapp.vercel.app
+          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+      <div class="surge">
+        <div class="regra">
+          <span class="regra__r">A regra da sala</span>
+          <p class="regra__c">“A densidade segue a frequência de uso.”</p>
+          <p class="regra__pe">
+            Quem usa todo dia recebe mesa escura, densa, instrumental. Quem usa toda
+            semana, bancada clara com uma tarefa por vez. Quem usa de vez em quando
+            e com emoção recebe um ateliê editorial, arejado. Três painéis, um
+            sistema — a mesma marca com três temperaturas.
+          </p>
+        </div>
+        <div class="fatos">
+          <div class="fato"><span class="fato__r">Painéis</span><span class="fato__v">3</span></div>
+          <div class="fato"><span class="fato__r">Rotas</span><span class="fato__v">13</span></div>
+          <div class="fato"><span class="fato__r">Fontes self-hosted</span><span class="fato__v">132 KB</span></div>
+          <div class="fato"><span class="fato__r">Status contra daltonismo</span><span class="fato__v">ΔE 11,7 / 9,6</span></div>
+          <div class="fato"><span class="fato__r">Arquivos de áudio</span><span class="fato__v">0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 ─────────────────────────────────────────────────────────────── -->
+<section class="sala sala--pronta faixa" id="sala-pronta" aria-labelledby="n-pronta">
+  <div class="medida">
+    <div class="soleira surge">
+      <span class="soleira__n">SALA 04</span>
+      <span class="soleira__risco"></span>
+      <span class="selo">Protótipo · valores fictícios</span>
+    </div>
+    <div class="sala__grade">
+      <div class="surge">
+        <p class="logo logo--pronta" id="n-pronta">Pronta<i aria-hidden="true"></i></p>
+        <p class="tese">O link na bio que transforma “me chama no direct” em sinal pago.</p>
+        <p class="sala__prosa">
+          Produto para o mercado de maquiagem. A cliente abre um link e sai de lá
+          com orçamento fechado, data reservada e sinal pago — sem a ida e volta no
+          direct que hoje come a agenda da maquiadora.
+        </p>
+        <p class="sala__prosa">
+          Seis telas: o início, o link que a cliente abre, o painel da maquiadora,
+          a equipe, o financeiro e a calculadora de preço. Instala na tela de
+          início e abre sem internet depois da primeira visita.
+        </p>
+        <a class="porta" href="https://prontaapp.vercel.app" target="_blank" rel="noopener">
+          prontaapp.vercel.app
+          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+      <div class="surge">
+        <div class="regra">
+          <span class="regra__r">A regra da sala</span>
+          <p class="regra__c">“O champanhe é só ornamento. Nunca texto.”</p>
+          <p class="regra__pe">
+            Mede 2,27:1 no tema claro — reprova como texto, e por isso está escrito
+            ao lado do token. O escuro é o padrão da marca; o claro foi desenhado à
+            parte, não invertido. Um script varre todas as telas nos dois temas e
+            reprova o que ficar abaixo de 4,5:1.
+          </p>
+        </div>
+        <div class="fatos">
+          <div class="fato"><span class="fato__r">Telas</span><span class="fato__v">6</span></div>
+          <div class="fato"><span class="fato__r">Tema padrão</span><span class="fato__v">escuro</span></div>
+          <div class="fato"><span class="fato__r">Piso de contraste</span><span class="fato__v">4,5:1</span></div>
+          <div class="fato"><span class="fato__r">Auditoria de paleta</span><span class="fato__v">automática</span></div>
+          <div class="fato"><span class="fato__r">Manual de identidade</span><span class="fato__v">publicado</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 05 ─────────────────────────────────────────────────────────────── -->
+<section class="sala sala--mayhouse faixa" id="sala-mayhouse" aria-labelledby="n-mayhouse">
+  <div class="medida">
+    <div class="soleira surge">
+      <span class="soleira__n">SALA 05</span>
+      <span class="soleira__risco"></span>
+      <span class="selo">No ar · 100% estático</span>
+    </div>
+    <div class="sala__grade">
+      <div class="surge">
+        <p class="logo logo--mayhouse" id="n-mayhouse">May<span>House</span></p>
+        <p class="tese">Onde suas contas moram.</p>
+        <p class="sala__prosa">
+          Controle financeiro doméstico em que cada conta ganha um cômodo, uma
+          janela e hora certa de sair — e pagar acende a janela dela na casinha.
+          Agenda de pagamentos sem débito automático, parcelas sob controle e metas
+          da família.
+        </p>
+        <p class="sala__prosa">
+          Sem servidor, sem conta, sem mensalidade: os dados ficam no navegador,
+          com backup e restauração em arquivo. Quem quiser os dois aparelhos vendo
+          a mesma casa liga duas variáveis e a sincronização sobe sozinha.
+        </p>
+        <a class="porta" href="https://mayhouse-vert.vercel.app" target="_blank" rel="noopener">
+          mayhouse-vert.vercel.app
+          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+      <div class="surge">
+        <div class="regra">
+          <span class="regra__r">A regra da sala</span>
+          <p class="regra__c">“Parcelamento nunca perde centavo — a diferença vai na primeira parcela.”</p>
+          <p class="regra__pe">
+            Dinheiro em centavos inteiros, nunca em ponto flutuante. O motor
+            verifica as próprias invariantes a cada cálculo, e a suíte tem mais de
+            noventa testes só para isso.
+          </p>
+        </div>
+        <div class="fatos">
+          <div class="fato"><span class="fato__r">Testes de cálculo</span><span class="fato__v">90+</span></div>
+          <div class="fato"><span class="fato__r">Unidade monetária</span><span class="fato__v">centavo inteiro</span></div>
+          <div class="fato"><span class="fato__r">Parcelamento até</span><span class="fato__v">24×</span></div>
+          <div class="fato"><span class="fato__r">Débito automático</span><span class="fato__v">nenhum</span></div>
+          <div class="fato"><span class="fato__r">Mensalidade</span><span class="fato__v">R$ 0</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ 4 · A REGRA DA CASA ═══════════════════════════════════════════════ -->
+<section class="casa faixa" aria-labelledby="t-casa">
+  <div class="medida">
+    <div class="casa__cabeca">
+      <span class="rotulo">O que se repete nas cinco</span>
+      <h2 id="t-casa">A regra da casa</h2>
+      <p class="casa__lede prosa">
+        Cinco produtos em cinco mercados que não conversam entre si — audiovisual,
+        agência, cerimonial, maquiagem, casa. O que faz disso um escritório e não
+        cinco pastas é o método que cada um herda ao entrar.
+      </p>
+    </div>
+    <div class="metodo">
+      <div class="metodo__item">
+        <span class="metodo__n">01</span>
+        <h3 class="metodo__t">Token é a fonte da verdade</h3>
+        <p class="metodo__d">Nenhum valor literal de cor, espaçamento, raio ou duração dentro de componente. A identidade mora num arquivo só, e mudar a marca é mudar esse arquivo.</p>
+      </div>
+      <div class="metodo__item">
+        <span class="metodo__n">02</span>
+        <h3 class="metodo__t">Contraste é medido, não escolhido</h3>
+        <p class="metodo__d">O número fica anotado ao lado da cor — <code>2,27:1</code>, <code>9,03:1</code>. Cor que reprova como texto vira ornamento e está escrito que é.</p>
+      </div>
+      <div class="metodo__item">
+        <span class="metodo__n">03</span>
+        <h3 class="metodo__t">Invariante é teste</h3>
+        <p class="metodo__d">As regras do produto rodam contra banco de verdade. Se um teste quebra, não é o código — é uma regra do produto que quebrou junto.</p>
+      </div>
+      <div class="metodo__item">
+        <span class="metodo__n">04</span>
+        <h3 class="metodo__t">Português é a língua do produto</h3>
+        <p class="metodo__d">Nenhuma string no código: tudo em arquivo de textos. E as palavras são decisão de produto — em Maestro, “reprovar” não existe em lugar nenhum.</p>
+      </div>
+      <div class="metodo__item">
+        <span class="metodo__n">05</span>
+        <h3 class="metodo__t">Cabe na tela de início</h3>
+        <p class="metodo__d">Três dos cinco instalam no celular e abrem sem internet depois da primeira visita. Campo editável tem no mínimo 16px, senão o Safari amplia a página e não volta.</p>
+      </div>
+      <div class="metodo__item">
+        <span class="metodo__n">06</span>
+        <h3 class="metodo__t">Decisão no lugar de conversa</h3>
+        <p class="metodo__d">É a tese da casa. Os cinco atacam a mesma ida e volta de três dias, cada um no seu mercado, e entregam no lugar dela um botão, um selo, uma data travada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 5 · O RODAPÉ ══════════════════════════════════════════════════════ -->
+<footer class="rodape faixa">
+  <div class="medida rodape__grade">
+    <div>
+      <span class="rotulo">Sobre este desenho</span>
+      <p class="rodape__nota" style="margin-top:16px">
+        Os números e as regras de cada sala saíram da documentação de cada produto.
+        <strong>Quatro dos cinco são protótipo ou obra em andamento</strong> — o estado
+        está na soleira de cada sala, e nomes, valores e métricas de demonstração são
+        fictícios.
+      </p>
+    </div>
+    <nav class="indice" aria-label="Índice das salas">
+      <a href="#sala-cdf">01 · Carro do Freela <em>audiovisual</em></a>
+      <a href="#sala-maestro">02 · Maestro <em>operação criativa</em></a>
+      <a href="#sala-dissesim">03 · Disse Sim <em>cerimonial</em></a>
+      <a href="#sala-pronta">04 · Pronta <em>maquiagem</em></a>
+      <a href="#sala-mayhouse">05 · MayHouse <em>casa</em></a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var calmo = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var salas = Array.prototype.slice.call(document.querySelectorAll(".sala-planta"));
+
+  /* a planta acende sala por sala, uma vez, na chegada */
+  function acender(g){ g.classList.add("acesa"); }
+  function apagar(g){ g.classList.remove("acesa"); }
+
+  if (calmo) {
+    salas.forEach(acender);
+  } else {
+    salas.forEach(function(g,i){
+      window.setTimeout(function(){
+        acender(g);
+        window.setTimeout(function(){ apagar(g); }, 900);
+      }, 420 + i*190);
+    });
+  }
+
+  /* passar o mouse acende; sair apaga */
+  salas.forEach(function(g){
+    var ir = function(){
+      var alvo = document.getElementById(g.getAttribute("data-alvo"));
+      if (alvo) alvo.scrollIntoView({behavior: calmo ? "auto" : "smooth", block: "start"});
+    };
+    if (!calmo) {
+      g.addEventListener("mouseenter", function(){ acender(g); });
+      g.addEventListener("mouseleave", function(){ apagar(g); });
+      g.addEventListener("focus", function(){ acender(g); });
+      g.addEventListener("blur", function(){ apagar(g); });
+    }
+    g.addEventListener("click", ir);
+    g.addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); ir(); }
+    });
+  });
+
+  /* o conteúdo das salas sobe ao entrar em quadro */
+  var partes = Array.prototype.slice.call(document.querySelectorAll(".surge"));
+  if (calmo || !("IntersectionObserver" in window)) {
+    partes.forEach(function(p){ p.classList.add("dentro"); });
+  } else {
+    var olho = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add("dentro"); olho.unobserve(e.target); }
+      });
+    }, {rootMargin: "0px 0px -12% 0px", threshold: 0.08});
+    partes.forEach(function(p){ olho.observe(p); });
+  }
+})();
+</script>
+</body>
+</html>
