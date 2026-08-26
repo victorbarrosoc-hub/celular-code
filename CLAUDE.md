@@ -65,10 +65,10 @@ dependências. Fontes pelo Google Fonts. Publica na Vercel a partir da raiz.
 
 ---
 
-# Briefing em aberto — NÃO EXECUTAR ATÉ LIBERAÇÃO
+# O programa expandido — LIBERADO EM 26/08/2026
 
-> Registrado em 26/08/2026. O Victor pediu explicitamente para **armazenar e não
-> fazer nada** até ele dizer que pode. Quando ele liberar, é este o programa.
+> Registrado como briefing e liberado pelo Victor na mesma data. É este o
+> programa que a vista 3D materializa.
 
 ## O norte
 
@@ -91,16 +91,32 @@ desenhadas como salas fechadas com porta e giro de folha.
 
 | Ambiente | Observação do pedido |
 |---|---|
+| Recepção | pedida na segunda rodada |
 | Espaço de convívio | de uso mútuo do HUB, comum aos cinco produtos |
 | Local de despressurização | descompressão, descanso |
 | Copa | para café |
 | Local para almoço | refeição |
 
 Somados às sete salas já desenhadas (cinco de produto + duas de reunião,
-*Marca* e *Máquina*), o pavimento passa a ter área social além da área de
-trabalho.
+*Marca* e *Máquina*), o pavimento tem **doze ambientes** e passa a ter área
+social além da área de trabalho.
 
-**4 · Liberdade criativa autorizada.** "Enfim, seja criativo."
+**4 · A mesa de reunião — regra dura.**
+
+> "Não gosto das mesas redondas pra reunião, elas precisam ser horizontais mesmo,
+> com possibilidade de virar podcast também."
+
+**Nenhuma mesa de reunião é redonda.** Todas são retangulares e longas, no eixo
+horizontal da sala. As duas salas de reunião são **preparadas para podcast**:
+braços de microfone articulados, microfones, painéis de feltro acústico e tela.
+A cápsula *Máquina* é o estúdio completo; *Marca* tem a mesma mesa e os mesmos
+braços, sem o tratamento acústico pesado.
+
+Isso derruba a mesa redonda que estava desenhada na planta 2D — lá ela era o
+símbolo arquitetônico convencional de sala de reunião. **A planta 2D precisa ser
+corrigida junto**, senão contradiz o 3D.
+
+**5 · Liberdade criativa autorizada.** "Enfim, seja criativo."
 
 ## Referências
 
@@ -121,15 +137,38 @@ Duas coisas a não confundir:
   reto. As duas linguagens não convivem bem na mesma página — é decisão a tomar,
   não detalhe.
 
-## Perguntas a resolver quando liberar
+## Como foi resolvido
 
-- A demonstração em imagem substitui a planta baixa atual ou convive com ela?
-  (A planta carrega a regra "área = quanto de produto existe", que hoje é o
-  raciocínio central da página — perder isso tem custo.)
-- Ponto de vista: uma vista por sala, ou um percurso contínuo pelo pavimento?
-- Os ambientes sociais entram na planta com a mesma neutralidade das salas de
-  reunião — sem cor de dono, janela dividida nos cinco tons?
-- A planta vira orgânica (curva, como as referências) ou continua reta?
-- São onze ambientes ao todo: cinco salas de produto, duas de reunião, convívio,
-  despressurização, copa e almoço. Quais ganham vista de dentro e quais ficam só
-  na planta?
+- **A vista 3D convive com a planta**, em página própria (`escritorio-3d.html`),
+  linkada do índice. A planta 2D continua carregando a regra "área = quanto de
+  produto existe"; o 3D carrega o espaço.
+- **Percurso, não vitrine.** Uma única maquete navegável do pavimento inteiro,
+  com câmera que voa para dentro de cada ambiente. Nada de doze imagens soltas.
+- **Os ambientes de uso comum não têm cor de dono.** Recepção, convívio e as duas
+  salas de reunião recebem o forro em cinco faixas — as cinco marcas juntas.
+  Copa e refeitório ficam em terracota, e a despressurização em grafite: são os
+  únicos dois tons da casa que não pertencem a produto nenhum.
+- **A planta é reta; o mobiliário e os forros são arredondados.** O desenho
+  técnico continua ortogonal, e a curva entra no objeto — forro de canto redondo,
+  cápsula de vidro curvo, ilha de carpete de canto suave.
+
+## O pavimento — 12 ambientes
+
+Placa de 56 × 26 m, pé-direito 3,60 m, forros suspensos a 2,90 m. Uma espinha de
+circulação leste-oeste no meio (z 11,5–14,5), sem forro, cortando o pavimento
+inteiro. Perímetro todo em vidro nas duas faces longas.
+
+| Faixa | Ambiente | x | Cor |
+|---|---|---|---|
+| norte | Recepção | 1–10 | cinco faixas |
+| norte | 01 Carro do Freela | 10,5–21 | ciano `#17D1E8` |
+| norte | 02 Maestro | 21,5–33,5 | latão `#C8963A` |
+| norte | 03 Disse Sim | 34–43,5 | navy `#064675` |
+| norte | A · Marca (reunião) | 44–55 | cinco faixas |
+| sul | Despressurização | 1–9,5 | grafite |
+| sul | Convívio · a praça | 10–21,5 | carvalho + cinco faixas |
+| sul | 04 Pronta | 22–30 | rosé `#EDB3BC` |
+| sul | 05 MayHouse | 30,5–38,5 | laranja `#E08700` |
+| sul | B · Máquina (cápsula podcast) | 39–46,5 | cinco faixas |
+| sul | Copa | 47–55, z 14,5–19 | terracota |
+| sul | Refeitório | 47–55, z 19–25 | terracota |

@@ -210,6 +210,7 @@ svg{display:block}
 .pl-porta{fill:none; stroke:var(--fio-forte); stroke-width:1.5}
 .pl-mesa{fill:none; stroke:var(--fio-forte); stroke-width:1.5}
 .pl-cadeira{fill:var(--fio-forte)}
+.pl-cadeira{fill:var(--fio-forte)}
 .pl-num{font-family:var(--cota); font-size:12px; font-weight:500; fill:var(--marca-forte)}
 .pl-num-anel{fill:none; stroke:var(--marca-forte); stroke-width:1.4; opacity:.5; transition:opacity 280ms var(--est)}
 .pl-nome{font-family:var(--disp); font-weight:700; font-size:15px; letter-spacing:.13em; fill:var(--marca-forte)}
@@ -237,6 +238,23 @@ svg{display:block}
 :root[data-theme="dark"] .pl-num,
 :root[data-theme="dark"] .pl-nome,
 :root[data-theme="dark"] .pl-num-anel{--marca-forte:var(--marca-forte-dk)}
+
+/* o convite para a maquete */
+.para3d{
+  display:flex; align-items:center; gap:clamp(14px,3vw,28px); margin-top:clamp(22px,3vw,30px);
+  padding:clamp(18px,2.4vw,24px) clamp(18px,2.6vw,26px); text-decoration:none;
+  border:1px solid var(--fio); background:var(--sup); color:var(--tinta);
+  transition:border-color 220ms var(--est), transform 220ms var(--mola), box-shadow 220ms var(--est);
+}
+.para3d:hover{border-color:var(--fio-forte); transform:translateY(-2px); box-shadow:var(--sombra)}
+.para3d__l{display:flex; flex-direction:column; gap:6px; flex:1 1 auto; min-width:0}
+.para3d__l b{font-family:var(--disp); font-weight:700; font-size:clamp(17px,2.2vw,21px); letter-spacing:-.025em}
+.para3d__l em{font-style:normal; font-size:14.5px; color:var(--tinta-2); font-family:var(--prosa)}
+.para3d__cores{display:flex; gap:0; flex:none; width:88px; height:5px}
+.para3d__cores i{flex:1; background:var(--h)}
+@media (max-width:640px){ .para3d__cores{display:none} }
+.para3d__seta{flex:none; transition:transform 220ms var(--mola)}
+.para3d:hover .para3d__seta{transform:translateX(5px)}
 
 /* ═══ 3 · O CORREDOR — as cinco salas ═══════════════════════════════════ */
 .sala{
@@ -670,10 +688,9 @@ svg{display:block}
           <line class="pl-janela" x1="1024" y1="70" x2="1046" y2="70" stroke="#3F86BE"/>
           <line class="pl-janela" x1="1046" y1="70" x2="1068" y2="70" stroke="#EDB3BC"/>
           <line class="pl-janela" x1="1068" y1="70" x2="1090" y2="70" stroke="#E08700"/>
-          <circle class="pl-mesa" cx="1055" cy="215" r="20"/>
-          <circle class="pl-cadeira" cx="1085" cy="215" r="5"/><circle class="pl-cadeira" cx="1070" cy="241" r="5"/>
-          <circle class="pl-cadeira" cx="1040" cy="241" r="5"/><circle class="pl-cadeira" cx="1025" cy="215" r="5"/>
-          <circle class="pl-cadeira" cx="1040" cy="189" r="5"/><circle class="pl-cadeira" cx="1070" cy="189" r="5"/>
+          <rect class="pl-mesa" x="1008" y="202" width="94" height="26" rx="3"/>
+          <rect class="pl-cadeira" x="1013" y="190" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1033" y="190" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1053" y="190" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1073" y="190" width="9" height="9" rx="1.5"/>
+          <rect class="pl-cadeira" x="1013" y="231" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1033" y="231" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1053" y="231" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1073" y="231" width="9" height="9" rx="1.5"/>
           <circle class="pl-num-anel" cx="940" cy="105" r="15"/>
           <text class="pl-num" x="940" y="109" text-anchor="middle">A</text>
           <text class="pl-nome" x="924" y="150">MARCA</text>
@@ -694,10 +711,9 @@ svg{display:block}
           <line class="pl-janela" x1="1024" y1="500" x2="1046" y2="500" stroke="#3F86BE"/>
           <line class="pl-janela" x1="1046" y1="500" x2="1068" y2="500" stroke="#EDB3BC"/>
           <line class="pl-janela" x1="1068" y1="500" x2="1090" y2="500" stroke="#E08700"/>
-          <circle class="pl-mesa" cx="1055" cy="455" r="20"/>
-          <circle class="pl-cadeira" cx="1085" cy="455" r="5"/><circle class="pl-cadeira" cx="1070" cy="481" r="5"/>
-          <circle class="pl-cadeira" cx="1040" cy="481" r="5"/><circle class="pl-cadeira" cx="1025" cy="455" r="5"/>
-          <circle class="pl-cadeira" cx="1040" cy="429" r="5"/><circle class="pl-cadeira" cx="1070" cy="429" r="5"/>
+          <rect class="pl-mesa" x="1008" y="442" width="94" height="26" rx="3"/>
+          <rect class="pl-cadeira" x="1013" y="430" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1033" y="430" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1053" y="430" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1073" y="430" width="9" height="9" rx="1.5"/>
+          <rect class="pl-cadeira" x="1013" y="471" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1033" y="471" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1053" y="471" width="9" height="9" rx="1.5"/><rect class="pl-cadeira" x="1073" y="471" width="9" height="9" rx="1.5"/>
           <circle class="pl-num-anel" cx="940" cy="352" r="15"/>
           <text class="pl-num" x="940" y="356" text-anchor="middle">B</text>
           <text class="pl-nome" x="924" y="397">MÁQUINA</text>
@@ -740,6 +756,16 @@ svg{display:block}
       </svg>
     </div>
     <p class="planta__dica">arraste para o lado para ver a planta inteira</p>
+    <a class="para3d" href="escritorio-3d.html">
+      <span class="para3d__l">
+        <b>Entrar no pavimento</b>
+        <em>Doze ambientes em 3D, navegáveis — recepção, convívio, despressurização, copa e refeitório inclusive</em>
+      </span>
+      <span class="para3d__cores" aria-hidden="true">
+        <i style="--h:var(--h-cdf)"></i><i style="--h:var(--h-mae)"></i><i style="--h:var(--h-dis)"></i><i style="--h:var(--h-pro)"></i><i style="--h:var(--h-may)"></i>
+      </span>
+      <svg class="para3d__seta" width="16" height="12" viewBox="0 0 16 12" fill="none" aria-hidden="true"><path d="M0 6h13M9 1.5l4.5 4.5L9 10.5" stroke="currentColor" stroke-width="1.6"/></svg>
+    </a>
   </div>
 </section>
 
@@ -1182,6 +1208,7 @@ svg{display:block}
       <a href="#sala-mayhouse" style="--h:var(--h-may);--cor:var(--c-may)"><i></i>05 · MayHouse <em>casa</em></a>
       <a href="#sala-marca"   style="--h:var(--luz);--cor:var(--luz)"><i></i>A · Marca <em>reunião</em></a>
       <a href="#sala-maquina" style="--h:var(--luz);--cor:var(--luz)"><i></i>B · Máquina <em>reunião</em></a>
+      <a href="escritorio-3d.html" style="--h:var(--luz);--cor:var(--luz)"><i></i>O pavimento em 3D <em>doze ambientes</em></a>
     </nav>
   </div>
 </footer>

@@ -67,3 +67,20 @@ e o comportamento dentro. As fontes vêm do Google Fonts.
 
 Importe o repositório na Vercel. Framework: *Other*. Build command e output
 directory vazios — a raiz é o site.
+
+## O pavimento em 3D
+
+[`escritorio-3d.html`](escritorio-3d.html) — maquete navegável do pavimento
+inteiro, 56 × 26 m, doze ambientes. Órbita com o mouse, e cada ambiente tem um
+botão que leva a câmera para dentro dele.
+
+Nenhuma sala tem parede: a zona é o **forro colorido suspenso** mais a **ilha de
+carpete da mesma cor** no chão, exatamente embaixo. As cinco salas de produto
+usam a cor da própria marca; a recepção, o convívio e as duas salas de reunião
+recebem o forro em cinco faixas, porque são de todos.
+
+**Toda mesa de reunião é retangular e longa, e nunca redonda** — as duas salas de
+reunião são preparadas para podcast, com braços de microfone, feltro acústico e
+tela. A cápsula *Máquina* é vidro curvo com cortina, solta no meio do pavimento.
+
+Three.js embutido no arquivo — sem CDN, sem build, abre offline.

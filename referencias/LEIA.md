@@ -4,7 +4,7 @@ Imagens que o Victor mandou para a demonstração visual das salas.
 O briefing que elas servem está em [`../CLAUDE.md`](../CLAUDE.md) →
 *Briefing em aberto*.
 
-**Recebidas em 26/08/2026 · 5 imagens.** São capturas de tela de app de
+**Recebidas em 26/08/2026 · 9 imagens, em duas levas.** São capturas de tela de app de
 referência; a moldura do celular faz parte do arquivo e deve ser ignorada.
 
 ---
@@ -41,22 +41,49 @@ cor.** A cor do HUB vem dos cinco produtos e não se troca — o corredor é neu
 justamente para caber as cinco. Adotar o azul-e-laranja das fotos apagaria a
 identidade que a página inteira defende.
 
+### As duas temperaturas
+
+A segunda leva (06–09) mudou o clima do conjunto. As cinco primeiras são **dia**:
+azul e laranja, luz natural, concreto claro, corporativo-lúdico. As quatro novas
+são **noite**: terracota, vinho, madeira quente, luz baixa, editorial e íntimo.
+
+Não são duas direções concorrentes — o HUB já tem duas temperaturas, o tema claro
+e o tema escuro do corredor. A leitura natural é essa: **o dia das referências é
+o tema claro; a noite delas é o tema escuro.**
+
+### A cápsula de vidro
+
+A referência 08 traz uma tipologia que faltava: uma **caixa de vidro curvo, de
+canto arredondado, solta no meio da planta aberta**, com cortina por dentro para
+privacidade regulável. Resolve a contradição de querer sala aberta e ao mesmo
+tempo sala de reunião: você vê através dela o tempo todo, e fecha a cortina
+quando precisa.
+
+### A luminária é a assinatura da sala
+
+Em cada referência a sala é identificada pela luminária antes de qualquer outra
+coisa: anel de LED (06), cacho de globos (07), fileira de pendentes âmbar (04),
+letreiro de neon (09). Vale mais que placa na porta.
+
 ### Vocabulário recorrente
 
 | Elemento | Onde aparece |
 |---|---|
-| Forro colorido suspenso + ilha de carpete igual | 01, 02, 04, 05 |
-| Contorno orgânico, canto arredondado | 01, 02, 03, 04, 05 |
-| Instalações do teto aparentes, pintadas na cor da zona | 01, 04 |
+| Forro colorido suspenso + ilha de carpete igual | 01, 02, 04, 05, 06, 07 |
+| Contorno orgânico, canto arredondado | 01–06, 08 |
+| Instalações do teto aparentes, pintadas na cor da zona | 01, 04, 08 |
 | Nicho / alcova curva escavada no espaço aberto | 01 (estante), 03, 04 (servidor) |
-| Tipografia-manifesto na parede, em contorno ou neon | 01 (neon), 02 (outline) |
+| Tipografia-manifesto na parede, em contorno ou neon | 01, 02, 08, 09 |
 | Mobiliário mole e redondo: pufe esférico, poltrona-concha, almofada redonda | 01, 02, 03, 04 |
 | Arquibancada em degraus para reunir gente | 01, 02 |
-| Mesa alta comunitária, uma só, longa | 04 |
+| Mesa longa retangular, nunca redonda | 04, 06, 07, 08 |
+| Luminária como assinatura da sala | 04, 06, 07, 09 |
+| Cápsula de vidro curvo solta no aberto | 08 |
+| Cortina como privacidade regulável | 08 |
+| Vidro no lugar de parede, quando precisa fechar | 05, 07, 08 |
 | Fita de LED por baixo do banco, linear no forro | 01, 02, 05 |
-| Vidro no lugar de parede quando precisa fechar | 05 |
-| Planta viva como divisor | 03, 04, 05 |
-| Madeira como o único neutro quente | 01, 04, 05 |
+| Planta viva como divisor | 03, 04, 05, 06, 08 |
+| Madeira como o único neutro quente | 01, 04, 05, 06, 07, 09 |
 
 ---
 
@@ -126,6 +153,55 @@ floreiras fazendo o papel de divisor.
 sala continua sendo sala — tem endereço, tem cor, tem limite — e mesmo assim
 você enxerga o pavimento inteiro por cima dela. Aplicado ao HUB: sete forros
 coloridos flutuando sobre um piso contínuo.
+
+### 06 · [`06-babar-mesa-longa-terracota.png`](06-babar-mesa-longa-terracota.png)
+**BABAR Mimarlık Sanat Ofisi** — a mesa longa.
+
+Forro e parede de fundo inteiros em **terracota rosado**, não em placa flutuante:
+o envelope todo é a cor. Sobre a mesa, dois **anéis de LED retangulares de canto
+arredondado**, suspensos, um dentro do outro. Mesa muito longa de madeira clara
+para doze, cadeiras cantilever coral com base preta. Piso creme, plantas altas,
+abertura em **arco** com vidro à direita.
+
+**O que serve:** a mesa. É exatamente a horizontal longa pedida, e a luminária em
+anel repete a forma da mesa em vez de competir com ela.
+
+### 07 · [`07-babar-sala-fechada-vinho.png`](07-babar-sala-fechada-vinho.png)
+**BABAR Mimarlık Sanat Ofisi** — a sala fechada, quente.
+
+Forro **vinho profundo**, paredes de madeira clara ripada, parede de vidro de um
+lado. Mesa retangular longa de madeira sobre base única de pedra, poltronas
+giratórias de couro laranja queimado, **tapete terracota** sob a mesa. Ao fundo,
+**estante retroiluminada** com objetos e livros — é ela que faz a cara da sala.
+Cachos de globos pretos como lustre.
+
+**O que serve:** a sala fechada que continua visível — vidro de um lado só. E a
+dupla forro-colorido mais tapete-da-mesma-família, agora em clima noturno.
+
+### 08 · [`08-capsula-de-vidro-curva.png`](08-capsula-de-vidro-curva.png)
+**Office Snapshots** — a cápsula.
+
+**A referência que resolve o problema da sala aberta.** Uma caixa de vidro de
+canto curvo, com caixilho preto fino, solta no meio do pavimento, com **cortinas
+por dentro** meio fechadas. Dentro: mesa oval de terrazzo, cadeiras vermelhas,
+tapete laranja, parede azul e neon. Fora e por cima: **toda a instalação aparente
+do teto pintada de vermelho** — dutos, vigas, sprinklers — com spots em trilho.
+Piso branco contínuo.
+
+**O que serve:** ver através da sala o tempo todo e poder fechar quando precisa.
+É a resposta à contradição entre planta aberta e reunião.
+
+### 09 · [`09-lounge-escuro-neon.png`](09-lounge-escuro-neon.png)
+**Alfa 2 Arquitetura** — o lounge escuro.
+
+Forro preto em vigas com spots e **fitas lineares de luz correndo pelo eixo do
+corredor**. No meio do vão, um **letreiro de neon rosa em manuscrito**, suspenso.
+Carpete grafite, **tapete claro de couro como ilha**, cacho de mesas redondas de
+madeira em alturas diferentes, sofá e poltrona de couro oliva. Ao fundo, mesas
+altas. Clima de clube, não de escritório.
+
+**O que serve:** o modelo de despressurização de verdade — luz baixa, escuro,
+acolhedor. E o neon como peça central de um eixo de circulação.
 
 ---
 
