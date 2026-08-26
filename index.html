@@ -194,6 +194,20 @@ svg{display:block}
 }
 .censo__r{display:block; margin-top:9px; font-family:var(--cota); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--tinta-3)}
 
+/* o botão de 3D dentro da apresentação — cores invertidas, como CTA primário */
+.hero3d{
+  display:inline-flex; align-items:center; gap:11px; margin-top:clamp(20px,3vw,28px);
+  padding:13px 22px 13px 19px; border-radius:999px; text-decoration:none;
+  background:var(--tinta); color:var(--chao);
+  font-family:var(--cota); font-size:12.5px; font-weight:500; letter-spacing:.05em;
+  box-shadow:0 12px 28px -16px rgba(0,0,0,.5);
+  transition:transform 220ms var(--mola), box-shadow 220ms var(--est), background 220ms var(--est);
+}
+.hero3d:hover{transform:translateY(-2px); box-shadow:0 18px 38px -16px rgba(0,0,0,.55)}
+.hero3d svg{flex:none}
+.hero3d__seta{transition:transform 220ms var(--mola)}
+.hero3d:hover .hero3d__seta{transform:translateX(4px)}
+
 /* ═══ 2 · A PLANTA ══════════════════════════════════════════════════════ */
 .planta{padding-block:clamp(44px,7vw,80px); border-bottom:1px solid var(--fio)}
 .planta__cabeca{display:flex; flex-wrap:wrap; gap:16px 32px; align-items:baseline; justify-content:space-between; margin-bottom:clamp(24px,4vw,40px)}
@@ -588,6 +602,14 @@ svg{display:block}
         aprova num selo, o casal decide numa tela, a cliente fecha num link, a
         conta tem hora certa de sair.
       </p>
+      <a class="hero3d" href="escritorio-3d.html" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M8 1 14.5 4.5V11.5L8 15 1.5 11.5V4.5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+          <path d="M1.5 4.5 8 8M8 8 14.5 4.5M8 8V15" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        Ver o pavimento em 3D
+        <svg class="hero3d__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg>
+      </a>
       <div class="vitrine">
         <a class="ficha" href="#sala-cdf"      style="--h:var(--h-cdf);--cor:var(--c-cdf)"><i></i>Carro do Freela <em>audiovisual</em></a>
         <a class="ficha" href="#sala-maestro"  style="--h:var(--h-mae);--cor:var(--c-mae)"><i></i>Maestro <em>operação criativa</em></a>
