@@ -104,9 +104,22 @@ trabalho.
 
 ## Referências
 
-Virão por anexo do Victor. Guardar em [`referencias/`](referencias/LEIA.md) e
-anotar ali o que cada uma traz. **Até o momento não chegou nenhuma** — na
-mensagem em que ele as citou, os anexos não vieram.
+**Recebidas em 26/08/2026 — cinco imagens**, guardadas em
+[`referencias/`](referencias/LEIA.md) com a leitura de cada uma.
+
+O que elas resolvem, em uma linha: **a zona é definida por forro colorido
+suspenso mais ilha de carpete da mesma cor no chão, nunca por parede.** É a
+resposta à planta aberta, e encaixa no desenho atual porque cada sala do HUB já
+tem uma cor — a planta perde as paredes sem perder as salas.
+
+Duas coisas a não confundir:
+
+- **A paleta das referências (azul, laranja, amarelo) é método, não cor.** A cor
+  do HUB vem dos cinco produtos e não se troca; o corredor é neutro justamente
+  para caber as cinco.
+- **O recorte das referências é orgânico**, e a planta atual é desenho técnico
+  reto. As duas linguagens não convivem bem na mesma página — é decisão a tomar,
+  não detalhe.
 
 ## Perguntas a resolver quando liberar
 
@@ -116,3 +129,7 @@ mensagem em que ele as citou, os anexos não vieram.
 - Ponto de vista: uma vista por sala, ou um percurso contínuo pelo pavimento?
 - Os ambientes sociais entram na planta com a mesma neutralidade das salas de
   reunião — sem cor de dono, janela dividida nos cinco tons?
+- A planta vira orgânica (curva, como as referências) ou continua reta?
+- São onze ambientes ao todo: cinco salas de produto, duas de reunião, convívio,
+  despressurização, copa e almoço. Quais ganham vista de dentro e quais ficam só
+  na planta?
