@@ -7,30 +7,31 @@
 <meta name="description" content="Escritório de produtos: cinco SaaS, cinco marcas, uma planta baixa.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@500;700&family=Instrument+Serif:ital@0;1&family=Bodoni+Moda:opsz,wght@6..96,500&family=Baloo+2:wght@700;800&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@500;700&family=Instrument+Serif:ital@0;1&family=Bodoni+Moda:opsz,wght@6..96,500&family=Baloo+2:wght@700;800&family=Inter:wght@400;500;600&display=swap">
 <style>
 /* ═══════════════════════════════════════════════════════════════════════════
    CINCO SALAS — escritório de produtos
-   O corredor é acromático. Toda cor da página pertence a uma sala.
+   O corredor é neutro; a cor da casa é a soma da cor das cinco salas.
    As salas não seguem o tema do visitante: a luz da sala é a luz da sala.
    ═══════════════════════════════════════════════════════════════════════════ */
 
-/* ── o corredor · tema claro (padrão) ───────────────────────────────────── */
 :root{
-  --chao:#F2F0EC;        /* cal — neutro puxado para o quente, escolhido */
-  --chao-2:#E7E4DE;
-  --sup:#FFFFFF;
-  --fio:#DAD5CC;
-  --fio-forte:#BEB7AB;
-  --tinta:#16150F;
-  --tinta-2:#4E4A40;
-  --tinta-3:#7A7466;
-  --luz:#B8791A;         /* a luz de janela, escurecida para valer como texto */
-  --luz-cheia:#F5D9A8;
+  /* ── as cinco luzes · vivas, para preencher: ponto, trilho, janela, brilho ── */
+  --h-cdf:#17D1E8; --h-mae:#D9AC4C; --h-dis:#3F86BE; --h-pro:#EDB3BC; --h-may:#E08700;
+
+  /* ── o corredor · tema claro (padrão) ── */
+  --chao:#F2F0EC; --chao-2:#E7E4DE; --sup:#FFFFFF;
+  --fio:#DAD5CC; --fio-forte:#BEB7AB;
+  --tinta:#16150F; --tinta-2:#4E4A40; --tinta-3:#7A7466;
+  --luz:#B8791A;
   --hachura:rgba(22,21,15,.055);
-  --planta-piso:#FFFFFF;--planta-piso-2:#FBFAF7;
+  --planta-piso:#FFFFFF;
   --planta-parede:#16150F;
+  --vidro:rgba(242,240,236,.86);
   --sombra:0 1px 2px rgba(22,21,15,.05), 0 18px 46px -30px rgba(22,21,15,.45);
+
+  /* ── as mesmas cinco, em versão que passa como texto sobre o corredor ── */
+  --c-cdf:#0C627C; --c-mae:#855F22; --c-dis:#064675; --c-pro:#8E3346; --c-may:#A35F00;
 
   --disp:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
   --prosa:"Newsreader",Georgia,"Times New Roman",serif;
@@ -38,31 +39,36 @@
 
   --mola:cubic-bezier(.22,1,.36,1);
   --est:cubic-bezier(.4,0,.2,1);
+  --barra-h:58px;
 }
 
-/* ── o corredor · tema escuro ───────────────────────────────────────────── */
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --chao:#0E0F12; --chao-2:#131519; --sup:#15171B;
     --fio:#24272E; --fio-forte:#363B44;
     --tinta:#EDEAE4; --tinta-2:#A8A69E; --tinta-3:#7C7A74;
-    --luz:#F5D9A8; --luz-cheia:#F5D9A8;
+    --luz:#F5D9A8;
     --hachura:rgba(237,234,228,.05);
     --planta-piso:#191C22; --planta-parede:#EDEAE4;
+    --vidro:rgba(14,15,18,.84);
     --sombra:0 1px 2px rgba(0,0,0,.5), 0 24px 60px -34px rgba(0,0,0,.95);
+    --c-cdf:#5DE1F2; --c-mae:#E3C173; --c-dis:#8FBEE2; --c-pro:#EDB3BC; --c-may:#F5A93A;
   }
 }
 :root[data-theme="dark"]{
   --chao:#0E0F12; --chao-2:#131519; --sup:#15171B;
   --fio:#24272E; --fio-forte:#363B44;
   --tinta:#EDEAE4; --tinta-2:#A8A69E; --tinta-3:#7C7A74;
-  --luz:#F5D9A8; --luz-cheia:#F5D9A8;
+  --luz:#F5D9A8;
   --hachura:rgba(237,234,228,.05);
   --planta-piso:#191C22; --planta-parede:#EDEAE4;
+  --vidro:rgba(14,15,18,.84);
   --sombra:0 1px 2px rgba(0,0,0,.5), 0 24px 60px -34px rgba(0,0,0,.95);
+  --c-cdf:#5DE1F2; --c-mae:#E3C173; --c-dis:#8FBEE2; --c-pro:#EDB3BC; --c-may:#F5A93A;
 }
 
 *,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   margin:0; background:var(--chao); color:var(--tinta);
   font-family:var(--prosa); font-size:17px; font-weight:300; line-height:1.62;
@@ -75,112 +81,181 @@ a{color:inherit}
 svg{display:block}
 :focus-visible{outline:2px solid var(--luz); outline-offset:3px; border-radius:3px}
 
-html{scroll-behavior:smooth}
 .faixa{padding-inline:clamp(20px,5vw,72px)}
 .medida{max-width:1240px; margin-inline:auto}
 .prosa{max-width:62ch}
-
-/* rótulo de desenho técnico */
 .rotulo{
   font-family:var(--cota); font-size:11px; font-weight:500;
   letter-spacing:.16em; text-transform:uppercase; color:var(--tinta-3);
 }
 
+/* ═══ A BARRA — a planta achatada em navegação ══════════════════════════ */
+.barra{
+  position:sticky; top:0; z-index:60;
+  background:var(--vidro); backdrop-filter:blur(14px) saturate(1.3);
+  -webkit-backdrop-filter:blur(14px) saturate(1.3);
+  border-bottom:1px solid var(--fio);
+}
+.barra__linha{
+  max-width:1240px; margin-inline:auto; height:var(--barra-h);
+  padding-inline:clamp(16px,5vw,72px);
+  display:flex; align-items:center; justify-content:space-between; gap:18px;
+}
+.barra__marca{
+  display:flex; align-items:center; gap:9px; text-decoration:none; flex:none;
+  font-family:var(--disp); font-weight:800; font-size:12.5px;
+  letter-spacing:.2em; text-transform:uppercase; white-space:nowrap;
+}
+.barra__marca svg{width:17px; height:17px; flex:none}
+.barra__salas{display:flex; align-items:center; gap:2px; overflow-x:auto; scrollbar-width:none}
+.barra__salas::-webkit-scrollbar{display:none}
+.pastilha{
+  display:inline-flex; align-items:center; gap:7px; flex:none;
+  padding:7px 11px; border-radius:999px; text-decoration:none;
+  font-family:var(--cota); font-size:11px; letter-spacing:.03em;
+  color:var(--tinta-3); white-space:nowrap;
+  transition:color 180ms var(--est), background 180ms var(--est);
+}
+.pastilha i{
+  width:7px; height:7px; border-radius:50%; background:var(--h); flex:none;
+  box-shadow:0 0 0 0 var(--h); transition:box-shadow 260ms var(--est), transform 260ms var(--mola);
+}
+.pastilha:hover{color:var(--tinta); background:var(--chao-2)}
+.pastilha.aqui{color:var(--cor); background:var(--chao-2)}
+.pastilha.aqui i{box-shadow:0 0 0 4px color-mix(in srgb, var(--h) 22%, transparent); transform:scale(1.1)}
+@media (max-width:820px){
+  .pastilha span{display:none}
+  .pastilha{padding:8px}
+}
+
+/* o trilho: cinco segmentos com a largura proporcional à área da sala */
+.trilho{display:flex; height:3px; max-width:1240px; margin-inline:auto}
+.trilho span{
+  background:var(--h); opacity:.26;
+  transition:opacity 300ms var(--est), transform 300ms var(--mola);
+  transform-origin:bottom;
+}
+.trilho span.aqui{opacity:1; transform:scaleY(2)}
+
 /* ═══ 1 · A PLACA ═══════════════════════════════════════════════════════ */
 .placa{
+  position:relative; overflow:hidden;
   border-bottom:1px solid var(--fio);
-  padding-block:clamp(48px,9vw,104px) clamp(40px,7vw,72px);
+  padding-block:clamp(44px,8vw,92px) clamp(38px,6vw,66px);
 }
-.placa__grade{
-  display:grid; gap:clamp(28px,5vw,56px);
-  grid-template-columns:1fr;
+/* as cinco luzes, vindas do teto do hall */
+.placa::before{
+  content:""; position:absolute; inset:0 -10% 0 -10%;
+  background:
+    radial-gradient(25% 58% at 10% 0%, color-mix(in srgb, var(--h-cdf) 46%, transparent), transparent 72%),
+    radial-gradient(26% 60% at 31% 0%, color-mix(in srgb, var(--h-mae) 46%, transparent), transparent 72%),
+    radial-gradient(25% 58% at 52% 0%, color-mix(in srgb, var(--h-dis) 44%, transparent), transparent 72%),
+    radial-gradient(25% 58% at 73% 0%, color-mix(in srgb, var(--h-pro) 44%, transparent), transparent 72%),
+    radial-gradient(25% 58% at 93% 0%, color-mix(in srgb, var(--h-may) 46%, transparent), transparent 72%);
+  opacity:.68; pointer-events:none;
 }
-@media (min-width:900px){ .placa__grade{grid-template-columns:1.15fr .85fr; align-items:end} }
+.placa > *{position:relative}
 
-.marca{display:flex; align-items:center; gap:14px; margin-bottom:clamp(28px,5vw,44px)}
-.marca__glifo{width:26px; height:26px; flex:none}
-.marca__nome{
-  font-family:var(--disp); font-weight:800; font-size:15px;
-  letter-spacing:.24em; text-transform:uppercase; line-height:1;
-}
-.marca__sub{
-  font-family:var(--cota); font-size:11px; letter-spacing:.1em;
-  color:var(--tinta-3); border-left:1px solid var(--fio); padding-left:14px; line-height:1;
-}
+.placa__grade{display:grid; gap:clamp(26px,4vw,52px); grid-template-columns:1fr}
+@media (min-width:940px){ .placa__grade{grid-template-columns:1.16fr .84fr; align-items:end} }
 
 .placa h1{font-size:clamp(42px,8.2vw,92px); letter-spacing:-.042em}
 .placa h1 em{
   font-family:var(--prosa); font-style:italic; font-weight:300;
   letter-spacing:-.02em; color:var(--luz);
 }
-.placa__lede{
-  margin-top:clamp(20px,3vw,30px); font-size:clamp(17px,2vw,20px);
-  color:var(--tinta-2); max-width:54ch;
+.placa__lede{margin-top:clamp(18px,2.6vw,28px); font-size:clamp(17px,2vw,20px); color:var(--tinta-2); max-width:52ch}
+
+/* os cinco produtos, coloridos, na primeira dobra */
+.vitrine{display:flex; flex-wrap:wrap; gap:8px; margin-top:clamp(26px,3.4vw,36px)}
+.ficha{
+  display:inline-flex; align-items:center; gap:9px; text-decoration:none;
+  padding:9px 15px 9px 12px; border-radius:999px;
+  border:1px solid color-mix(in srgb, var(--h) 42%, transparent);
+  background:color-mix(in srgb, var(--h) 9%, transparent);
+  color:var(--cor); font-family:var(--cota); font-size:12px; font-weight:500;
+  transition:background 200ms var(--est), transform 200ms var(--mola), border-color 200ms var(--est);
+}
+.ficha i{width:8px; height:8px; border-radius:50%; background:var(--h); flex:none}
+.ficha em{font-style:normal; color:var(--tinta-3); font-size:10.5px; letter-spacing:.06em}
+.ficha:hover{
+  background:color-mix(in srgb, var(--h) 18%, transparent);
+  border-color:color-mix(in srgb, var(--h) 72%, transparent);
+  transform:translateY(-2px);
 }
 
-/* o censo — cotas do edifício */
+/* o censo */
 .censo{display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--fio); border:1px solid var(--fio)}
 @media (min-width:560px){ .censo{grid-template-columns:repeat(4,1fr)} }
-.censo__item{background:var(--chao); padding:16px 18px}
+.censo__item{background:var(--chao); padding:18px}
 .censo__n{
-  display:block; font-family:var(--disp); font-weight:700; font-size:26px;
-  letter-spacing:-.03em; line-height:1; font-variant-numeric:tabular-nums;
+  display:block; font-family:var(--disp); font-weight:800; font-size:34px;
+  letter-spacing:-.04em; line-height:1; font-variant-numeric:tabular-nums; color:var(--cor,var(--tinta));
 }
-.censo__r{display:block; margin-top:8px; font-family:var(--cota); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--tinta-3)}
+.censo__r{display:block; margin-top:9px; font-family:var(--cota); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--tinta-3)}
 
 /* ═══ 2 · A PLANTA ══════════════════════════════════════════════════════ */
 .planta{padding-block:clamp(44px,7vw,80px); border-bottom:1px solid var(--fio)}
-.planta__cabeca{
-  display:flex; flex-wrap:wrap; gap:16px 32px; align-items:baseline;
-  justify-content:space-between; margin-bottom:clamp(24px,4vw,40px);
-}
+.planta__cabeca{display:flex; flex-wrap:wrap; gap:16px 32px; align-items:baseline; justify-content:space-between; margin-bottom:clamp(24px,4vw,40px)}
 .planta__legenda{font-size:15px; color:var(--tinta-2); max-width:46ch}
 .planta__rolagem{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:6px}
 .planta__svg{width:100%; height:auto; min-width:780px}
-.planta__dica{
-  margin-top:12px; font-family:var(--cota); font-size:10px; letter-spacing:.12em;
-  text-transform:uppercase; color:var(--tinta-3);
-}
+.planta__dica{margin-top:12px; font-family:var(--cota); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--tinta-3)}
 @media (min-width:860px){ .planta__dica{display:none} }
 
-/* peças do desenho */
 .pl-parede{fill:none; stroke:var(--planta-parede); stroke-width:5}
 .pl-divisa{stroke:var(--planta-parede); stroke-width:5; stroke-linecap:butt}
-.pl-piso{fill:var(--planta-piso); transition:fill 280ms var(--est)}
+.pl-piso{fill:var(--tinte); transition:fill 280ms var(--est)}
 .pl-corredor{fill:url(#hachura)}
 .pl-porta{fill:none; stroke:var(--fio-forte); stroke-width:1.5}
-.pl-num{font-family:var(--cota); font-size:12px; font-weight:500; fill:var(--tinta-3)}
-.pl-num-anel{fill:none; stroke:var(--fio-forte); stroke-width:1.2}
-.pl-nome{font-family:var(--disp); font-weight:700; font-size:15px; letter-spacing:.13em; fill:var(--tinta)}
+.pl-mesa{fill:none; stroke:var(--fio-forte); stroke-width:1.5}
+.pl-cadeira{fill:var(--fio-forte)}
+.pl-num{font-family:var(--cota); font-size:12px; font-weight:500; fill:var(--marca-forte)}
+.pl-num-anel{fill:none; stroke:var(--marca-forte); stroke-width:1.4; opacity:.5; transition:opacity 280ms var(--est)}
+.pl-nome{font-family:var(--disp); font-weight:700; font-size:15px; letter-spacing:.13em; fill:var(--marca-forte)}
 .pl-sub{font-family:var(--cota); font-size:10.5px; letter-spacing:.09em; fill:var(--tinta-3)}
 .pl-cota{font-family:var(--cota); font-size:9.5px; letter-spacing:.1em; fill:var(--tinta-3)}
 .pl-cota-linha{stroke:var(--fio-forte); stroke-width:1}
-.pl-janela{stroke-width:9; stroke-linecap:butt; opacity:.5; transition:opacity 320ms var(--est)}
-.pl-brilho{opacity:0; transition:opacity 420ms var(--est)}
+/* a janela nasce acesa; entrar na sala acende mais */
+.pl-janela{stroke-width:9; stroke-linecap:butt; opacity:.9; transition:opacity 300ms var(--est)}
+.pl-brilho{opacity:.5; transition:opacity 420ms var(--est)}
 
 .sala-planta{cursor:pointer}
 .sala-planta:focus{outline:none}
-.sala-planta:focus-visible .pl-piso{stroke:var(--luz); stroke-width:2}
-.sala-planta.acesa .pl-piso{fill:var(--tinte)}
-.sala-planta.acesa .pl-janela{opacity:1}
+.sala-planta:focus-visible .pl-piso{stroke:var(--marca-forte); stroke-width:2}
+.sala-planta.acesa .pl-piso{fill:var(--tinte-forte)}
 .sala-planta.acesa .pl-brilho{opacity:1}
-.sala-planta.acesa .pl-nome{fill:var(--marca-forte-lt)}
+.sala-planta.acesa .pl-num-anel{opacity:1}
+
+/* o nome da sala usa a versão que passa como texto sobre o piso de cada tema */
+.pl-num, .pl-nome, .pl-num-anel{--marca-forte:var(--marca-forte-lt)}
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]) .sala-planta.acesa .pl-nome{fill:var(--marca-forte)}
+  :root:not([data-theme="light"]) .pl-num,
+  :root:not([data-theme="light"]) .pl-nome,
+  :root:not([data-theme="light"]) .pl-num-anel{--marca-forte:var(--marca-forte-dk)}
 }
-:root[data-theme="dark"] .sala-planta.acesa .pl-nome{fill:var(--marca-forte)}
+:root[data-theme="dark"] .pl-num,
+:root[data-theme="dark"] .pl-nome,
+:root[data-theme="dark"] .pl-num-anel{--marca-forte:var(--marca-forte-dk)}
 
 /* ═══ 3 · O CORREDOR — as cinco salas ═══════════════════════════════════ */
 .sala{
   --sala-pad:clamp(56px,9vw,116px);
-  position:relative; padding-block:var(--sala-pad);
+  position:relative; overflow:hidden; scroll-margin-top:calc(var(--barra-h) + 4px);
+  padding-block:var(--sala-pad);
   background:var(--sala-fundo); color:var(--sala-tinta);
   border-bottom:1px solid var(--sala-fio);
 }
+/* a luz que entra pela janela da sala */
+.sala::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:min(62%,560px);
+  background:radial-gradient(120% 100% at 22% 0%, color-mix(in srgb, var(--sala-marca) var(--sala-luz,15%), transparent), transparent 66%);
+  pointer-events:none;
+}
+.sala > *{position:relative}
 .sala__grade{display:grid; gap:clamp(36px,5vw,64px); grid-template-columns:1fr}
-@media (min-width:940px){ .sala__grade{grid-template-columns:1.08fr .92fr; align-items:start} }
+@media (min-width:940px){ .sala__grade{grid-template-columns:1.06fr .94fr; align-items:start} }
 
-/* a soleira: número, nome curto, estado */
 .soleira{
   display:flex; align-items:center; gap:14px; flex-wrap:wrap;
   padding-bottom:22px; margin-bottom:clamp(26px,4vw,38px);
@@ -188,63 +263,67 @@ html{scroll-behavior:smooth}
 }
 .soleira__n{
   font-family:var(--cota); font-size:11px; font-weight:500; letter-spacing:.18em;
-  color:var(--sala-tinta-3); font-variant-numeric:tabular-nums;
+  color:var(--sala-marca-txt); font-variant-numeric:tabular-nums;
 }
-.soleira__risco{flex:1 1 40px; height:1px; background:var(--sala-fio); min-width:24px}
+.soleira__risco{
+  flex:1 1 40px; min-width:24px; height:2px;
+  background:linear-gradient(90deg, color-mix(in srgb, var(--sala-marca) 55%, transparent), transparent);
+}
 .selo{
   display:inline-flex; align-items:center; gap:7px;
   font-family:var(--cota); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
-  padding:5px 11px; border-radius:999px;
-  border:1px solid var(--sala-fio-forte); color:var(--sala-tinta-2);
+  padding:6px 12px; border-radius:999px;
+  border:1px solid color-mix(in srgb, var(--sala-marca) 34%, transparent);
+  background:color-mix(in srgb, var(--sala-marca) 8%, transparent);
+  color:var(--sala-marca-txt);
 }
-.selo::before{content:""; width:5px; height:5px; border-radius:50%; background:var(--sala-marca); flex:none}
+.selo::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--sala-marca); flex:none}
 
-/* o logotipo de cada sala, na letra da própria marca */
 .logo{line-height:1; margin-bottom:22px}
-.tese{
-  font-size:clamp(24px,3.4vw,36px); line-height:1.16; letter-spacing:-.02em;
-  text-wrap:balance; color:var(--sala-tinta); margin-bottom:22px;
-}
+.tese{font-size:clamp(24px,3.4vw,36px); line-height:1.16; letter-spacing:-.02em; text-wrap:balance; color:var(--sala-tinta); margin-bottom:22px}
 .sala__prosa{font-size:16.5px; color:var(--sala-tinta-2); max-width:56ch}
 .sala__prosa + .sala__prosa{margin-top:16px}
-
-/* a régua de fatos */
-.fatos{margin-top:clamp(28px,4vw,40px); border-top:1px solid var(--sala-fio)}
-.fato{
-  display:flex; justify-content:space-between; align-items:baseline; gap:20px;
-  padding:13px 0; border-bottom:1px solid var(--sala-fio);
+.sala__prosa code{
+  font-family:var(--cota); font-size:.86em; background:var(--sala-sup);
+  border:1px solid var(--sala-fio); padding:1px 5px; border-radius:2px; color:var(--sala-tinta);
 }
+
+/* as três métricas grandes */
+.metricas{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--sala-fio); border:1px solid var(--sala-fio); margin-bottom:clamp(22px,3vw,30px)}
+.metrica{background:var(--sala-sup); padding:clamp(16px,2.4vw,22px)}
+.metrica__n{
+  display:block; font-family:var(--disp); font-weight:800;
+  font-size:clamp(28px,4.2vw,42px); line-height:1; letter-spacing:-.045em;
+  color:var(--sala-marca-txt); font-variant-numeric:tabular-nums;
+}
+.metrica__r{display:block; margin-top:10px; font-family:var(--cota); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--sala-tinta-3); line-height:1.4}
+
+.fatos{border-top:1px solid var(--sala-fio)}
+.fato{display:flex; justify-content:space-between; align-items:baseline; gap:20px; padding:12px 0; border-bottom:1px solid var(--sala-fio)}
 .fato__r{font-family:var(--cota); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--sala-tinta-3)}
-.fato__v{
-  font-family:var(--cota); font-size:13.5px; font-weight:500; color:var(--sala-tinta);
-  font-variant-numeric:tabular-nums; text-align:right;
-}
+.fato__v{font-family:var(--cota); font-size:13px; font-weight:500; color:var(--sala-tinta); font-variant-numeric:tabular-nums; text-align:right}
 
-/* a regra que define o produto */
 .regra{
-  background:var(--sala-sup); border:1px solid var(--sala-fio-forte);
+  background:var(--sala-sup);
+  border:1px solid color-mix(in srgb, var(--sala-marca) 26%, var(--sala-fio));
   border-left:3px solid var(--sala-marca);
-  padding:clamp(24px,3.4vw,34px);
+  padding:clamp(24px,3.4vw,34px); margin-bottom:clamp(26px,3.4vw,34px);
 }
-.regra__r{
-  font-family:var(--cota); font-size:10px; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--sala-marca-txt); display:block; margin-bottom:16px;
-}
-.regra__c{
-  font-family:var(--prosa); font-style:italic; font-weight:300;
-  font-size:clamp(19px,2.3vw,23px); line-height:1.42; color:var(--sala-tinta);
-  letter-spacing:-.012em;
-}
+.regra__r{font-family:var(--cota); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--sala-marca-txt); display:block; margin-bottom:16px}
+.regra__c{font-family:var(--prosa); font-style:italic; font-weight:300; font-size:clamp(19px,2.3vw,23px); line-height:1.42; color:var(--sala-tinta); letter-spacing:-.012em}
 .regra__pe{margin-top:18px; font-size:15px; color:var(--sala-tinta-2)}
 
+/* a porta: botão cheio, com a luz da sala por baixo */
 .porta{
   display:inline-flex; align-items:center; gap:10px; margin-top:clamp(26px,3.4vw,34px);
-  font-family:var(--cota); font-size:12px; font-weight:500; letter-spacing:.08em;
-  text-decoration:none; color:var(--sala-marca-txt);
-  padding:13px 20px; border:1px solid var(--sala-marca); border-radius:2px;
-  background:transparent; transition:background 200ms var(--est), color 200ms var(--est);
+  font-family:var(--cota); font-size:12.5px; font-weight:500; letter-spacing:.04em;
+  text-decoration:none; color:var(--sala-marca-sobre);
+  padding:14px 22px; border-radius:999px; border:0;
+  background:var(--sala-marca);
+  box-shadow:0 10px 30px -14px color-mix(in srgb, var(--sala-marca) 90%, transparent);
+  transition:transform 220ms var(--mola), box-shadow 220ms var(--est), filter 200ms var(--est);
 }
-.porta:hover{background:var(--sala-marca); color:var(--sala-marca-sobre)}
+.porta:hover{transform:translateY(-2px); filter:brightness(1.08); box-shadow:0 16px 40px -14px color-mix(in srgb, var(--sala-marca) 100%, transparent)}
 .porta__seta{transition:transform 220ms var(--mola)}
 .porta:hover .porta__seta{transform:translateX(4px)}
 .sala :focus-visible{outline-color:var(--sala-marca)}
@@ -253,12 +332,10 @@ html{scroll-behavior:smooth}
 .sala--cdf{
   --sala-fundo:#121110; --sala-sup:#1A1917;
   --sala-tinta:#F0EDE7; --sala-tinta-2:#B7B0A6; --sala-tinta-3:#948C82;
-  --sala-fio:#272522; --sala-fio-forte:#33302C;
-  --sala-marca:#17D1E8; --sala-marca-txt:#17D1E8; --sala-marca-sobre:#0A1416;
+  --sala-fio:#272522; --sala-luz:16%;
+  --sala-marca:#17D1E8; --sala-marca-txt:#5DE1F2; --sala-marca-sobre:#06181C;
 }
-.sala--cdf .tese, .sala--cdf .logo{
-  font-family:"Schibsted Grotesk",system-ui,sans-serif; font-weight:700;
-}
+.sala--cdf .tese, .sala--cdf .logo{font-family:"Schibsted Grotesk",system-ui,sans-serif; font-weight:700}
 .logo--cdf{font-size:clamp(30px,4.4vw,46px); letter-spacing:-.035em; color:#17D1E8}
 .logo--cdf span{color:#F0EDE7}
 .sala--cdf .sala__prosa{font-family:"Schibsted Grotesk",system-ui,sans-serif; font-weight:400; font-size:16px}
@@ -267,13 +344,10 @@ html{scroll-behavior:smooth}
 .sala--maestro{
   --sala-fundo:#0D0F12; --sala-sup:#121418;
   --sala-tinta:#F4F6F8; --sala-tinta-2:#9AA1AC; --sala-tinta-3:#6B7280;
-  --sala-fio:#23272E; --sala-fio-forte:#333941;
+  --sala-fio:#23272E; --sala-luz:15%;
   --sala-marca:#D9AC4C; --sala-marca-txt:#E3C173; --sala-marca-sobre:#0D0F12;
 }
-.logo--maestro{
-  font-family:"Instrument Serif",Georgia,serif; font-weight:400;
-  font-size:clamp(38px,5.6vw,60px); letter-spacing:-.022em; color:#E3C173;
-}
+.logo--maestro{font-family:"Instrument Serif",Georgia,serif; font-weight:400; font-size:clamp(38px,5.6vw,60px); letter-spacing:-.022em; color:#E3C173}
 .sala--maestro .tese{font-family:"Instrument Serif",Georgia,serif; font-weight:400; letter-spacing:-.018em; font-size:clamp(26px,3.6vw,40px)}
 .sala--maestro .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
 
@@ -281,13 +355,10 @@ html{scroll-behavior:smooth}
 .sala--dissesim{
   --sala-fundo:#FAF8F5; --sala-sup:#FFFFFF;
   --sala-tinta:#171512; --sala-tinta-2:#4A453F; --sala-tinta-3:#6F6960;
-  --sala-fio:rgba(23,21,18,.11); --sala-fio-forte:rgba(23,21,18,.2);
+  --sala-fio:rgba(23,21,18,.12); --sala-luz:11%;
   --sala-marca:#064675; --sala-marca-txt:#064675; --sala-marca-sobre:#FFFFFF;
 }
-.logo--dissesim{
-  font-family:"Instrument Serif",Georgia,serif; font-weight:400;
-  font-size:clamp(38px,5.6vw,60px); letter-spacing:-.022em; color:#171512;
-}
+.logo--dissesim{font-family:"Instrument Serif",Georgia,serif; font-weight:400; font-size:clamp(38px,5.6vw,60px); letter-spacing:-.022em; color:#171512}
 .logo--dissesim em{font-style:italic; color:#064675}
 .sala--dissesim .tese{font-family:"Instrument Serif",Georgia,serif; font-weight:400; letter-spacing:-.018em; font-size:clamp(26px,3.6vw,40px)}
 .sala--dissesim .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
@@ -296,7 +367,7 @@ html{scroll-behavior:smooth}
 .sala--pronta{
   --sala-fundo:#0C0A0D; --sala-sup:#131016;
   --sala-tinta:#F4F0F2; --sala-tinta-2:#C6BDC5; --sala-tinta-3:#9E95A1;
-  --sala-fio:#262029; --sala-fio-forte:#332C37;
+  --sala-fio:#262029; --sala-luz:15%;
   --sala-marca:#EDB3BC; --sala-marca-txt:#EDB3BC; --sala-marca-sobre:#2A121A;
 }
 .logo--pronta{
@@ -304,10 +375,7 @@ html{scroll-behavior:smooth}
   font-size:clamp(40px,5.8vw,62px); letter-spacing:-.026em; color:#F4F0F2;
   display:inline-flex; align-items:baseline; gap:.05em;
 }
-.logo--pronta i{
-  width:.17em; height:.17em; border-radius:50%; background:#D8BC8C;
-  box-shadow:0 0 .5em rgba(216,188,140,.34); flex:none; display:inline-block;
-}
+.logo--pronta i{width:.17em; height:.17em; border-radius:50%; background:#D8BC8C; box-shadow:0 0 .5em rgba(216,188,140,.34); flex:none; display:inline-block}
 .sala--pronta .tese{font-family:"Bodoni Moda",Didot,Georgia,serif; font-weight:500; font-size:clamp(25px,3.5vw,38px); letter-spacing:-.022em}
 .sala--pronta .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
 
@@ -315,37 +383,88 @@ html{scroll-behavior:smooth}
 .sala--mayhouse{
   --sala-fundo:#0A0F22; --sala-sup:#101731;
   --sala-tinta:#F1F4FB; --sala-tinta-2:#A7B2CE; --sala-tinta-3:#78849F;
-  --sala-fio:#1D2745; --sala-fio-forte:#2C3860;
-  --sala-marca:#E08700; --sala-marca-txt:#F5A93A; --sala-marca-sobre:#20160A;
+  --sala-fio:#1D2745; --sala-luz:18%;
+  --sala-marca:#E08700; --sala-marca-txt:#F5A93A; --sala-marca-sobre:#1B1206;
 }
-.logo--mayhouse{
-  font-family:"Baloo 2",system-ui,sans-serif; font-weight:800;
-  font-size:clamp(36px,5.2vw,56px); letter-spacing:-.02em; color:#F1F4FB;
-}
+.logo--mayhouse{font-family:"Baloo 2",system-ui,sans-serif; font-weight:800; font-size:clamp(36px,5.2vw,56px); letter-spacing:-.02em; color:#F1F4FB}
 .logo--mayhouse span{color:#F5A93A}
 .sala--mayhouse .tese{font-family:"Baloo 2",system-ui,sans-serif; font-weight:700; font-size:clamp(25px,3.4vw,37px); letter-spacing:-.015em; line-height:1.24}
 .sala--mayhouse .sala__prosa{font-family:Inter,system-ui,sans-serif; font-size:15.5px; line-height:1.62}
 
-/* ═══ 4 · A REGRA DA CASA ═══════════════════════════════════════════════ */
-.casa{padding-block:clamp(56px,9vw,110px); border-bottom:1px solid var(--fio)}
-.casa__cabeca{margin-bottom:clamp(34px,5vw,54px)}
-.casa h2{font-size:clamp(30px,4.6vw,50px); margin-top:16px; letter-spacing:-.035em}
-.casa__lede{margin-top:20px; font-size:17.5px; color:var(--tinta-2); max-width:58ch}
-.metodo{display:grid; gap:1px; background:var(--fio); border:1px solid var(--fio); grid-template-columns:1fr}
-@media (min-width:640px){ .metodo{grid-template-columns:repeat(2,1fr)} }
-@media (min-width:1020px){ .metodo{grid-template-columns:repeat(3,1fr)} }
-.metodo__item{background:var(--chao); padding:clamp(24px,3vw,32px); display:flex; flex-direction:column; gap:12px}
-.metodo__n{font-family:var(--cota); font-size:10px; letter-spacing:.16em; color:var(--tinta-3)}
-.metodo__t{font-family:var(--disp); font-weight:700; font-size:19px; letter-spacing:-.02em; line-height:1.18}
-.metodo__d{font-size:15.5px; color:var(--tinta-2)}
-.metodo__d code{
-  font-family:var(--cota); font-size:.86em; background:var(--chao-2);
-  padding:1px 5px; border-radius:2px; color:var(--tinta);
+/* ═══ 4 · AS DUAS SALAS DE REUNIÃO ═════════════════════════════════════ */
+.pastilha__corte{width:1px; height:18px; background:var(--fio); margin-inline:8px; flex:none}
+
+.comuns{padding-block:clamp(56px,9vw,110px); border-bottom:1px solid var(--fio)}
+.comuns__cabeca{margin-bottom:clamp(38px,5vw,58px)}
+.comuns h2{font-size:clamp(30px,4.6vw,50px); margin-top:16px; letter-spacing:-.035em}
+.comuns__lede{margin-top:20px; font-size:17.5px; color:var(--tinta-2); max-width:60ch}
+.arcoiris{display:flex; height:4px; margin-top:14px; max-width:280px}
+.arcoiris span{flex:1; background:var(--h)}
+
+.reuniao{border-top:2px solid var(--luz); background:var(--sup); padding:clamp(26px,3.6vw,40px); scroll-margin-top:calc(var(--barra-h) + 12px)}
+.reuniao + .reuniao{margin-top:clamp(20px,2.6vw,28px)}
+.reuniao__soleira{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-bottom:clamp(22px,3vw,30px)}
+.reuniao__letra{
+  display:grid; place-items:center; width:34px; height:34px; flex:none;
+  border-radius:50%; border:1.4px solid var(--luz); color:var(--luz);
+  font-family:var(--cota); font-size:13px; font-weight:500;
 }
-.sala__prosa code{
-  font-family:var(--cota); font-size:.86em; background:var(--sala-sup);
-  border:1px solid var(--sala-fio); padding:1px 5px; border-radius:2px; color:var(--sala-tinta);
+.reuniao h3{font-family:var(--disp); font-weight:800; font-size:clamp(24px,3.2vw,32px); letter-spacing:-.032em}
+.reuniao__risco{flex:1 1 40px; min-width:20px; height:1px; background:var(--fio)}
+.selo-comum{
+  display:inline-flex; align-items:center; gap:8px; flex:none;
+  font-family:var(--cota); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+  padding:6px 12px; border-radius:999px; border:1px solid var(--fio-forte); color:var(--tinta-3);
 }
+.selo-comum b{display:flex; gap:2px}
+.selo-comum b span{width:5px; height:5px; border-radius:50%; background:var(--h)}
+.reuniao__grade{display:grid; gap:clamp(30px,4vw,50px); grid-template-columns:1fr}
+@media (min-width:960px){ .reuniao__grade{grid-template-columns:.92fr 1.08fr; align-items:start} }
+.reuniao__tese{font-family:var(--disp); font-weight:700; font-size:clamp(20px,2.5vw,26px); line-height:1.2; letter-spacing:-.028em; margin-bottom:18px; text-wrap:balance}
+.reuniao__prosa{font-size:16px; color:var(--tinta-2); max-width:52ch}
+
+/* o que se acorda na sala */
+.acordo{list-style:none; margin:clamp(24px,3vw,32px) 0 0; padding:0; border-top:1px solid var(--fio)}
+.acordo li{padding:16px 0; border-bottom:1px solid var(--fio)}
+.acordo b{display:block; font-family:var(--disp); font-weight:700; font-size:16px; letter-spacing:-.018em; margin-bottom:6px}
+.acordo span{font-size:15px; color:var(--tinta-2)}
+.acordo code{font-family:var(--cota); font-size:.86em; background:var(--chao-2); padding:1px 5px; border-radius:2px; color:var(--tinta)}
+
+/* a mesa da sala A — as cinco paletas lado a lado */
+.paletas{display:flex; flex-direction:column; gap:18px}
+.paleta__cabeca{display:flex; align-items:baseline; gap:9px; margin-bottom:8px}
+.paleta__cabeca i{width:8px; height:8px; border-radius:50%; background:var(--h); flex:none; align-self:center}
+.paleta__cabeca b{font-family:var(--cota); font-size:12px; font-weight:500; color:var(--cor)}
+.paleta__cabeca em{font-style:normal; font-size:11px; color:var(--tinta-3); margin-left:auto; text-align:right}
+.tiras{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--fio); border:1px solid var(--fio)}
+.tira{display:block; padding-top:34px; position:relative; background:var(--t)}
+.tira::after{
+  content:attr(data-hex); position:absolute; inset:auto 0 0 0;
+  background:var(--chao); color:var(--tinta-3);
+  font-family:var(--cota); font-size:9.5px; letter-spacing:.02em;
+  padding:5px 7px; text-align:center;
+}
+
+/* a mesa da sala B — onde cada um roda */
+.mesa-b{overflow-x:auto; -webkit-overflow-scrolling:touch}
+.mesa-b table{border-collapse:collapse; width:100%; min-width:600px; font-family:var(--cota); font-size:12px}
+.mesa-b th, .mesa-b td{text-align:left; padding:12px 14px 12px 0; border-bottom:1px solid var(--fio); vertical-align:top}
+.mesa-b th{font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--tinta-3); font-weight:500; border-bottom-color:var(--fio-forte)}
+.mesa-b td:first-child{color:var(--cor); white-space:nowrap}
+.mesa-b td:first-child i{display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--h); margin-right:8px}
+.mesa-b td{color:var(--tinta-2)}
+.mesa-b td.sim{color:var(--tinta)}
+
+/* ═══ 4b · A TESE DA CASA ══════════════════════════════════════════════ */
+.tese-casa{position:relative; padding-block:clamp(56px,8vw,96px); border-bottom:1px solid var(--fio); overflow:hidden}
+.tese-casa::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:4px; display:block;
+  background:linear-gradient(90deg,
+    var(--h-cdf) 0 20%, var(--h-mae) 20% 40%, var(--h-dis) 40% 60%,
+    var(--h-pro) 60% 80%, var(--h-may) 80% 100%);
+}
+.tese-casa h2{font-size:clamp(30px,5.4vw,58px); margin-top:16px; letter-spacing:-.04em; max-width:16ch}
+.tese-casa p{margin-top:22px; font-size:clamp(17px,2vw,19.5px); color:var(--tinta-2); max-width:62ch}
 
 /* ═══ 5 · O RODAPÉ ══════════════════════════════════════════════════════ */
 .rodape{padding-block:clamp(44px,6vw,72px) clamp(52px,7vw,80px)}
@@ -355,13 +474,14 @@ html{scroll-behavior:smooth}
 .rodape__nota strong{font-weight:400; color:var(--tinta)}
 .indice{display:flex; flex-direction:column; gap:1px; background:var(--fio); border-block:1px solid var(--fio)}
 .indice a{
-  display:flex; justify-content:space-between; gap:16px; align-items:baseline;
+  display:flex; align-items:baseline; gap:12px;
   background:var(--chao); padding:12px 0; text-decoration:none;
   font-family:var(--cota); font-size:12px; letter-spacing:.06em;
   transition:color 180ms var(--est);
 }
-.indice a:hover{color:var(--luz)}
-.indice em{font-style:normal; color:var(--tinta-3); font-size:10px; letter-spacing:.12em; text-transform:uppercase}
+.indice i{width:7px; height:7px; border-radius:50%; background:var(--h); flex:none; align-self:center}
+.indice em{font-style:normal; color:var(--tinta-3); font-size:10px; letter-spacing:.12em; text-transform:uppercase; margin-left:auto}
+.indice a:hover{color:var(--cor)}
 
 /* ═══ movimento ═════════════════════════════════════════════════════════ */
 .surge{opacity:0; transform:translateY(18px); transition:opacity 620ms var(--mola), transform 620ms var(--mola)}
@@ -375,35 +495,63 @@ html{scroll-behavior:smooth}
 </head>
 <body>
 
-<!-- ═══ 1 · A PLACA ═══════════════════════════════════════════════════════ -->
-<header class="placa faixa">
-  <div class="medida">
-    <div class="marca">
-      <svg class="marca__glifo" viewBox="0 0 26 26" aria-hidden="true">
-        <rect x="1.5" y="1.5" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.6"/>
-        <path d="M1.5 11.5h23M11.5 1.5v10M11.5 15.5v9M17.5 15.5v9" stroke="currentColor" stroke-width="1.2"/>
+<!-- ═══ A BARRA — a planta achatada em navegação ═══════════════════════════ -->
+<div class="barra">
+  <div class="barra__linha">
+    <a class="barra__marca" href="#topo">
+      <svg viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="1.5" y="1.5" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M1.5 11.5h23M11.5 1.5v10M11.5 15.5v9M17.5 15.5v9" stroke="currentColor" stroke-width="1.4"/>
         <rect x="4" y="4" width="5" height="5" fill="var(--luz)"/>
       </svg>
-      <span class="marca__nome">Cinco&nbsp;Salas</span>
-      <span class="marca__sub">escritório de produtos</span>
-    </div>
+      Cinco&nbsp;Salas
+    </a>
+    <nav class="barra__salas" aria-label="Salas">
+      <a class="pastilha" href="#sala-cdf"      data-sala="cdf"      style="--h:var(--h-cdf);--cor:var(--c-cdf)"><i></i><span>Carro do Freela</span></a>
+      <a class="pastilha" href="#sala-maestro"  data-sala="maestro"  style="--h:var(--h-mae);--cor:var(--c-mae)"><i></i><span>Maestro</span></a>
+      <a class="pastilha" href="#sala-dissesim" data-sala="dissesim" style="--h:var(--h-dis);--cor:var(--c-dis)"><i></i><span>Disse Sim</span></a>
+      <a class="pastilha" href="#sala-pronta"   data-sala="pronta"   style="--h:var(--h-pro);--cor:var(--c-pro)"><i></i><span>Pronta</span></a>
+      <a class="pastilha" href="#sala-mayhouse" data-sala="mayhouse" style="--h:var(--h-may);--cor:var(--c-may)"><i></i><span>MayHouse</span></a>
+      <span class="pastilha__corte" aria-hidden="true"></span>
+      <a class="pastilha" href="#sala-marca"   data-sala="marca"   style="--h:var(--luz);--cor:var(--luz)"><i></i><span>Marca</span></a>
+      <a class="pastilha" href="#sala-maquina" data-sala="maquina" style="--h:var(--luz);--cor:var(--luz)"><i></i><span>Máquina</span></a>
+    </nav>
+  </div>
+  <!-- a largura de cada segmento é a área da sala na planta -->
+  <div class="trilho" aria-hidden="true">
+    <span data-sala="cdf"      style="--h:var(--h-cdf);flex:72666"></span>
+    <span data-sala="maestro"  style="--h:var(--h-mae);flex:91278"></span>
+    <span data-sala="dissesim" style="--h:var(--h-dis);flex:49896"></span>
+    <span data-sala="pronta"   style="--h:var(--h-pro);flex:46032"></span>
+    <span data-sala="mayhouse" style="--h:var(--h-may);flex:42168"></span>
+    <span data-sala="marca"    style="--h:var(--luz);flex:46332"></span>
+    <span data-sala="maquina"  style="--h:var(--luz);flex:39312"></span>
+  </div>
+</div>
 
-    <div class="placa__grade">
-      <div>
-        <h1>Cinco produtos.<br>Cinco marcas.<br><em>Uma regra só.</em></h1>
-        <p class="placa__lede prosa">
-          Nenhum deles pede uma conversa. O freela responde num botão, a agência
-          aprova num selo, o casal decide numa tela, a cliente fecha num link, a
-          conta tem hora certa de sair. O escritório existe para guardar essa
-          regra — e para que cada empresa mantenha a própria luz.
-        </p>
+<!-- ═══ 1 · A PLACA ═══════════════════════════════════════════════════════ -->
+<header class="placa faixa" id="topo">
+  <div class="medida placa__grade">
+    <div>
+      <h1>Cinco produtos.<br>Cinco marcas.<br><em>Uma regra só.</em></h1>
+      <p class="placa__lede prosa">
+        Nenhum deles pede uma conversa. O freela responde num botão, a agência
+        aprova num selo, o casal decide numa tela, a cliente fecha num link, a
+        conta tem hora certa de sair.
+      </p>
+      <div class="vitrine">
+        <a class="ficha" href="#sala-cdf"      style="--h:var(--h-cdf);--cor:var(--c-cdf)"><i></i>Carro do Freela <em>audiovisual</em></a>
+        <a class="ficha" href="#sala-maestro"  style="--h:var(--h-mae);--cor:var(--c-mae)"><i></i>Maestro <em>operação criativa</em></a>
+        <a class="ficha" href="#sala-dissesim" style="--h:var(--h-dis);--cor:var(--c-dis)"><i></i>Disse Sim <em>cerimonial</em></a>
+        <a class="ficha" href="#sala-pronta"   style="--h:var(--h-pro);--cor:var(--c-pro)"><i></i>Pronta <em>maquiagem</em></a>
+        <a class="ficha" href="#sala-mayhouse" style="--h:var(--h-may);--cor:var(--c-may)"><i></i>MayHouse <em>casa</em></a>
       </div>
-      <div class="censo" aria-label="O edifício em números">
-        <div class="censo__item"><span class="censo__n">5</span><span class="censo__r">salas</span></div>
-        <div class="censo__item"><span class="censo__n">5</span><span class="censo__r">sistemas de tokens</span></div>
-        <div class="censo__item"><span class="censo__n">3</span><span class="censo__r">instalam no celular</span></div>
-        <div class="censo__item"><span class="censo__n">1</span><span class="censo__r">método</span></div>
-      </div>
+    </div>
+    <div class="censo" aria-label="O edifício em números">
+      <div class="censo__item"><span class="censo__n" style="--cor:var(--c-cdf)">5</span><span class="censo__r">salas</span></div>
+      <div class="censo__item"><span class="censo__n" style="--cor:var(--luz)">2</span><span class="censo__r">salas de reunião</span></div>
+      <div class="censo__item"><span class="censo__n" style="--cor:var(--c-dis)">5</span><span class="censo__r">sistemas de tokens</span></div>
+      <div class="censo__item"><span class="censo__n" style="--cor:var(--c-may)">1</span><span class="censo__r">método</span></div>
     </div>
   </div>
 </header>
@@ -417,14 +565,14 @@ html{scroll-behavior:smooth}
         <h2 id="t-planta" style="font-size:clamp(26px,3.6vw,38px);margin-top:12px">A planta</h2>
       </div>
       <p class="planta__legenda">
-        A área de cada sala é proporcional a quanto de produto existe lá dentro —
-        modelos, telas, testes, decisões registradas. O corredor é comum. Clique
-        numa sala para entrar.
+        Cinco salas de produto e duas de reunião. A área de cada sala de produto é
+        proporcional a quanto de produto existe lá dentro — a mesma proporção do
+        trilho lá em cima. As salas A e B ficam fora dessa conta: são de todos.
       </p>
     </div>
 
     <div class="planta__rolagem">
-      <svg class="planta__svg" viewBox="0 0 1200 650" role="group" aria-label="Planta baixa do escritório, cinco salas ligadas por um corredor">
+      <svg class="planta__svg" viewBox="0 0 1200 650" role="group" aria-label="Planta baixa do escritório: cinco salas de produto e duas de reunião, ligadas por um corredor">
         <defs>
           <pattern id="hachura" width="9" height="9" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
             <line x1="0" y1="0" x2="0" y2="9" stroke="var(--hachura)" stroke-width="3"/>
@@ -446,87 +594,148 @@ html{scroll-behavior:smooth}
           <polygon points="54,300 44,295 44,305" fill="var(--tinta-3)"/>
         </g>
 
-        <g class="sala-planta" data-alvo="sala-cdf" data-sala="cdf" role="link" tabindex="0"
-           aria-label="Sala 01, Carro do Freela" style="--marca-forte:#17D1E8;--marca-forte-lt:#0C627C;--tinte:rgba(23,209,232,.10)">
-          <rect class="pl-piso" x="63" y="73" width="407" height="198"/>
-          <rect class="pl-brilho" x="180" y="66" width="120" height="8" fill="#17D1E8" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="180" y1="70" x2="300" y2="70" stroke="#17D1E8"/>
+        <!-- ── as cinco salas de produto ── -->
+        <g class="sala-planta" data-alvo="sala-cdf" data-sala="cdf" role="link" tabindex="0" aria-label="Sala 01, Carro do Freela"
+           style="--marca-forte-dk:#5DE1F2;--marca-forte-lt:#0C627C;--tinte:rgba(23,209,232,.10);--tinte-forte:rgba(23,209,232,.22)">
+          <rect fill="var(--planta-piso)" x="63" y="73" width="367" height="198"/>
+          <rect class="pl-piso" x="63" y="73" width="367" height="198"/>
+          <rect class="pl-brilho" x="150" y="66" width="100" height="8" fill="#17D1E8" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="150" y1="70" x2="250" y2="70" stroke="#17D1E8"/>
           <circle class="pl-num-anel" cx="100" cy="113" r="15"/>
           <text class="pl-num" x="100" y="117" text-anchor="middle">01</text>
           <text class="pl-nome" x="84" y="165">CARRO DO FREELA</text>
-          <text class="pl-sub" x="84" y="186">audiovisual · escala e contratação</text>
+          <text class="pl-sub" x="84" y="186">audiovisual</text>
         </g>
 
-        <g class="sala-planta" data-alvo="sala-maestro" data-sala="maestro" role="link" tabindex="0"
-           aria-label="Sala 02, Maestro" style="--marca-forte:#D9AC4C;--marca-forte-lt:#855F22;--tinte:rgba(217,172,76,.10)">
-          <rect class="pl-piso" x="476" y="73" width="661" height="198"/>
-          <rect class="pl-brilho" x="700" y="66" width="200" height="8" fill="#D9AC4C" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="700" y1="70" x2="900" y2="70" stroke="#D9AC4C"/>
-          <circle class="pl-num-anel" cx="513" cy="113" r="15"/>
-          <text class="pl-num" x="513" y="117" text-anchor="middle">02</text>
-          <text class="pl-nome" x="497" y="165">MAESTRO</text>
-          <text class="pl-sub" x="497" y="186">operação criativa · agência e cliente</text>
+        <g class="sala-planta" data-alvo="sala-maestro" data-sala="maestro" role="link" tabindex="0" aria-label="Sala 02, Maestro"
+           style="--marca-forte-dk:#E3C173;--marca-forte-lt:#855F22;--tinte:rgba(217,172,76,.10);--tinte-forte:rgba(217,172,76,.22)">
+          <rect fill="var(--planta-piso)" x="436" y="73" width="461" height="198"/>
+          <rect class="pl-piso" x="436" y="73" width="461" height="198"/>
+          <rect class="pl-brilho" x="560" y="66" width="180" height="8" fill="#D9AC4C" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="560" y1="70" x2="740" y2="70" stroke="#D9AC4C"/>
+          <circle class="pl-num-anel" cx="473" cy="113" r="15"/>
+          <text class="pl-num" x="473" y="117" text-anchor="middle">02</text>
+          <text class="pl-nome" x="457" y="165">MAESTRO</text>
+          <text class="pl-sub" x="457" y="186">operação criativa · agência e cliente</text>
         </g>
 
-        <g class="sala-planta" data-alvo="sala-dissesim" data-sala="dissesim" role="link" tabindex="0"
-           aria-label="Sala 03, Disse Sim" style="--marca-forte:#3F86BE;--marca-forte-lt:#064675;--tinte:rgba(63,134,190,.10)">
-          <rect class="pl-piso" x="63" y="329" width="392" height="168"/>
-          <rect class="pl-brilho" x="150" y="496" width="120" height="8" fill="#3F86BE" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="150" y1="500" x2="270" y2="500" stroke="#3F86BE"/>
+        <g class="sala-planta" data-alvo="sala-dissesim" data-sala="dissesim" role="link" tabindex="0" aria-label="Sala 03, Disse Sim"
+           style="--marca-forte-dk:#8FBEE2;--marca-forte-lt:#064675;--tinte:rgba(63,134,190,.10);--tinte-forte:rgba(63,134,190,.22)">
+          <rect fill="var(--planta-piso)" x="63" y="329" width="297" height="168"/>
+          <rect class="pl-piso" x="63" y="329" width="297" height="168"/>
+          <rect class="pl-brilho" x="130" y="496" width="100" height="8" fill="#3F86BE" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="130" y1="500" x2="230" y2="500" stroke="#3F86BE"/>
           <circle class="pl-num-anel" cx="100" cy="369" r="15"/>
           <text class="pl-num" x="100" y="373" text-anchor="middle">03</text>
           <text class="pl-nome" x="84" y="421">DISSE SIM</text>
           <text class="pl-sub" x="84" y="442">cerimonial · três painéis</text>
         </g>
 
-        <g class="sala-planta" data-alvo="sala-pronta" data-sala="pronta" role="link" tabindex="0"
-           aria-label="Sala 04, Pronta" style="--marca-forte:#EDB3BC;--marca-forte-lt:#8E3346;--tinte:rgba(237,179,188,.10)">
-          <rect class="pl-piso" x="461" y="329" width="359" height="168"/>
-          <rect class="pl-brilho" x="560" y="496" width="120" height="8" fill="#EDB3BC" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="560" y1="500" x2="680" y2="500" stroke="#EDB3BC"/>
-          <circle class="pl-num-anel" cx="498" cy="369" r="15"/>
-          <text class="pl-num" x="498" y="373" text-anchor="middle">04</text>
-          <text class="pl-nome" x="482" y="421">PRONTA</text>
-          <text class="pl-sub" x="482" y="442">maquiagem · o link na bio</text>
+        <g class="sala-planta" data-alvo="sala-pronta" data-sala="pronta" role="link" tabindex="0" aria-label="Sala 04, Pronta"
+           style="--marca-forte-dk:#EDB3BC;--marca-forte-lt:#8E3346;--tinte:rgba(237,179,188,.11);--tinte-forte:rgba(237,179,188,.24)">
+          <rect fill="var(--planta-piso)" x="366" y="329" width="274" height="168"/>
+          <rect class="pl-piso" x="366" y="329" width="274" height="168"/>
+          <rect class="pl-brilho" x="440" y="496" width="120" height="8" fill="#EDB3BC" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="440" y1="500" x2="560" y2="500" stroke="#EDB3BC"/>
+          <circle class="pl-num-anel" cx="403" cy="369" r="15"/>
+          <text class="pl-num" x="403" y="373" text-anchor="middle">04</text>
+          <text class="pl-nome" x="387" y="421">PRONTA</text>
+          <text class="pl-sub" x="387" y="442">maquiagem · o link na bio</text>
         </g>
 
-        <g class="sala-planta" data-alvo="sala-mayhouse" data-sala="mayhouse" role="link" tabindex="0"
-           aria-label="Sala 05, MayHouse" style="--marca-forte:#E08700;--marca-forte-lt:#A35F00;--tinte:rgba(224,135,0,.10)">
-          <rect class="pl-piso" x="826" y="329" width="311" height="168"/>
-          <rect class="pl-brilho" x="920" y="496" width="120" height="8" fill="#E08700" filter="url(#brilho)"/>
-          <line class="pl-janela" x1="920" y1="500" x2="1040" y2="500" stroke="#E08700"/>
-          <circle class="pl-num-anel" cx="863" cy="369" r="15"/>
-          <text class="pl-num" x="863" y="373" text-anchor="middle">05</text>
-          <text class="pl-nome" x="847" y="421">MAYHOUSE</text>
-          <text class="pl-sub" x="847" y="442">contas da casa</text>
+        <g class="sala-planta" data-alvo="sala-mayhouse" data-sala="mayhouse" role="link" tabindex="0" aria-label="Sala 05, MayHouse"
+           style="--marca-forte-dk:#F5A93A;--marca-forte-lt:#A35F00;--tinte:rgba(224,135,0,.10);--tinte-forte:rgba(224,135,0,.22)">
+          <rect fill="var(--planta-piso)" x="646" y="329" width="251" height="168"/>
+          <rect class="pl-piso" x="646" y="329" width="251" height="168"/>
+          <rect class="pl-brilho" x="720" y="496" width="110" height="8" fill="#E08700" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="720" y1="500" x2="830" y2="500" stroke="#E08700"/>
+          <circle class="pl-num-anel" cx="683" cy="369" r="15"/>
+          <text class="pl-num" x="683" y="373" text-anchor="middle">05</text>
+          <text class="pl-nome" x="667" y="421">MAYHOUSE</text>
+          <text class="pl-sub" x="667" y="442">contas da casa</text>
+        </g>
+
+        <!-- ── as duas salas de reunião · sem marca, janela dividida nos cinco tons ── -->
+        <g class="sala-planta" data-alvo="sala-marca" data-sala="marca" role="link" tabindex="0" aria-label="Sala de reunião A, Marca"
+           style="--marca-forte-dk:#EDEAE4;--marca-forte-lt:#16150F;--tinte:rgba(184,121,26,.07);--tinte-forte:rgba(184,121,26,.17)">
+          <rect fill="var(--planta-piso)" x="903" y="73" width="234" height="198"/>
+          <rect class="pl-piso" x="903" y="73" width="234" height="198"/>
+          <rect class="pl-brilho" x="980"  y="66" width="22" height="8" fill="#17D1E8" filter="url(#brilho)"/>
+          <rect class="pl-brilho" x="1002" y="66" width="22" height="8" fill="#D9AC4C" filter="url(#brilho)"/>
+          <rect class="pl-brilho" x="1024" y="66" width="22" height="8" fill="#3F86BE" filter="url(#brilho)"/>
+          <rect class="pl-brilho" x="1046" y="66" width="22" height="8" fill="#EDB3BC" filter="url(#brilho)"/>
+          <rect class="pl-brilho" x="1068" y="66" width="22" height="8" fill="#E08700" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="980"  y1="70" x2="1002" y2="70" stroke="#17D1E8"/>
+          <line class="pl-janela" x1="1002" y1="70" x2="1024" y2="70" stroke="#D9AC4C"/>
+          <line class="pl-janela" x1="1024" y1="70" x2="1046" y2="70" stroke="#3F86BE"/>
+          <line class="pl-janela" x1="1046" y1="70" x2="1068" y2="70" stroke="#EDB3BC"/>
+          <line class="pl-janela" x1="1068" y1="70" x2="1090" y2="70" stroke="#E08700"/>
+          <circle class="pl-mesa" cx="1055" cy="215" r="20"/>
+          <circle class="pl-cadeira" cx="1085" cy="215" r="5"/><circle class="pl-cadeira" cx="1070" cy="241" r="5"/>
+          <circle class="pl-cadeira" cx="1040" cy="241" r="5"/><circle class="pl-cadeira" cx="1025" cy="215" r="5"/>
+          <circle class="pl-cadeira" cx="1040" cy="189" r="5"/><circle class="pl-cadeira" cx="1070" cy="189" r="5"/>
+          <circle class="pl-num-anel" cx="940" cy="105" r="15"/>
+          <text class="pl-num" x="940" y="109" text-anchor="middle">A</text>
+          <text class="pl-nome" x="924" y="150">MARCA</text>
+          <text class="pl-sub" x="924" y="170">reunião · de todos</text>
+        </g>
+
+        <g class="sala-planta" data-alvo="sala-maquina" data-sala="maquina" role="link" tabindex="0" aria-label="Sala de reunião B, Máquina"
+           style="--marca-forte-dk:#EDEAE4;--marca-forte-lt:#16150F;--tinte:rgba(184,121,26,.07);--tinte-forte:rgba(184,121,26,.17)">
+          <rect fill="var(--planta-piso)" x="903" y="329" width="234" height="168"/>
+          <rect class="pl-piso" x="903" y="329" width="234" height="168"/>
+          <rect class="pl-brilho" x="980"  y="496" width="22" height="8" fill="#17D1E8" filter="url(#brilho)"/>
+          <rect class="pl-brilho" x="1002" y="496" width="22" height="8" fill="#D9AC4C" filter="url(#brilho)"/>
+          <rect class="pl-brilho" x="1024" y="496" width="22" height="8" fill="#3F86BE" filter="url(#brilho)"/>
+          <rect class="pl-brilho" x="1046" y="496" width="22" height="8" fill="#EDB3BC" filter="url(#brilho)"/>
+          <rect class="pl-brilho" x="1068" y="496" width="22" height="8" fill="#E08700" filter="url(#brilho)"/>
+          <line class="pl-janela" x1="980"  y1="500" x2="1002" y2="500" stroke="#17D1E8"/>
+          <line class="pl-janela" x1="1002" y1="500" x2="1024" y2="500" stroke="#D9AC4C"/>
+          <line class="pl-janela" x1="1024" y1="500" x2="1046" y2="500" stroke="#3F86BE"/>
+          <line class="pl-janela" x1="1046" y1="500" x2="1068" y2="500" stroke="#EDB3BC"/>
+          <line class="pl-janela" x1="1068" y1="500" x2="1090" y2="500" stroke="#E08700"/>
+          <circle class="pl-mesa" cx="1055" cy="455" r="20"/>
+          <circle class="pl-cadeira" cx="1085" cy="455" r="5"/><circle class="pl-cadeira" cx="1070" cy="481" r="5"/>
+          <circle class="pl-cadeira" cx="1040" cy="481" r="5"/><circle class="pl-cadeira" cx="1025" cy="455" r="5"/>
+          <circle class="pl-cadeira" cx="1040" cy="429" r="5"/><circle class="pl-cadeira" cx="1070" cy="429" r="5"/>
+          <circle class="pl-num-anel" cx="940" cy="352" r="15"/>
+          <text class="pl-num" x="940" y="356" text-anchor="middle">B</text>
+          <text class="pl-nome" x="924" y="397">MÁQUINA</text>
+          <text class="pl-sub" x="924" y="416">reunião · de todos</text>
         </g>
 
         <rect class="pl-corredor" x="63" y="276" width="1074" height="48"/>
-        <text class="pl-cota" x="600" y="305" text-anchor="middle" letter-spacing="3">C O R R E D O R</text>
+        <text class="pl-cota" x="480" y="305" text-anchor="middle" letter-spacing="3">C O R R E D O R</text>
 
         <rect class="pl-parede" x="60" y="70" width="1080" height="430"/>
-        <line class="pl-divisa" x1="473" y1="70" x2="473" y2="274"/>
-        <line class="pl-divisa" x1="60"   y1="274" x2="240"  y2="274"/>
-        <line class="pl-divisa" x1="280"  y1="274" x2="760"  y2="274"/>
-        <line class="pl-divisa" x1="800"  y1="274" x2="1140" y2="274"/>
-        <line class="pl-divisa" x1="60"   y1="326" x2="340"  y2="326"/>
-        <line class="pl-divisa" x1="380"  y1="326" x2="690"  y2="326"/>
-        <line class="pl-divisa" x1="730"  y1="326" x2="1000" y2="326"/>
-        <line class="pl-divisa" x1="1040" y1="326" x2="1140" y2="326"/>
-        <line class="pl-divisa" x1="458" y1="326" x2="458" y2="500"/>
-        <line class="pl-divisa" x1="823" y1="326" x2="823" y2="500"/>
+        <line class="pl-divisa" x1="433" y1="70" x2="433" y2="274"/>
+        <line class="pl-divisa" x1="900" y1="70" x2="900" y2="274"/>
+        <line class="pl-divisa" x1="60"   y1="274" x2="180"  y2="274"/>
+        <line class="pl-divisa" x1="220"  y1="274" x2="620"  y2="274"/>
+        <line class="pl-divisa" x1="660"  y1="274" x2="1010" y2="274"/>
+        <line class="pl-divisa" x1="1050" y1="274" x2="1140" y2="274"/>
+        <line class="pl-divisa" x1="60"   y1="326" x2="250"  y2="326"/>
+        <line class="pl-divisa" x1="290"  y1="326" x2="470"  y2="326"/>
+        <line class="pl-divisa" x1="510"  y1="326" x2="760"  y2="326"/>
+        <line class="pl-divisa" x1="800"  y1="326" x2="960"  y2="326"/>
+        <line class="pl-divisa" x1="1000" y1="326" x2="1140" y2="326"/>
+        <line class="pl-divisa" x1="363" y1="326" x2="363" y2="500"/>
+        <line class="pl-divisa" x1="643" y1="326" x2="643" y2="500"/>
+        <line class="pl-divisa" x1="900" y1="326" x2="900" y2="500"/>
 
-        <path class="pl-porta" fill="none" d="M240,274 L240,234 A40,40 0 0 1 280,274"/>
-        <path class="pl-porta" fill="none" d="M760,274 L760,234 A40,40 0 0 1 800,274"/>
-        <path class="pl-porta" fill="none" d="M340,326 L340,366 A40,40 0 0 0 380,326"/>
-        <path class="pl-porta" fill="none" d="M690,326 L690,366 A40,40 0 0 0 730,326"/>
-        <path class="pl-porta" fill="none" d="M1000,326 L1000,366 A40,40 0 0 0 1040,326"/>
+        <path class="pl-porta" fill="none" d="M180,274 L180,234 A40,40 0 0 1 220,274"/>
+        <path class="pl-porta" fill="none" d="M620,274 L620,234 A40,40 0 0 1 660,274"/>
+        <path class="pl-porta" fill="none" d="M1010,274 L1010,234 A40,40 0 0 1 1050,274"/>
+        <path class="pl-porta" fill="none" d="M250,326 L250,366 A40,40 0 0 0 290,326"/>
+        <path class="pl-porta" fill="none" d="M470,326 L470,366 A40,40 0 0 0 510,326"/>
+        <path class="pl-porta" fill="none" d="M760,326 L760,366 A40,40 0 0 0 800,326"/>
+        <path class="pl-porta" fill="none" d="M960,326 L960,366 A40,40 0 0 0 1000,326"/>
 
         <g>
           <line class="pl-cota-linha" x1="60" y1="568" x2="1140" y2="568"/>
           <line class="pl-cota-linha" x1="60" y1="560" x2="60" y2="576"/>
           <line class="pl-cota-linha" x1="1140" y1="560" x2="1140" y2="576"/>
-          <text class="pl-cota" x="600" y="602" text-anchor="middle" letter-spacing="1.4">ÁREA DA SALA = QUANTO DE PRODUTO EXISTE</text>
+          <text class="pl-cota" x="600" y="602" text-anchor="middle" letter-spacing="1.4">ÁREA = QUANTO DE PRODUTO EXISTE · AS SALAS A E B SÃO DE USO COMUM</text>
         </g>
       </svg>
     </div>
@@ -538,7 +747,7 @@ html{scroll-behavior:smooth}
 <main>
 
 <!-- ── 01 ─────────────────────────────────────────────────────────────── -->
-<section class="sala sala--cdf faixa" id="sala-cdf" aria-labelledby="n-cdf">
+<section class="sala sala--cdf faixa" id="sala-cdf" data-sala="cdf" aria-labelledby="n-cdf">
   <div class="medida">
     <div class="soleira surge">
       <span class="soleira__n">SALA 01</span>
@@ -562,11 +771,16 @@ html{scroll-behavior:smooth}
           conferida. O nome nasceu no grupo, não numa agência.
         </p>
         <a class="porta" href="https://carrodofreela.com.br" target="_blank" rel="noopener">
-          carrodofreela.com.br
-          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+          Entrar na sala 01
+          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg>
         </a>
       </div>
       <div class="surge">
+        <div class="metricas">
+          <div class="metrica"><span class="metrica__n">109</span><span class="metrica__r">profissionais cadastrados</span></div>
+          <div class="metrica"><span class="metrica__n">28</span><span class="metrica__r">suítes de teste</span></div>
+          <div class="metrica"><span class="metrica__n">0</span><span class="metrica__r">requisições externas</span></div>
+        </div>
         <div class="regra">
           <span class="regra__r">A regra da sala</span>
           <p class="regra__c">“Nada disso passa por chat. A conversa de três dias é o custo que se quer eliminar — por isso a resposta é um botão.”</p>
@@ -577,9 +791,6 @@ html{scroll-behavior:smooth}
           </p>
         </div>
         <div class="fatos">
-          <div class="fato"><span class="fato__r">Profissionais cadastrados</span><span class="fato__v">109</span></div>
-          <div class="fato"><span class="fato__r">Suítes de teste</span><span class="fato__v">28</span></div>
-          <div class="fato"><span class="fato__r">Requisições externas</span><span class="fato__v">0</span></div>
           <div class="fato"><span class="fato__r">Reputação</span><span class="fato__v">4 fatos, nenhuma estrela</span></div>
           <div class="fato"><span class="fato__r">Posição na busca</span><span class="fato__v">não se compra</span></div>
         </div>
@@ -589,7 +800,7 @@ html{scroll-behavior:smooth}
 </section>
 
 <!-- ── 02 ─────────────────────────────────────────────────────────────── -->
-<section class="sala sala--maestro faixa" id="sala-maestro" aria-labelledby="n-maestro">
+<section class="sala sala--maestro faixa" id="sala-maestro" data-sala="maestro" aria-labelledby="n-maestro">
   <div class="medida">
     <div class="soleira surge">
       <span class="soleira__n">SALA 02</span>
@@ -607,16 +818,21 @@ html{scroll-behavior:smooth}
         </p>
         <p class="sala__prosa">
           A documentação é a fonte da verdade: nada entra no código sem estar
-          escrito em <code>/docs</code> antes. Trinta e um documentos, sessenta e
-          uma decisões registradas, nove protótipos navegáveis e duas rodadas de
-          teste com clientes reais antes da primeira linha de produção.
+          escrito em <code>/docs</code> antes. Trinta e um documentos, nove
+          protótipos navegáveis e duas rodadas de teste com clientes reais antes da
+          primeira linha de produção.
         </p>
         <a class="porta" href="https://maestroapptest.vercel.app" target="_blank" rel="noopener">
-          maestroapptest.vercel.app
-          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+          Entrar na sala 02
+          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg>
         </a>
       </div>
       <div class="surge">
+        <div class="metricas">
+          <div class="metrica"><span class="metrica__n">36</span><span class="metrica__r">modelos no schema</span></div>
+          <div class="metrica"><span class="metrica__n">105</span><span class="metrica__r">testes passando</span></div>
+          <div class="metrica"><span class="metrica__n">61</span><span class="metrica__r">decisões registradas</span></div>
+        </div>
         <div class="regra">
           <span class="regra__r">A regra da sala · invariante I-05</span>
           <p class="regra__c">“‘O que foi aprovado é o que vai ao ar’ deixa de ser confiança e vira propriedade do sistema.”</p>
@@ -627,10 +843,7 @@ html{scroll-behavior:smooth}
           </p>
         </div>
         <div class="fatos">
-          <div class="fato"><span class="fato__r">Modelos no schema</span><span class="fato__v">36</span></div>
-          <div class="fato"><span class="fato__r">Testes passando</span><span class="fato__v">105</span></div>
           <div class="fato"><span class="fato__r">Invariantes contra Postgres real</span><span class="fato__v">21</span></div>
-          <div class="fato"><span class="fato__r">Decisões registradas</span><span class="fato__v">61</span></div>
           <div class="fato"><span class="fato__r">Aberto e bloqueante</span><span class="fato__v">D-024 · marca e domínio</span></div>
         </div>
       </div>
@@ -639,7 +852,7 @@ html{scroll-behavior:smooth}
 </section>
 
 <!-- ── 03 ─────────────────────────────────────────────────────────────── -->
-<section class="sala sala--dissesim faixa" id="sala-dissesim" aria-labelledby="n-dissesim">
+<section class="sala sala--dissesim faixa" id="sala-dissesim" data-sala="dissesim" aria-labelledby="n-dissesim">
   <div class="medida">
     <div class="soleira surge">
       <span class="soleira__n">SALA 03</span>
@@ -662,11 +875,16 @@ html{scroll-behavior:smooth}
           de início do celular.
         </p>
         <a class="porta" href="https://dissesimapp.vercel.app" target="_blank" rel="noopener">
-          dissesimapp.vercel.app
-          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+          Entrar na sala 03
+          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg>
         </a>
       </div>
       <div class="surge">
+        <div class="metricas">
+          <div class="metrica"><span class="metrica__n">3</span><span class="metrica__r">painéis, um sistema</span></div>
+          <div class="metrica"><span class="metrica__n">13</span><span class="metrica__r">rotas</span></div>
+          <div class="metrica"><span class="metrica__n">132<small style="font-size:.5em;letter-spacing:0"> KB</small></span><span class="metrica__r">de fonte self-hosted</span></div>
+        </div>
         <div class="regra">
           <span class="regra__r">A regra da sala</span>
           <p class="regra__c">“A densidade segue a frequência de uso.”</p>
@@ -678,9 +896,6 @@ html{scroll-behavior:smooth}
           </p>
         </div>
         <div class="fatos">
-          <div class="fato"><span class="fato__r">Painéis</span><span class="fato__v">3</span></div>
-          <div class="fato"><span class="fato__r">Rotas</span><span class="fato__v">13</span></div>
-          <div class="fato"><span class="fato__r">Fontes self-hosted</span><span class="fato__v">132 KB</span></div>
           <div class="fato"><span class="fato__r">Status contra daltonismo</span><span class="fato__v">ΔE 11,7 / 9,6</span></div>
           <div class="fato"><span class="fato__r">Arquivos de áudio</span><span class="fato__v">0</span></div>
         </div>
@@ -690,7 +905,7 @@ html{scroll-behavior:smooth}
 </section>
 
 <!-- ── 04 ─────────────────────────────────────────────────────────────── -->
-<section class="sala sala--pronta faixa" id="sala-pronta" aria-labelledby="n-pronta">
+<section class="sala sala--pronta faixa" id="sala-pronta" data-sala="pronta" aria-labelledby="n-pronta">
   <div class="medida">
     <div class="soleira surge">
       <span class="soleira__n">SALA 04</span>
@@ -712,11 +927,16 @@ html{scroll-behavior:smooth}
           início e abre sem internet depois da primeira visita.
         </p>
         <a class="porta" href="https://prontaapp.vercel.app" target="_blank" rel="noopener">
-          prontaapp.vercel.app
-          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+          Entrar na sala 04
+          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg>
         </a>
       </div>
       <div class="surge">
+        <div class="metricas">
+          <div class="metrica"><span class="metrica__n">6</span><span class="metrica__r">telas</span></div>
+          <div class="metrica"><span class="metrica__n">2</span><span class="metrica__r">temas desenhados à parte</span></div>
+          <div class="metrica"><span class="metrica__n">4,5<small style="font-size:.6em;letter-spacing:0">:1</small></span><span class="metrica__r">piso de contraste</span></div>
+        </div>
         <div class="regra">
           <span class="regra__r">A regra da sala</span>
           <p class="regra__c">“O champanhe é só ornamento. Nunca texto.”</p>
@@ -728,11 +948,8 @@ html{scroll-behavior:smooth}
           </p>
         </div>
         <div class="fatos">
-          <div class="fato"><span class="fato__r">Telas</span><span class="fato__v">6</span></div>
           <div class="fato"><span class="fato__r">Tema padrão</span><span class="fato__v">escuro</span></div>
-          <div class="fato"><span class="fato__r">Piso de contraste</span><span class="fato__v">4,5:1</span></div>
           <div class="fato"><span class="fato__r">Auditoria de paleta</span><span class="fato__v">automática</span></div>
-          <div class="fato"><span class="fato__r">Manual de identidade</span><span class="fato__v">publicado</span></div>
         </div>
       </div>
     </div>
@@ -740,7 +957,7 @@ html{scroll-behavior:smooth}
 </section>
 
 <!-- ── 05 ─────────────────────────────────────────────────────────────── -->
-<section class="sala sala--mayhouse faixa" id="sala-mayhouse" aria-labelledby="n-mayhouse">
+<section class="sala sala--mayhouse faixa" id="sala-mayhouse" data-sala="mayhouse" aria-labelledby="n-mayhouse">
   <div class="medida">
     <div class="soleira surge">
       <span class="soleira__n">SALA 05</span>
@@ -763,11 +980,16 @@ html{scroll-behavior:smooth}
           a mesma casa liga duas variáveis e a sincronização sobe sozinha.
         </p>
         <a class="porta" href="https://mayhouse-vert.vercel.app" target="_blank" rel="noopener">
-          mayhouse-vert.vercel.app
-          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5"/></svg>
+          Entrar na sala 05
+          <svg class="porta__seta" width="14" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true"><path d="M0 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.6"/></svg>
         </a>
       </div>
       <div class="surge">
+        <div class="metricas">
+          <div class="metrica"><span class="metrica__n">90<small style="font-size:.6em;letter-spacing:0">+</small></span><span class="metrica__r">testes de cálculo</span></div>
+          <div class="metrica"><span class="metrica__n">24<small style="font-size:.6em;letter-spacing:0">×</small></span><span class="metrica__r">parcelas, centavo exato</span></div>
+          <div class="metrica"><span class="metrica__n">R$ 0</span><span class="metrica__r">de mensalidade</span></div>
+        </div>
         <div class="regra">
           <span class="regra__r">A regra da sala</span>
           <p class="regra__c">“Parcelamento nunca perde centavo — a diferença vai na primeira parcela.”</p>
@@ -778,11 +1000,8 @@ html{scroll-behavior:smooth}
           </p>
         </div>
         <div class="fatos">
-          <div class="fato"><span class="fato__r">Testes de cálculo</span><span class="fato__v">90+</span></div>
           <div class="fato"><span class="fato__r">Unidade monetária</span><span class="fato__v">centavo inteiro</span></div>
-          <div class="fato"><span class="fato__r">Parcelamento até</span><span class="fato__v">24×</span></div>
           <div class="fato"><span class="fato__r">Débito automático</span><span class="fato__v">nenhum</span></div>
-          <div class="fato"><span class="fato__r">Mensalidade</span><span class="fato__v">R$ 0</span></div>
         </div>
       </div>
     </div>
@@ -791,50 +1010,154 @@ html{scroll-behavior:smooth}
 
 </main>
 
-<!-- ═══ 4 · A REGRA DA CASA ═══════════════════════════════════════════════ -->
-<section class="casa faixa" aria-labelledby="t-casa">
+<!-- ═══ 4 · AS DUAS SALAS DE REUNIÃO ═════════════════════════════════════ -->
+<section class="comuns faixa" id="comuns" aria-labelledby="t-comuns">
   <div class="medida">
-    <div class="casa__cabeca">
-      <span class="rotulo">O que se repete nas cinco</span>
-      <h2 id="t-casa">A regra da casa</h2>
-      <p class="casa__lede prosa">
-        Cinco produtos em cinco mercados que não conversam entre si — audiovisual,
-        agência, cerimonial, maquiagem, casa. O que faz disso um escritório e não
-        cinco pastas é o método que cada um herda ao entrar.
+    <div class="comuns__cabeca">
+      <span class="rotulo">De uso comum</span>
+      <h2 id="t-comuns">As duas salas de reunião</h2>
+      <div class="arcoiris" aria-hidden="true">
+        <span style="--h:var(--h-cdf)"></span><span style="--h:var(--h-mae)"></span><span style="--h:var(--h-dis)"></span><span style="--h:var(--h-pro)"></span><span style="--h:var(--h-may)"></span>
+      </div>
+      <p class="comuns__lede prosa">
+        Não pertencem a produto nenhum e não têm marca própria — por isso são as
+        únicas salas sem cor de dono. A janela de cada uma é dividida nos cinco
+        tons, porque quem senta ali são os cinco. É onde o método se decide, e é o
+        que faz disso um escritório e não cinco pastas.
       </p>
     </div>
-    <div class="metodo">
-      <div class="metodo__item">
-        <span class="metodo__n">01</span>
-        <h3 class="metodo__t">Token é a fonte da verdade</h3>
-        <p class="metodo__d">Nenhum valor literal de cor, espaçamento, raio ou duração dentro de componente. A identidade mora num arquivo só, e mudar a marca é mudar esse arquivo.</p>
+
+    <!-- ── A · MARCA ─────────────────────────────────────────────────── -->
+    <article class="reuniao" id="sala-marca" data-sala="marca" aria-labelledby="t-marca">
+      <div class="reuniao__soleira">
+        <span class="reuniao__letra" aria-hidden="true">A</span>
+        <h3 id="t-marca">Marca</h3>
+        <span class="reuniao__risco"></span>
+        <span class="selo-comum">Reunião · de todos
+          <b aria-hidden="true"><span style="--h:var(--h-cdf)"></span><span style="--h:var(--h-mae)"></span><span style="--h:var(--h-dis)"></span><span style="--h:var(--h-pro)"></span><span style="--h:var(--h-may)"></span></b>
+        </span>
       </div>
-      <div class="metodo__item">
-        <span class="metodo__n">02</span>
-        <h3 class="metodo__t">Contraste é medido, não escolhido</h3>
-        <p class="metodo__d">O número fica anotado ao lado da cor — <code>2,27:1</code>, <code>9,03:1</code>. Cor que reprova como texto vira ornamento e está escrito que é.</p>
+      <div class="reuniao__grade">
+        <div>
+          <p class="reuniao__tese">A mesa onde as cinco identidades se sentam juntas.</p>
+          <p class="reuniao__prosa">
+            As marcas não se misturam: cada produto guarda a própria paleta e a
+            própria letra, e o corredor fica neutro justamente para que caibam as
+            cinco. O que se decide aqui é o método — como a cor entra no código,
+            qual é o piso de contraste, quem escreve as palavras. Nunca o gosto de
+            um produto sobre o outro.
+          </p>
+          <ul class="acordo">
+            <li><b>Token é a fonte da verdade</b><span>Nenhum valor literal de cor, espaçamento, raio ou duração dentro de componente. A identidade mora num arquivo só, e mudar a marca é mudar esse arquivo.</span></li>
+            <li><b>Contraste é medido, não escolhido</b><span>O número fica anotado ao lado da cor — <code>2,27:1</code>, <code>9,03:1</code>. Cor que reprova como texto vira ornamento, e está escrito que é.</span></li>
+            <li><b>Português é a língua do produto</b><span>Nenhuma string no código: tudo em arquivo de textos. E as palavras são decisão de produto — em Maestro, “reprovar” não existe em lugar nenhum.</span></li>
+          </ul>
+        </div>
+        <div class="paletas">
+          <div class="paleta" style="--h:var(--h-cdf);--cor:var(--c-cdf)">
+            <div class="paleta__cabeca"><i></i><b>Carro do Freela</b><em>Schibsted Grotesk · Spline Sans Mono</em></div>
+            <div class="tiras">
+              <span class="tira" style="--t:#121110" data-hex="#121110"></span>
+              <span class="tira" style="--t:#17D1E8" data-hex="#17D1E8"></span>
+              <span class="tira" style="--t:#F0EDE7" data-hex="#F0EDE7"></span>
+              <span class="tira" style="--t:#FF3D9A" data-hex="#FF3D9A"></span>
+            </div>
+          </div>
+          <div class="paleta" style="--h:var(--h-mae);--cor:var(--c-mae)">
+            <div class="paleta__cabeca"><i></i><b>Maestro</b><em>Instrument Serif · Inter</em></div>
+            <div class="tiras">
+              <span class="tira" style="--t:#0D0F12" data-hex="#0D0F12"></span>
+              <span class="tira" style="--t:#C8963A" data-hex="#C8963A"></span>
+              <span class="tira" style="--t:#3B6FE0" data-hex="#3B6FE0"></span>
+              <span class="tira" style="--t:#2A9862" data-hex="#2A9862"></span>
+            </div>
+          </div>
+          <div class="paleta" style="--h:var(--h-dis);--cor:var(--c-dis)">
+            <div class="paleta__cabeca"><i></i><b>Disse Sim</b><em>Instrument Serif · Inter · DM Mono</em></div>
+            <div class="tiras">
+              <span class="tira" style="--t:#FAF8F5" data-hex="#FAF8F5"></span>
+              <span class="tira" style="--t:#171512" data-hex="#171512"></span>
+              <span class="tira" style="--t:#064675" data-hex="#064675"></span>
+              <span class="tira" style="--t:#7FB6DC" data-hex="#7FB6DC"></span>
+            </div>
+          </div>
+          <div class="paleta" style="--h:var(--h-pro);--cor:var(--c-pro)">
+            <div class="paleta__cabeca"><i></i><b>Pronta</b><em>Bodoni Moda · Inter</em></div>
+            <div class="tiras">
+              <span class="tira" style="--t:#0C0A0D" data-hex="#0C0A0D"></span>
+              <span class="tira" style="--t:#EDB3BC" data-hex="#EDB3BC"></span>
+              <span class="tira" style="--t:#D8BC8C" data-hex="#D8BC8C"></span>
+              <span class="tira" style="--t:#F4F0F2" data-hex="#F4F0F2"></span>
+            </div>
+          </div>
+          <div class="paleta" style="--h:var(--h-may);--cor:var(--c-may)">
+            <div class="paleta__cabeca"><i></i><b>MayHouse</b><em>Baloo 2 · Inter</em></div>
+            <div class="tiras">
+              <span class="tira" style="--t:#0A0F22" data-hex="#0A0F22"></span>
+              <span class="tira" style="--t:#E08700" data-hex="#E08700"></span>
+              <span class="tira" style="--t:#6D5BC4" data-hex="#6D5BC4"></span>
+              <span class="tira" style="--t:#C9705A" data-hex="#C9705A"></span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="metodo__item">
-        <span class="metodo__n">03</span>
-        <h3 class="metodo__t">Invariante é teste</h3>
-        <p class="metodo__d">As regras do produto rodam contra banco de verdade. Se um teste quebra, não é o código — é uma regra do produto que quebrou junto.</p>
+    </article>
+
+    <!-- ── B · MÁQUINA ───────────────────────────────────────────────── -->
+    <article class="reuniao" id="sala-maquina" data-sala="maquina" aria-labelledby="t-maquina">
+      <div class="reuniao__soleira">
+        <span class="reuniao__letra" aria-hidden="true">B</span>
+        <h3 id="t-maquina">Máquina</h3>
+        <span class="reuniao__risco"></span>
+        <span class="selo-comum">Reunião · de todos
+          <b aria-hidden="true"><span style="--h:var(--h-cdf)"></span><span style="--h:var(--h-mae)"></span><span style="--h:var(--h-dis)"></span><span style="--h:var(--h-pro)"></span><span style="--h:var(--h-may)"></span></b>
+        </span>
       </div>
-      <div class="metodo__item">
-        <span class="metodo__n">04</span>
-        <h3 class="metodo__t">Português é a língua do produto</h3>
-        <p class="metodo__d">Nenhuma string no código: tudo em arquivo de textos. E as palavras são decisão de produto — em Maestro, “reprovar” não existe em lugar nenhum.</p>
+      <div class="reuniao__grade">
+        <div>
+          <p class="reuniao__tese">Infra, entrega e prova. O que os cinco assinam junto.</p>
+          <p class="reuniao__prosa">
+            Cinco produtos em cinco mercados que não conversam entre si, e mesmo
+            assim quatro deles vão ao ar sem build e sem servidor. O que se decide
+            aqui é onde cada um roda, como sobe, e o que precisa provar antes de
+            subir.
+          </p>
+          <ul class="acordo">
+            <li><b>Invariante é teste</b><span>A regra do produto roda contra banco de verdade. Se um teste quebra, não é o código — é uma regra do produto que quebrou junto.</span></li>
+            <li><b>Cabe na tela de início</b><span>Três dos cinco instalam no celular e abrem sem internet depois da primeira visita. Campo editável tem no mínimo <code>16px</code>, senão o Safari amplia a página e não volta.</span></li>
+            <li><b>Estático quando dá</b><span>O que não precisa de servidor não ganha um. Menos peça no ar é menos coisa para quebrar num domingo.</span></li>
+          </ul>
+        </div>
+        <div class="mesa-b">
+          <table>
+            <thead>
+              <tr><th>Produto</th><th>Roda em</th><th>Vai ao ar</th><th>Prova</th><th>Celular</th></tr>
+            </thead>
+            <tbody>
+              <tr style="--h:var(--h-cdf);--cor:var(--c-cdf)"><td><i></i>Carro do Freela</td><td>HTML único, sem dependências</td><td>Vercel</td><td>28 suítes Playwright</td><td>—</td></tr>
+              <tr style="--h:var(--h-mae);--cor:var(--c-mae)"><td><i></i>Maestro</td><td>NestJS · Prisma · Postgres · Next</td><td>Vercel</td><td>105 testes · 21 invariantes</td><td>—</td></tr>
+              <tr style="--h:var(--h-dis);--cor:var(--c-dis)"><td><i></i>Disse Sim</td><td>Vite · React 18 · TS strict</td><td>Vercel</td><td>typecheck no build</td><td class="sim">sim</td></tr>
+              <tr style="--h:var(--h-pro);--cor:var(--c-pro)"><td><i></i>Pronta</td><td>estático, sem build</td><td>Vercel · GitHub Pages</td><td>auditoria de contraste</td><td class="sim">sim</td></tr>
+              <tr style="--h:var(--h-may);--cor:var(--c-may)"><td><i></i>MayHouse</td><td>estático, sem servidor</td><td>Vercel</td><td>90+ testes de cálculo</td><td class="sim">sim</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="metodo__item">
-        <span class="metodo__n">05</span>
-        <h3 class="metodo__t">Cabe na tela de início</h3>
-        <p class="metodo__d">Três dos cinco instalam no celular e abrem sem internet depois da primeira visita. Campo editável tem no mínimo 16px, senão o Safari amplia a página e não volta.</p>
-      </div>
-      <div class="metodo__item">
-        <span class="metodo__n">06</span>
-        <h3 class="metodo__t">Decisão no lugar de conversa</h3>
-        <p class="metodo__d">É a tese da casa. Os cinco atacam a mesma ida e volta de três dias, cada um no seu mercado, e entregam no lugar dela um botão, um selo, uma data travada.</p>
-      </div>
-    </div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ 4b · A TESE DA CASA ══════════════════════════════════════════════ -->
+<section class="tese-casa faixa" aria-labelledby="t-tese">
+  <div class="medida">
+    <span class="rotulo">O que vale no pavimento inteiro</span>
+    <h2 id="t-tese">Decisão no lugar de conversa</h2>
+    <p>
+      Os cinco atacam a mesma ida e volta de três dias, cada um no seu mercado, e
+      entregam no lugar dela um botão, um selo, uma data travada, um link que
+      fecha. É a única coisa que os cinco têm em comum — e é o que faz o
+      escritório existir.
+    </p>
   </div>
 </section>
 
@@ -844,18 +1167,21 @@ html{scroll-behavior:smooth}
     <div>
       <span class="rotulo">Sobre este desenho</span>
       <p class="rodape__nota" style="margin-top:16px">
-        Os números e as regras de cada sala saíram da documentação de cada produto.
+        Os números e as regras de cada sala saíram da documentação de cada produto,
+        e as paletas saíram dos arquivos de token de cada um.
         <strong>Quatro dos cinco são protótipo ou obra em andamento</strong> — o estado
         está na soleira de cada sala, e nomes, valores e métricas de demonstração são
         fictícios.
       </p>
     </div>
     <nav class="indice" aria-label="Índice das salas">
-      <a href="#sala-cdf">01 · Carro do Freela <em>audiovisual</em></a>
-      <a href="#sala-maestro">02 · Maestro <em>operação criativa</em></a>
-      <a href="#sala-dissesim">03 · Disse Sim <em>cerimonial</em></a>
-      <a href="#sala-pronta">04 · Pronta <em>maquiagem</em></a>
-      <a href="#sala-mayhouse">05 · MayHouse <em>casa</em></a>
+      <a href="#sala-cdf"      style="--h:var(--h-cdf);--cor:var(--c-cdf)"><i></i>01 · Carro do Freela <em>audiovisual</em></a>
+      <a href="#sala-maestro"  style="--h:var(--h-mae);--cor:var(--c-mae)"><i></i>02 · Maestro <em>operação criativa</em></a>
+      <a href="#sala-dissesim" style="--h:var(--h-dis);--cor:var(--c-dis)"><i></i>03 · Disse Sim <em>cerimonial</em></a>
+      <a href="#sala-pronta"   style="--h:var(--h-pro);--cor:var(--c-pro)"><i></i>04 · Pronta <em>maquiagem</em></a>
+      <a href="#sala-mayhouse" style="--h:var(--h-may);--cor:var(--c-may)"><i></i>05 · MayHouse <em>casa</em></a>
+      <a href="#sala-marca"   style="--h:var(--luz);--cor:var(--luz)"><i></i>A · Marca <em>reunião</em></a>
+      <a href="#sala-maquina" style="--h:var(--luz);--cor:var(--luz)"><i></i>B · Máquina <em>reunião</em></a>
     </nav>
   </div>
 </footer>
@@ -863,42 +1189,44 @@ html{scroll-behavior:smooth}
 <script>
 (function(){
   var calmo = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var salas = Array.prototype.slice.call(document.querySelectorAll(".sala-planta"));
+  var planta = Array.prototype.slice.call(document.querySelectorAll(".sala-planta"));
 
-  /* a planta acende sala por sala, uma vez, na chegada */
-  function acender(g){ g.classList.add("acesa"); }
-  function apagar(g){ g.classList.remove("acesa"); }
-
-  if (calmo) {
-    salas.forEach(acender);
-  } else {
-    salas.forEach(function(g,i){
-      window.setTimeout(function(){
-        acender(g);
-        window.setTimeout(function(){ apagar(g); }, 900);
-      }, 420 + i*190);
-    });
-  }
-
-  /* passar o mouse acende; sair apaga */
-  salas.forEach(function(g){
+  /* ── a planta: passar o mouse acende mais forte ── */
+  planta.forEach(function(g){
     var ir = function(){
       var alvo = document.getElementById(g.getAttribute("data-alvo"));
       if (alvo) alvo.scrollIntoView({behavior: calmo ? "auto" : "smooth", block: "start"});
     };
-    if (!calmo) {
-      g.addEventListener("mouseenter", function(){ acender(g); });
-      g.addEventListener("mouseleave", function(){ apagar(g); });
-      g.addEventListener("focus", function(){ acender(g); });
-      g.addEventListener("blur", function(){ apagar(g); });
-    }
+    ["mouseenter","focus"].forEach(function(ev){ g.addEventListener(ev, function(){ g.classList.add("acesa"); }); });
+    ["mouseleave","blur"].forEach(function(ev){ g.addEventListener(ev, function(){ g.classList.remove("acesa"); }); });
     g.addEventListener("click", ir);
     g.addEventListener("keydown", function(e){
       if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") { e.preventDefault(); ir(); }
     });
   });
 
-  /* o conteúdo das salas sobe ao entrar em quadro */
+  /* ── o trilho e as pastilhas seguem a sala em que você está ── */
+  var marcas = Array.prototype.slice.call(document.querySelectorAll(".pastilha[data-sala], .trilho span[data-sala]"));
+  function marcar(nome){
+    marcas.forEach(function(el){ el.classList.toggle("aqui", el.getAttribute("data-sala") === nome); });
+  }
+  /* as sete salas: as cinco de produto e as duas de reunião */
+  var secoes = Array.prototype.slice.call(document.querySelectorAll("section.sala, article.reuniao"));
+  if ("IntersectionObserver" in window) {
+    var vistas = {};
+    var espia = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){ vistas[e.target.getAttribute("data-sala")] = e.isIntersecting ? e.intersectionRatio : 0; });
+      var topo = null, maior = 0;
+      secoes.forEach(function(s){
+        var n = s.getAttribute("data-sala");
+        if ((vistas[n] || 0) > maior) { maior = vistas[n]; topo = n; }
+      });
+      marcar(maior > 0.06 ? topo : null);
+    }, {threshold: [0, 0.06, 0.25, 0.5, 0.75, 1], rootMargin: "-58px 0px 0px 0px"});
+    secoes.forEach(function(s){ espia.observe(s); });
+  }
+
+  /* ── o conteúdo das salas sobe ao entrar em quadro ── */
   var partes = Array.prototype.slice.call(document.querySelectorAll(".surge"));
   if (calmo || !("IntersectionObserver" in window)) {
     partes.forEach(function(p){ p.classList.add("dentro"); });

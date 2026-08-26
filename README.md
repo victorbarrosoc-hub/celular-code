@@ -1,7 +1,8 @@
 # Cinco Salas
 
 Escritório de produtos em planta baixa. Cinco SaaS, cada um numa sala com a
-própria marca, ligados por um corredor e por um método.
+própria marca, mais **duas salas de reunião de uso comum**, ligadas por um
+corredor e por um método.
 
 No ar a partir da raiz — o site é estático, sem build.
 
@@ -14,10 +15,15 @@ acento da casa é a luz que sai das janelas.
 a luz da sala: grafite e ciano, tinta e latão, papel e navy, quase-preto e rosé,
 noite e laranja. Só o corredor troca de claro para escuro conforme o sistema.
 
-**A área de cada sala é proporcional a quanto de produto existe** lá dentro —
-modelos, telas, testes, decisões registradas. A planta é desenho técnico de
-verdade: parede cheia, giro de folha nas portas, hachura no corredor, cota,
-norte. As portas são escalonadas para nenhuma alinhar com a da sala oposta.
+**A área de cada sala de produto é proporcional a quanto de produto existe** lá
+dentro — modelos, telas, testes, decisões registradas. As duas salas de reunião
+ficam fora dessa conta: são de todos. A planta é desenho técnico de verdade:
+parede cheia, giro de folha nas portas, mesa redonda com cadeiras nas salas de
+reunião, hachura no corredor, cota, norte. As portas são escalonadas para
+nenhuma alinhar com a da sala oposta.
+
+**As salas de reunião não têm cor de dono.** A janela de cada uma é dividida nos
+cinco tons, porque quem senta ali são os cinco.
 
 ## As salas
 
@@ -28,6 +34,15 @@ norte. As portas são escalonadas para nenhuma alinhar com a da sala oposta.
 | 03 | Disse Sim | cerimonial · três painéis | demonstração, dados fictícios |
 | 04 | Pronta | maquiagem · o link na bio | protótipo, valores fictícios |
 | 05 | MayHouse | contas da casa | no ar, 100% estático |
+
+## As salas de reunião
+
+| | Sala | Para que serve |
+|---|---|---|
+| A | **Marca** | A mesa onde as cinco identidades se sentam juntas: paletas, letra, piso de contraste, as palavras do produto. |
+| B | **Máquina** | Infra, entrega e prova: onde cada um roda, como sobe, o que testa, o que instala no celular. |
+
+O programa completo do escritório está em [`CLAUDE.md`](CLAUDE.md).
 
 Os números e as regras de cada sala saíram da documentação de cada produto, e as
 paletas saíram dos arquivos de token de cada um — não são aproximações.
