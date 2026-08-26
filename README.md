@@ -71,7 +71,7 @@ directory vazios — a raiz é o site.
 ## O pavimento em 3D
 
 [`escritorio-3d.html`](escritorio-3d.html) — maquete navegável do pavimento
-inteiro, 56 × 26 m, doze ambientes. Órbita com o mouse, e cada ambiente tem um
+inteiro, 72 × 26 m, dezoito ambientes. Órbita com o mouse, e cada ambiente tem um
 botão que leva a câmera para dentro dele.
 
 Nenhuma sala tem parede: a zona é o **forro colorido suspenso** mais a **ilha de
@@ -82,5 +82,11 @@ recebem o forro em cinco faixas, porque são de todos.
 **Toda mesa de reunião é retangular e longa, e nunca redonda** — as duas salas de
 reunião são preparadas para podcast, com braços de microfone, feltro acústico e
 tela. A cápsula *Máquina* é vidro curvo com cortina, solta no meio do pavimento.
+
+Na ponta leste fica o **bloco de produção**: estúdio de foto e vídeo com fundo
+infinito, camarim e cabine de edição. O estúdio abre direto no depósito de
+equipamento, é o único ambiente sem forro — a laje aparente devolve 60 cm de
+pé-direito para o grid de iluminação — e o bloco inteiro é sem cor, porque
+parede colorida contamina o que se fotografa.
 
 Three.js embutido no arquivo — sem CDN, sem build, abre offline.

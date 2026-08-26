@@ -4555,7 +4555,7 @@ function paredeTexto(l1, l2, w, h){
    Placa de 56 × 26. Espinha de circulação em z 11,5–14,5, sem forro,
    cortando o pavimento inteiro de leste a oeste.
    ═══════════════════════════════════════════════════════════════════════════ */
-var PLACA_W = 64, PLACA_D = 26;
+var PLACA_W = 72, PLACA_D = 26;
 var cena = new T.Scene();
 cena.background = new T.Color(0x0B0C0E);
 cena.fog = new T.Fog(0x0B0C0E, 60, 175);
@@ -4951,6 +4951,102 @@ function painelMarca(id, larg){
   return g;
 }
 
+
+/* ── o ciclorama: parede, curva e piso num corpo só ──────────────────────
+   É a curva que faz o fundo ser infinito. Sem ela a linha do rodapé
+   aparece na foto e o fundo vira parede. Perfil extrudado: desce a parede,
+   curva no raio e corre pelo chão. */
+function ciclorama(larg, alt, raio, corrida, mat){
+  var e = .10, s = new T.Shape();
+  s.moveTo(0, alt);
+  s.lineTo(0, raio);
+  s.quadraticCurveTo(0, 0, raio, 0);
+  s.lineTo(corrida, 0);
+  s.lineTo(corrida, -e);
+  s.lineTo(raio, -e);
+  s.quadraticCurveTo(-e, -e, -e, raio);
+  s.lineTo(-e, alt);
+  s.closePath();
+  var g = new T.ExtrudeGeometry(s, {depth:larg, bevelEnabled:false, curveSegments:20});
+  var m = new T.Mesh(g, mat);
+  m.rotation.y = Math.PI/2;
+  return m;
+}
+/* o grid: é dele que a luz pendura, e é ele que o forro impediria */
+function gridIluminacao(w, d, y, mat){
+  var g = new T.Group();
+  var nz = 5, nx = 3, i;
+  for (i=0;i<nz;i++) g.add(por(cil(.035,.035,w,mat,8), 0, y, -d/2 + d*(i+.5)/nz)).children[g.children.length-1].rotation.z = Math.PI/2;
+  for (i=0;i<nx;i++){
+    var t = cil(.035,.035,d,mat,8); t.rotation.x = Math.PI/2;
+    t.position.set(-w/2 + w*(i+.5)/nx, y, 0); g.add(t);
+  }
+  return g;
+}
+function refletor(cor, forca){
+  var g = new T.Group();
+  g.add(por(cil(.02,.02,.5,M.preto,6), 0, -.25, 0));
+  g.add(por(cx(.3,.3,.34,M.preto), 0, -.55, 0));
+  g.add(por(cx(.26,.02,.3, emissivo(cor||0xFFF3DC, forca||1.6)), 0, -.71, 0));
+  return g;
+}
+function softbox(w, h, incl){
+  var g = new T.Group();
+  var q = new T.Group(); q.rotation.x = incl || .35; g.add(q);
+  q.add(por(cx(w,h,.16,M.preto), 0, 0, 0));
+  q.add(por(cx(w-.1,h-.1,.03, emissivo(0xFFF6E8,1.35)), 0, 0, .1));
+  g.position.y = 1.95;
+  var pe = new T.Group(); pe.position.y = -1.95; g.add(pe);
+  pe.add(por(cil(.035,.045,1.95,M.metal,8), 0, .975, 0));
+  for (var k=0;k<3;k++){
+    var a2 = k/3*Math.PI*2, p = cil(.02,.02,.7,M.metal,6);
+    p.position.set(Math.cos(a2)*.24, .3, Math.sin(a2)*.24);
+    p.rotation.z = Math.cos(a2)*.5; p.rotation.x = -Math.sin(a2)*.5; pe.add(p);
+  }
+  return g;
+}
+function tripeCamera(){
+  var g = new T.Group();
+  for (var k=0;k<3;k++){
+    var a2 = k/3*Math.PI*2 + .5, p = cil(.022,.022,1.5,M.preto,6);
+    p.position.set(Math.cos(a2)*.3, .72, Math.sin(a2)*.3);
+    p.rotation.z = Math.cos(a2)*.38; p.rotation.x = -Math.sin(a2)*.38; g.add(p);
+  }
+  g.add(por(cx(.16,.1,.16,M.metal), 0, 1.44, 0));
+  g.add(por(cx(.3,.24,.5,M.preto), 0, 1.6, 0));
+  g.add(por(cil(.11,.13,.26,M.preto,14), 0, 1.62, .34)).children[g.children.length-1].rotation.x = Math.PI/2;
+  g.add(por(cx(.2,.14,.02, emissivo(0x6FA9C4,.5)), 0, 1.62, -.27));
+  return g;
+}
+/* a bancada de camarim: espelho com lâmpada em volta, não luminária no teto */
+function bancadaCamarim(g, comp, x, z, giro){
+  var b = new T.Group(); b.position.set(x,0,z); b.rotation.y = giro||0; g.add(b);
+  b.add(por(cx(comp,.06,.55,M.carvalho), 0, .76, 0));
+  b.add(por(cx(comp,.7,.05,M.oak2), 0, .41, -.2));
+  var esp = cx(comp-.5,1.15,.04, new T.MeshStandardMaterial({color:0xD8E0E4, roughness:.09, metalness:.88}));
+  esp.position.set(0,1.52,-.24); b.add(esp);
+  var n = Math.max(4, Math.round((comp-.5)/.42));
+  for (var i=0;i<n;i++){
+    var px2 = -(comp-.5)/2 + (comp-.5)*(i+.5)/n;
+    b.add(por(esf(.07, emissivo(0xFFE2AE,2.4),10), px2, 2.18, -.24));
+    b.add(por(esf(.07, emissivo(0xFFE2AE,2.4),10), px2, .86, -.24));
+  }
+  for (var j=0;j<2;j++) b.add(por(esf(.07, emissivo(0xFFE2AE,2.4),10), (j?1:-1)*((comp-.5)/2), 1.52, -.24));
+  var pl = new T.PointLight(0xFFDCA8, 6, 5.5, 2); pl.position.set(0,1.6,.9); b.add(pl);
+  return b;
+}
+function arara(g, comp, x, z){
+  var a2 = new T.Group(); a2.position.set(x,0,z); g.add(a2);
+  a2.add(por(cil(.03,.03,comp,M.metal,8), 0, 1.72, 0)).children[a2.children.length-1].rotation.z = Math.PI/2;
+  [-1,1].forEach(function(l){ a2.add(por(cil(.03,.03,1.72,M.metal,8), l*comp/2, .86, 0)); });
+  var cores = [0x2C3038, 0xE9E4DA, 0x51565F, 0xBFB4A6, 0x2C3038, 0x8E8579];
+  for (var i=0;i<6;i++){
+    var r = cx(.1,.85,.34, pad(cores[i],.9));
+    r.position.set(-comp/2 + comp*(i+1)/7, 1.22, 0); a2.add(r);
+  }
+  return a2;
+}
+
 /* ── serviço: o único bloco fechado do pavimento ───────────────────────── */
 function paredeServico(g, x, z, w, d, h){
   var m = pad(0xCFC9BF,.88);
@@ -5068,7 +5164,11 @@ var AMB_SERVICO = [
     var h=3.0, m=pad(0xCFC9BF,.88);
     ilha(w, d, 0x7E7C82, g, .5);
     g.add(por(cx(w,h,.16,m), 0, h/2, d/2));
-    g.add(por(cx(.16,h,d,m),  w/2, h/2, 0));
+    /* a parede leste abre direto no estúdio: equipamento não atravessa o escritório */
+    g.add(por(cx(.16,h,2.3,m),  w/2, h/2, -1.85));
+    g.add(por(cx(.16,h,2.3,m),  w/2, h/2,  1.85));
+    g.add(por(cx(.16,.9,1.4,m), w/2, h-.45, 0));
+    var pe2 = cx(.05,2.2,1.35,M.metal); pe2.position.set(w/2-.1,1.1,0); pe2.rotation.y=.3; g.add(pe2);
     g.add(por(cx(.16,h,d,m), -w/2, h/2, 0));
     g.add(por(cx(2.6,h,.16,m), -w/2+1.3, h/2, -d/2));
     g.add(por(cx(2.6,h,.16,m),  w/2-1.3, h/2, -d/2));
@@ -5097,12 +5197,160 @@ var AMB_SERVICO = [
 ];
 AMB = AMB.concat(AMB_SERVICO);
 
+/* ── o bloco de produção · leste ─────────────────────────────────────────
+   O único conjunto do pavimento sem cor nenhuma, e é regra, não falta de
+   ideia: parede colorida contamina o que se fotografa. Cinza de cartão,
+   branco de ciclorama, preto de cabine. */
+var AMB_PRODUCAO = [
+{ id:'estudio', nome:'Estúdio', rot:'Foto e vídeo · fundo infinito', cor:'#E8E6E1',
+  x:[63.5,71], z:[14.5,25], norte:false, camPos:[2.0,1.72,-4.4], camAlvo:[-.2,1.25,3.2],
+  fatos:[['Área','7,5 × 10,5 m'],['Ciclorama','6,5 m, curva de 1,2 m'],['Pé-direito','4,20 m, laje aparente']],
+  texto:'O ciclorama é a curva que faz o fundo ser infinito: sem ela a linha do rodapé aparece na foto e o fundo vira parede. É o único ambiente sem forro — a laje fica aparente e devolve 60 cm de pé-direito, que é onde mora o grid de iluminação. E é o único sem cor: parede colorida contamina o que se fotografa.',
+  montar:function(g,w,d){
+    var h=3.9, m=pad(0xBEBAB3,.9), branco=pad(0xF2F0EC,.96);
+    /* piso duro, cinza de cartão — estúdio não tem carpete */
+    var piso = cx(w-.32,.04,d-.32, pad(0x6E7175,.72));
+    piso.position.y=.02; piso.receiveShadow=true; g.add(piso);
+    /* casca */
+    g.add(por(cx(w,h,.16,m), 0, h/2, d/2));
+    g.add(por(cx(.16,h,d,m), w/2, h/2, 0));
+    /* oeste: a parede do depósito, com a passagem direta de equipamento */
+    g.add(por(cx(.16,h,6.8,m), -w/2, h/2, -1.85));
+    g.add(por(cx(.16,h,2.3,m), -w/2, h/2, 4.10));
+    g.add(por(cx(.16,.9,1.4,m), -w/2, h-.45, 2.25));
+    var pd = cx(.05,2.2,1.35,M.metal); pd.position.set(-w/2+.1,1.1,2.25); pd.rotation.y=-.3; g.add(pd);
+    /* norte: a porta que dá no corredor */
+    g.add(por(cx(1.5,h,.16,m), -3.0, h/2, -d/2));
+    g.add(por(cx(4.5,h,.16,m),  1.5, h/2, -d/2));
+    g.add(por(cx(1.5,1.5,.16,m), -1.5, h-.75, -d/2));
+    var pn = cx(1.45,2.4,.06,M.preto); pn.position.set(-1.45,1.2,-d/2+.1); pn.rotation.y=.38; g.add(pn);
+    /* eclusa: um anteparo, senão a luz do corredor entra na foto */
+    g.add(por(cx(3.55,h,.14,m), -1.975, h/2, -3.9));
+
+    /* o ciclorama */
+    var cic = ciclorama(6.5, 3.5, 1.2, 4.6, branco);
+    cic.position.set(-3.25, .04, d/2-.09); g.add(cic);
+    var lavagem = new T.PointLight(0xFFF6E9, 30, 13, 2);
+    lavagem.position.set(0, 2.7, d/2-3.0); g.add(lavagem);
+    g.add(por(new T.PointLight(0xFFF6E9, 14, 9, 2), 0, .9, d/2-4.2));
+
+    /* o grid e o que pendura nele */
+    g.add(gridIluminacao(w-.7, d-.9, 3.3, M.preto));
+    [[-2.1,2.4],[2.1,2.4],[-1.6,.2],[1.6,.2],[0,-1.6]].forEach(function(pp){
+      var r = refletor(0xFFF3DC, pp[1]>1 ? 2.0 : 1.4);
+      r.position.set(pp[0], 3.3, pp[1]); g.add(r);
+    });
+
+    /* set: dois softboxes, tripé e monitor de referência */
+    var sb1 = softbox(1.15,1.7,.3); sb1.position.set(-2.35,0,.4); sb1.rotation.y=.62; g.add(sb1);
+    var sb2 = softbox(.95,1.45,.26); sb2.position.set(2.65,0,1.9); sb2.rotation.y=-.72; g.add(sb2);
+    var tri = tripeCamera(); tri.position.set(-.35,0,-2.5); g.add(tri);
+    g.add(por(cx(.62,.02,.42,M.preto), 2.55,.98,-.4));
+    g.add(por(cx(.58,.36,.03, emissivo(0x87B4CC,.6)), 2.55,1.16,-.44));
+    g.add(por(cil(.28,.32,.9,M.metal,10), 2.55,.45,-.4));
+    /* caixa de equipamento que veio do depósito, aberta no chão */
+    g.add(por(cx(.85,.42,.55, pad(0x1D1F24,.6,.2)), -2.85,.21,-2.7));
+    g.add(por(cx(.85,.05,.55, pad(0x2A2D33,.7)), -2.85,.62,-3.05)).children[g.children.length-1].rotation.x=-.7;
+    var pl=new T.PointLight(0xE6EEF5, 7, 8, 2); pl.position.set(-1.4,2.6,-3.2); g.add(pl);
+  } },
+
+{ id:'camarim', nome:'Camarim', rot:'Produção · preparação', cor:'#C4BCB0',
+  x:[63.5,67], z:[1,11.5], norte:true, camPos:[-1.15,1.62,3.5], camAlvo:[1.35,1.35,-1.3],
+  fatos:[['Área','3,5 × 10,5 m'],['Espelho','lâmpada em volta, 4 m'],['Luz','2700 K, quente']],
+  texto:'Espelho de camarim de verdade: a lâmpada fica em volta do espelho, não no teto — luz de cima cava olheira e a pessoa chega no set já parecendo cansada. Arara de roupa, bancada corrida e a única janela do bloco de produção, porque quem se arruma precisa de luz de dia para conferir.',
+  montar:function(g,w,d){
+    var h=3.0, m=pad(0xCFC9BF,.88);
+    ilha(w-.2, d-.2, 0xB4AEA4, g, .5);
+    g.add(por(cx(.16,h,d,m), -w/2, h/2, 0));
+    g.add(por(cx(.16,h,d,m),  w/2, h/2, 0));
+    /* norte: a janela */
+    g.add(por(cx(.8,h,.16,m), -w/2+.4, h/2, -d/2));
+    g.add(por(cx(.8,h,.16,m),  w/2-.4, h/2, -d/2));
+    g.add(por(cx(w-1.6,.9,.16,m), 0, h-.45, -d/2));
+    g.add(por(cx(w-1.6,.95,.16,m), 0, .48, -d/2));
+    g.add(por(cx(w-1.7,1.2,.05,M.vidro), 0, 1.55, -d/2));
+    /* sul: a porta para o corredor */
+    g.add(por(cx(1.0,h,.16,m), -w/2+.5, h/2, d/2));
+    g.add(por(cx(1.2,h,.16,m),  w/2-.6, h/2, d/2));
+    g.add(por(cx(1.3,.7,.16,m), -.1, h-.35, d/2));
+    var pc = cx(1.25,2.3,.05,M.oak2); pc.position.set(-.15,1.15,d/2-.1); pc.rotation.y=-.42; g.add(pc);
+
+    bancadaCamarim(g, 4.0, 1.36, -1.0, -Math.PI/2);
+    arara(g, 2.5, 0, -4.5);
+    var banq = cx(.42,.06,.42,M.carvalho); banq.position.set(.6,.47,-1.9); g.add(banq);
+    [[.6,-1.9],[.6,-.2]].forEach(function(pp){
+      for (var k=0;k<3;k++){ var a2=k/3*Math.PI*2; g.add(por(cil(.02,.02,.46,M.preto,6), pp[0]+Math.cos(a2)*.13, .23, pp[1]+Math.sin(a2)*.13)); }
+      g.add(por(cx(.42,.06,.42,M.carvalho), pp[0], .47, pp[1]));
+    });
+    g.add(por(cx(1.5,.42,.62, pad(0x8E8579,.92)), -.35,.21,3.0));
+    g.add(por(cx(1.5,.5,.16, pad(0x8E8579,.92)), -.35,.62,2.72));
+    g.add(por(planta(.95), -w/2+.7, 0, 4.4));
+    var pl=new T.PointLight(0xFFE6C4, 9, 9, 2); pl.position.set(0,2.5,1.4); g.add(pl);
+  } },
+
+{ id:'cabine', nome:'Cabine', rot:'Produção · controle e edição', cor:'#6E7683',
+  x:[67.3,71], z:[1,11.5], norte:true, camPos:[-.55,1.62,4.15], camAlvo:[.5,1.2,-2.6],
+  fatos:[['Área','3,7 × 10,5 m'],['Bancada','4,2 m, três telas'],['Luz','baixa, sem janela']],
+  texto:'Escura e sem janela, de propósito: quem corrige cor não pode ter o sol mudando de lugar no meio da tarde. Bancada corrida, três telas, monitor de referência calibrado, e feltro nas duas paredes longas para o áudio não bater de um lado no outro.',
+  montar:function(g,w,d){
+    var h=3.0, m=pad(0x8C8A88,.9);
+    ilha(w-.2, d-.2, 0x30343B, g);
+    g.add(por(cx(.16,h,d,m), -w/2, h/2, 0));
+    g.add(por(cx(.16,h,d,m),  w/2, h/2, 0));
+    g.add(por(cx(w,h,.16,m), 0, h/2, -d/2));
+    g.add(por(cx(1.1,h,.16,m), -w/2+.55, h/2, d/2));
+    g.add(por(cx(1.3,h,.16,m),  w/2-.65, h/2, d/2));
+    g.add(por(cx(1.3,.7,.16,m), -.05, h-.35, d/2));
+    var pc = cx(1.25,2.3,.05,M.preto); pc.position.set(-.1,1.15,d/2-.1); pc.rotation.y=-.4; g.add(pc);
+    /* feltro nas duas paredes longas */
+    [-1,1].forEach(function(l){
+      for (var i=0;i<3;i++){
+        var f = cx(.07,1.5,2.4,M.feltro); f.position.set(l*(w/2-.14), 1.65, -3.4+i*3.0); g.add(f);
+      }
+    });
+    var mesa = mesaLonga(4.2,.95,.74); mesa.rotation.y=Math.PI/2; mesa.position.set(.55,0,-.6); g.add(mesa);
+    [-1.4,0,1.4].forEach(function(zz, i){
+      var mo = monitor(); mo.rotation.y=-Math.PI/2; mo.position.set(1.32,0,zz-.6); g.add(mo);
+      g.add(por(cx(.02,.3,.5, emissivo(0x7FA8C6,.55)), 1.29,.95,zz-.6));
+      if (i===1){ var pl2=new T.PointLight(0x8FB6D4, 5, 4, 2); pl2.position.set(.9,1.1,zz-.6); g.add(pl2); }
+    });
+    [-1.0,.6].forEach(function(zz){
+      var c = cadeira(pad(0x3A3E46,.6,.15), true); c.position.set(-.2,0,zz); c.rotation.y=Math.PI/2; g.add(c);
+    });
+    /* rack de equipamento */
+    var rk = cx(.7,1.9,.62, pad(0x1B1D22,.6,.25)); rk.position.set(-w/2+.55,.95,-4.1); g.add(rk);
+    for (var r2=0;r2<7;r2++) g.add(por(cx(.5,.03,.02, emissivo(0x6FD08C,.9)), -w/2+.55, .35+r2*.24, -4.1+.32));
+    g.add(por(cx(.5,.34,.03, emissivo(0xC9D6DE,.45)), -w/2+.6, 1.9, 3.4));
+    var pl=new T.PointLight(0xA9C0D6, 5, 8, 2); pl.position.set(0,2.5,1.2); g.add(pl);
+  } }
+];
+AMB = AMB.concat(AMB_PRODUCAO);
+
+
 /* ═══ MONTAGEM ═════════════════════════════════════════════════════════════ */
-var ORDEM = ['recepcao','cdf','maestro','dissesim','pronta','mayhouse','marca','maquina','convivio','despressurizacao','copa','refeitorio','servico','despensa','deposito'];
+var ORDEM = ['recepcao','cdf','maestro','dissesim','pronta','mayhouse','marca','maquina','estudio','camarim','cabine','convivio','despressurizacao','copa','refeitorio','servico','despensa','deposito'];
 var porId = {};
 AMB.forEach(function(a){ porId[a.id]=a; });
 
+/* Sem ambiente, superfície metálica não tem o que refletir e sai preta —
+   o espelho do camarim some e o vidro da cápsula vira plástico. Um degradê
+   equirretangular barato basta: céu em cima, piso embaixo. */
+function ambienteDaCasa(){
+  var c=document.createElement('canvas'); c.width=64; c.height=32;
+  var g=c.getContext('2d');
+  var grd=g.createLinearGradient(0,0,0,32);
+  grd.addColorStop(0,'#39424C'); grd.addColorStop(.46,'#AEB9C4');
+  grd.addColorStop(.54,'#7E786D'); grd.addColorStop(1,'#26251F');
+  g.fillStyle=grd; g.fillRect(0,0,64,32);
+  var t=new T.CanvasTexture(c); t.mapping=T.EquirectangularReflectionMapping;
+  var pm=new T.PMREMGenerator(rend); pm.compileEquirectangularShader();
+  var env=pm.fromEquirectangular(t).texture;
+  pm.dispose(); t.dispose();
+  return env;
+}
+
 function montarPavimento(){
+  try { cena.environment = ambienteDaCasa(); } catch(e){ /* segue sem reflexo */ }
   /* o plinto e a laje */
   var plinto = cx(PLACA_W+3.2, .6, PLACA_D+3.2, M.plinto);
   plinto.position.set(PLACA_W/2, -.42, PLACA_D/2); cena.add(plinto);
@@ -5144,16 +5392,23 @@ function montarPavimento(){
     g.traverse(function(o){ if (o.isMesh){ o.castShadow=true; o.receiveShadow=true; } });
     /* A câmera sai da largura da sala: você fica parado na porta, no corredor,
        e a sala inteira cabe no quadro. Sem parede, a porta é uma linha no chão. */
-    var lado = a.norte ? 1 : -1;
-    var dist = Math.max(6.8, Math.min(15.5, Math.max(w,d) * (a.dist||.82)));
-    var desv = a.desv===undefined ? -.34 : a.desv;
-    var dir = new T.Vector3(desv, 0, lado).normalize();
-    a._cam=[new T.Vector3(cxx + dir.x*dist, a.alt||2.0, czz + dir.z*dist),
-            new T.Vector3(cxx + (a.mira||0), a.miraY||1.05, czz)];
+    if (a.camPos){
+      /* Sala fechada não aceita a regra da porta: a câmera calculada cairia
+         atrás de uma parede. Estas trazem posição e mira em coordenada local. */
+      a._cam=[new T.Vector3(cxx + a.camPos[0], a.camPos[1], czz + a.camPos[2]),
+              new T.Vector3(cxx + a.camAlvo[0], a.camAlvo[1], czz + a.camAlvo[2])];
+    } else {
+      var lado = a.norte ? 1 : -1;
+      var dist = Math.max(6.8, Math.min(15.5, Math.max(w,d) * (a.dist||.82)));
+      var desv = a.desv===undefined ? -.34 : a.desv;
+      var dir = new T.Vector3(desv, 0, lado).normalize();
+      a._cam=[new T.Vector3(cxx + dir.x*dist, a.alt||2.0, czz + dir.z*dist),
+              new T.Vector3(cxx + (a.mira||0), a.miraY||1.05, czz)];
+    }
   });
 
   /* luz */
-  cena.add(new T.HemisphereLight(0xC6DAF0, 0x2A2622, 1.05));
+  cena.add(new T.HemisphereLight(0xC6DAF0, 0x2A2622, .72));
   var sol = new T.DirectionalLight(0xFFF2DC, 2.1);
   sol.position.set(PLACA_W*.72, 34, -20);
   sol.target.position.set(PLACA_W*.45, 0, PLACA_D*.6); cena.add(sol.target);
@@ -5179,8 +5434,8 @@ if (T.SRGBColorSpace) rend.outputColorSpace = T.SRGBColorSpace;
 
 var cam = new T.PerspectiveCamera(46, 1, .1, 400);
 var alvo = new T.Vector3(PLACA_W/2, 0, PLACA_D/2 - 1);
-var esp = {raio:54, theta:-Math.PI/2, phi:.78};
-var GERAL = {pos:new T.Vector3(PLACA_W/2-11, 28, PLACA_D/2+46), alv:new T.Vector3(PLACA_W/2+1, 1.2, PLACA_D/2-1)};
+var esp = {raio:60, theta:-Math.PI/2, phi:.78};
+var GERAL = {pos:new T.Vector3(PLACA_W/2-12, 31, PLACA_D/2+51), alv:new T.Vector3(PLACA_W/2+1, 1.2, PLACA_D/2-1)};
 
 function aplicarEsp(){
   cam.position.set(
@@ -5289,8 +5544,8 @@ function mostrarCartela(a){
     } else {
       cartela.style.setProperty('--cor','#F5D9A8');
       cR.textContent='Pavimento único'; cT.textContent='O escritório';
-      cP.textContent='Quinze ambientes num pavimento aberto. Nenhuma sala de trabalho tem parede: a zona é o forro colorido suspenso mais a ilha de carpete da mesma cor no chão. Só o serviço é bloco fechado — banheiro é a única coisa que a planta aberta não resolve.';
-      cD.innerHTML='<dt>Placa</dt><dd>64 × 26 m</dd><dt>Pé-direito</dt><dd>3,60 m</dd><dt>Ambientes</dt><dd>15</dd>';
+      cP.textContent='Dezoito ambientes num pavimento aberto. Nenhuma sala de trabalho tem parede: a zona é o forro colorido suspenso mais a ilha de carpete da mesma cor no chão. Fecham-se só dois blocos — o serviço, porque banheiro a planta aberta não resolve, e a produção, porque estúdio precisa de escuro e de silêncio.';
+      cD.innerHTML='<dt>Placa</dt><dd>72 × 26 m</dd><dt>Pé-direito</dt><dd>3,60 m</dd><dt>Ambientes</dt><dd>18</dd>';
     }
     cartela.classList.add('dentro');
   }, calmo?0:180);
@@ -5313,7 +5568,7 @@ document.getElementById('btGeral').addEventListener('click', geral);
 
 function montarPista(){
   ORDEM.forEach(function(id, i){
-    if (i===1 || i===6 || i===8 || i===12){
+    if (i===1 || i===6 || i===8 || i===11 || i===15){
       var s=document.createElement('span'); s.className='porta__corte'; pista.appendChild(s);
     }
     var a=porId[id];
@@ -5338,10 +5593,16 @@ function partir(){
   espDe(GERAL.pos, GERAL.alv); aplicarEsp();
   rend.render(cena, cam);
   requestAnimationFrame(laco);
+  /* a planta 2D manda o ambiente pela âncora: escritorio-3d.html#copa */
+  var pedido = (location.hash || '').replace('#','');
   window.setTimeout(function(){
     veu.classList.add('saiu');
-    mostrarCartela(null);
+    if (pedido && porId[pedido]) entrar(pedido); else mostrarCartela(null);
   }, 260);
+  window.addEventListener('hashchange', function(){
+    var h = (location.hash || '').replace('#','');
+    if (h && porId[h]) entrar(h);
+  });
 }
 if (document.fonts && document.fonts.ready){
   var pronto=false;

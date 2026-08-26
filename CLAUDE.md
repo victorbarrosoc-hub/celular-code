@@ -152,9 +152,9 @@ Duas coisas a não confundir:
   técnico continua ortogonal, e a curva entra no objeto — forro de canto redondo,
   cápsula de vidro curvo, ilha de carpete de canto suave.
 
-## O pavimento — 15 ambientes
+## O pavimento — 18 ambientes
 
-Placa de **64 × 26 m**, pé-direito 3,60 m, forros suspensos a 2,90 m. Uma espinha
+Placa de **72 × 26 m**, pé-direito 3,60 m, forros suspensos a 2,90 m. Uma espinha
 de circulação leste-oeste no meio (z 11,5–14,5), sem forro, cortando o pavimento
 inteiro, **com porta de vidro nas duas pontas** — ela terminava em parede cega.
 Perímetro todo em vidro nas duas faces longas.
@@ -180,12 +180,48 @@ foi redesenhada para parar de desenhar parede onde não há.
 | norte | **Serviço** · feminino, masculino, acessível | 44–54 | bloco fechado |
 | sul | **Despensa** · alimentos e limpeza | 55,5–63, z 14,5–19 | bloco fechado |
 | sul | **Depósito** · equipamento audiovisual e técnico | 55,5–63, z 19–25 | bloco fechado |
+| sul | **Estúdio** · foto e vídeo, fundo infinito | 63,5–71 | bloco fechado, sem cor |
+| norte | **Camarim** · preparação | 63,5–67 | bloco fechado, sem cor |
+| norte | **Cabine** · controle e edição | 67,3–71 | bloco fechado, sem cor |
 
 Marca passou para 54,5–63. Serviço abre numa antecâmara, e a antecâmara abre no
 corredor: ninguém entra em sanitário direto do aberto. Despensa encosta na copa
 parede a parede — quem repõe o café não atravessa o escritório com a caixa.
 Depósito é separado da despensa de propósito: câmera não se guarda ao lado de
 material de limpeza.
+
+## O bloco de produção — o estúdio
+
+Pedido em 26/08/2026, com a condição de ficar **encostado no depósito**, para o
+equipamento não atravessar o escritório. Ocupa a ponta leste, e é por isso que a
+placa cresceu de 64 para 72 m.
+
+| Ambiente | O que é |
+|---|---|
+| **Estúdio** | 7,5 × 10,5 m. Ciclorama de 6,5 m com curva de 1,20 m de raio. |
+| **Camarim** | 3,5 × 10,5 m. Bancada corrida, arara e espelho com lâmpada em volta. |
+| **Cabine** | 3,7 × 10,5 m. Controle e ilha de edição, escura e sem janela. |
+
+As regras que o estúdio impõe, e que valem como decisão de projeto:
+
+- **O ciclorama é a curva, não a parede.** Sem o raio de 1,20 m entre parede e
+  piso, a linha do rodapé aparece na foto e o fundo deixa de ser infinito.
+- **É o único ambiente sem forro.** A laje fica aparente e devolve 60 cm de
+  pé-direito — 4,20 m livres —, que é onde mora o grid de iluminação. Um forro
+  ali seria a única coisa impedindo o grid de existir.
+- **O bloco de produção é o único sem cor nenhuma**, e é regra, não falta de
+  ideia: parede colorida contamina o que se fotografa. Cinza de cartão no
+  estúdio, branco no ciclorama, grafite na cabine.
+- **A cabine não tem janela.** Quem corrige cor não pode ter o sol mudando de
+  lugar no meio da tarde.
+- **O camarim tem a única janela do bloco**, porque quem se arruma precisa de luz
+  de dia para conferir — e a lâmpada fica em volta do espelho, nunca no teto:
+  luz de cima cava olheira.
+- **O depósito abre direto no estúdio**, por uma porta na parede que os separa.
+  Foi a condição do pedido e é o que justifica a posição.
+
+Com ele, o pavimento tem **dois blocos de parede cheia**: serviço e produção. O
+resto continua sem parede nenhuma.
 
 ## Os manuais de identidade — a fonte das cinco marcas
 
